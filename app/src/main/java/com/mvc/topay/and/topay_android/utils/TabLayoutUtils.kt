@@ -17,7 +17,7 @@ import java.lang.reflect.Field
 object TabLayoutUtils {
 
     /**
-     * 更改TabLayout下划线长度
+     * Change the length of the TabLayout underline
      *
      * @param tabs     tablayout
      * @param leftDip

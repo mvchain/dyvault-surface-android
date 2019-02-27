@@ -1,7 +1,6 @@
 package com.mvc.topay.and.topay_android.utils
 
 import com.blankj.utilcode.util.LogUtils
-import com.mvc.topay.and.topay_android.utils.RetrofitUtils.createSSLSocketFactory
 
 import java.security.SecureRandom
 import java.security.cert.CertificateException
@@ -21,18 +20,49 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitUtils {
-    private var mRetrofit: Retrofit? = null
+class RetrofitUtils {
+    companion object {
+        private val instance: Retrofit by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            Retrofit.Builder()
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl("")
+                    .client(okhttpUtils).build()
+        }
+        private val okhttpUtils: OkHttpClient
+            get() = OkHttpClient.Builder()
+                    .addInterceptor { chain ->
+                        val builder = chain.request().newBuilder()
+                        val request = builder.build()
+                        val response = chain.proceed(request)
+                        response
+                    }
+                    .addInterceptor(HttpLoggingInterceptor { message -> LogUtils.e("RetrofitUtils", message) }
+                            .setLevel(HttpLoggingInterceptor.Level.BODY))
+                    .sslSocketFactory(createSSLSocketFactory()!!)
+                    .writeTimeout(15, TimeUnit.SECONDS)
+                    .readTimeout(15, TimeUnit.SECONDS)
+                    .connectTimeout(20, TimeUnit.SECONDS)
+                    .build()
 
-    val instance: Retrofit by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
-        Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("")
-                .client(okhttpUtils).build()
+        private fun createSSLSocketFactory(): SSLSocketFactory? {
+            var ssfFactory: SSLSocketFactory? = null
+            try {
+                val sc = SSLContext.getInstance("TLS")
+                sc.init(null, arrayOf<TrustManager>(TrustAllCerts()), SecureRandom())
+                ssfFactory = sc.socketFactory
+            } catch (e: Exception) {
+            }
+            return ssfFactory
+        }
+
+        fun <T> client(clazz: Class<T>): T {
+            return instance.create(clazz)
+        }
     }
 
-//    private//                    builder.header("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE));
+
+//                builder.header("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE));
     //                .authenticator((route, response) -> {
     //                    HttpTokenBean body = RetrofitUtils.client(ApiStore.class).refreshToken(SPUtils.getInstance().getString(REFRESH_TOKEN)).execute().body();
     //                    if (body.getCode() == 200) {
@@ -71,33 +101,7 @@ object RetrofitUtils {
     //                    builder.header("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE));
     //                    return builder.build();
     //                })
-    val okhttpUtils: OkHttpClient
-        get() = OkHttpClient.Builder()
-                .addInterceptor { chain ->
-                    val builder = chain.request().newBuilder()
-                    val request = builder.build()
-                    val response = chain.proceed(request)
-                    response
-                }
-                .addInterceptor(HttpLoggingInterceptor { message -> LogUtils.e("RetrofitUtils", message) }
-                        .setLevel(HttpLoggingInterceptor.Level.BODY))
-                .sslSocketFactory(createSSLSocketFactory()!!)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .build()
 
-    private fun createSSLSocketFactory(): SSLSocketFactory? {
-        var ssfFactory: SSLSocketFactory? = null
-        try {
-            val sc = SSLContext.getInstance("TLS")
-            sc.init(null, arrayOf<TrustManager>(TrustAllCerts()), SecureRandom())
-            ssfFactory = sc.socketFactory
-        } catch (e: Exception) {
-        }
-
-        return ssfFactory
-    }
 
     private class TrustAllCerts : X509TrustManager {
         @Throws(CertificateException::class)
@@ -112,16 +116,5 @@ object RetrofitUtils {
         override fun getAcceptedIssuers(): Array<X509Certificate?> {
             return arrayOfNulls(0)
         }
-    }
-
-    //信任所有的服务器,返回true
-    private class TrustAllHostnameVerifier : HostnameVerifier {
-        override fun verify(hostname: String, session: SSLSession): Boolean {
-            return true
-        }
-    }
-
-    fun <T> client(clazz: Class<T>): T {
-        return instance.create(clazz)
     }
 }

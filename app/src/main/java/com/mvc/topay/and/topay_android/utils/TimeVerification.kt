@@ -8,7 +8,7 @@ import com.mvc.topay.and.topay_android.listener.OnTimeEndCallBack
 
 
 /***
- * 验证码点击之后倒计时
+ * Countdown after verification code click
  */
 class TimeVerification private constructor() {
     private var mOnTimeEndCallBack: OnTimeEndCallBack? = null
@@ -36,7 +36,7 @@ class TimeVerification private constructor() {
     }
 
     /**
-     * 重置计时器
+     * reset timer
      */
     fun resume() {
         if (mOnTimeEndCallBack != null) {
@@ -47,7 +47,7 @@ class TimeVerification private constructor() {
     }
 
     /**
-     * 设置时间
+     * set Time
      *
      * @param temp
      * @return
@@ -58,9 +58,9 @@ class TimeVerification private constructor() {
     }
 
     /**
-     * 设置每次递增或者减少的值
+     * Set the value to increment or decrease each time
      *
-     * @param shed
+     * @param shed value
      */
     fun setTimeDiminished(shed: Int): TimeVerification {
         this.mDiminished = shed
@@ -68,7 +68,7 @@ class TimeVerification private constructor() {
     }
 
     /**
-     * 第一次更新时间
+     * first update Time
      */
     fun updataTime() {
         resume()
@@ -80,7 +80,7 @@ class TimeVerification private constructor() {
     }
 
     /**
-     * 销毁计时器
+     * Destroy timer
      */
     fun onExit() {
         if (mHandler != null && timeVerification != null) {
@@ -97,7 +97,7 @@ class TimeVerification private constructor() {
         private var timeVerification: TimeVerification? = null
 
         /**
-         * 获取计时器实例
+         * Get timer instance
          *
          * @return
          */

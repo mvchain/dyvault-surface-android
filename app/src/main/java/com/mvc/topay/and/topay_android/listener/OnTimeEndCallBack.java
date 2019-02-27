@@ -1,12 +1,12 @@
 package com.mvc.topay.and.topay_android.listener;
 
 /***
- *  验证码倒计时的回调
+ *  Callback for the verification code countdown
  */
 public interface OnTimeEndCallBack {
-    //更新时间
+    //update time
     void updata(int time);
     
-    //计时结束
+    //End of time
     void exit();
 }

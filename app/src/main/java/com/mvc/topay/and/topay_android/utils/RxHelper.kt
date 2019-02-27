@@ -8,10 +8,9 @@ import io.reactivex.schedulers.Schedulers
 
 object RxHelper {
     /**
-     * 统一线程处理
+     * Unified thread processing
      *
-     *
-     * 发布事件io线程，接收事件主线程
+     * Publish event io thread, receive event main thread
      */
     fun <T> rxSchedulerHelper(): ObservableTransformer<T, T> {//compose处理线程 并且处理token过期问题
         return ObservableTransformer { upstream ->

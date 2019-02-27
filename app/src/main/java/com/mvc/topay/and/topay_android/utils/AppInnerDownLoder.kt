@@ -33,7 +33,7 @@ object AppInnerDownLoder {
     private val TAG = AppInnerDownLoder::class.java.simpleName
 
     /**
-     * 从服务器中下载APK
+     * Download APK from the server
      */
     fun downLoadApk(mContext: Context, downURL: String, appName: String) {
         val pd: ProgressDialog // 进度条对话框
@@ -62,26 +62,26 @@ object AppInnerDownLoder {
     }
 
     /**
-     * 从服务器下载最新更新文件
+     * Download the latest update file from the server
      *
-     * @param path 下载路径
-     * @param pd   进度条
+     * @param path Download path
+     * @param pd  progress bar
      * @return
      * @throws Exception
      */
     @Throws(Exception::class)
     private fun downloadFile(path: String, appName: String, pd: ProgressDialog): File {
-        // 如果相等的话表示当前的sdcard挂载在手机上并且是可用的
+        // If they are equal, the current sdcard is mounted on the phone and is available.
         if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
             val url = URL(path)
             val conn = url.openConnection() as HttpURLConnection
             conn.connect()
-            // 获取到文件的大小
+            // Get the size of the file
             pd.max = conn.contentLength / 1024
             val `is` = conn.inputStream
             val fileName = "$SD_FOLDER$appName.apk"
             val file = File(fileName)
-            // 目录不存在创建目录
+            // Directory does not exist to create a directory
             if (!file.parentFile.exists()) {
                 file.parentFile.mkdirs()
             }
@@ -97,7 +97,7 @@ object AppInnerDownLoder {
                 }
                 fos.write(buffer, 0, len)
                 total += len
-                // 获取当前下载量
+                // Get current downloads
                 pd.progress = total / 1024
             }
             fos.close()
@@ -110,7 +110,7 @@ object AppInnerDownLoder {
     }
 
     /**
-     * 安装apk
+     * install apk
      */
     private fun installApk(mContext: Context, file: File) {
         //判读版本是否在7.0以上
@@ -136,9 +136,9 @@ object AppInnerDownLoder {
     }
 
     /**
-     * 获取应用程序版本（versionName）
+     * Get the app version（versionName）
      *
-     * @return 当前应用的版本号
+     * @return This application version number
      */
 
     private fun getLocalVersion(context: Context): Double {
@@ -147,7 +147,7 @@ object AppInnerDownLoder {
         try {
             info = manager.getPackageInfo(context.packageName, 0)
         } catch (e: PackageManager.NameNotFoundException) {
-            Log.e(TAG, "获取应用程序版本失败，原因：" + e.message)
+            Log.e(TAG, "Failed to get the app version，reason：" + e.message)
             return 0.0
         }
 
@@ -155,9 +155,9 @@ object AppInnerDownLoder {
     }
 
     /**
-     * 获取版本名
+     * Get the app versionName
      *
-     * @return 当前应用的版本名
+     * @return This application version name
      */
     fun getVersionName(context: Context): String {
         return getPackageInfo(context)!!.versionName
@@ -179,7 +179,7 @@ object AppInnerDownLoder {
     }
 
     /**
-     * byte(字节)根据长度转成kb(千字节)和mb(兆字节)
+     * byte: Convert to kb (kilobytes) and mb (megabytes) according to length
      *
      * @param bytes
      * @return

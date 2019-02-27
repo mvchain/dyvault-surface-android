@@ -7,5 +7,10 @@
     <color name="line_gray">#F2F2F2</color>
     <color name="login_content">#595971</color>
     <color name="trand_gray">#8E8E9E</color>
+    <color name="login_button_bg">#DADADB</color>
+    <color name="login_button_tv_bg">#ACACAC</color>
+    <color name="register_button_bg">#8B8B8B</color>
+    <color name="register_button_tv_bg">#DEDEDE</color>
+    <color name="app_bg_status_bar">#E6E8F0</color>
 
 </resources>

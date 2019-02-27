@@ -16,7 +16,7 @@ public class MyApplication extends Application {
     }
 
     public static String getTOKEN() {
-        return TOKEN == null ? SPUtils.getInstance().getString(Constant.SP.TOKEN) : TOKEN;
+        return TOKEN == null ? SPUtils.getInstance().getString(Constant.SP.INSTANCE.getTOKEN()) : TOKEN;
     }
 
     public static void setTOKEN(String TOKEN) {
