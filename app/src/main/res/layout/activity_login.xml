@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
     <View
         android:id="@+id/status_bar"
@@ -9,11 +11,146 @@
         android:layout_height="0dp"
         android:background="@color/white" />
 
-    <ImageView
-        android:id="@+id/select_icon"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
-        android:src="@color/login_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <TextView
+            android:id="@+id/login_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Log in"
+            android:textColor="@color/login_title_tv_bg"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/login_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@color/trand_gray" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/login_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                android:text="Log in"
+                android:textColor="@color/content_tv_bg"
+                android:textSize="35sp" />
+
+            <EditText
+                android:id="@+id/login_email"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_login_edit_14dp"
+                android:hint="邮箱地址"
+                android:paddingLeft="20dp"
+                android:textColor="@color/login_edit_tv_bg"
+                android:textSize="19sp" />
+
+            <EditText
+                android:id="@+id/login_password"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_login_edit_14dp"
+                android:hint="登入密码"
+                android:paddingLeft="20dp"
+                android:textColor="@color/login_edit_tv_bg"
+                android:textSize="19sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp">
+
+                <EditText
+                    android:id="@+id/login_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/shape_login_edit_14dp"
+                    android:hint="验证码"
+                    android:paddingLeft="20dp"
+                    android:textColor="@color/login_edit_tv_bg"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/login_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/shape_login_get_code_20dp"
+                    android:gravity="center"
+                    android:paddingLeft="18dp"
+                    android:paddingRight="18dp"
+                    android:text="获取验证码"
+                    android:textColor="@color/content_tv_bg"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/login_submit"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="99dp"
+                android:layout_marginRight="110dp"
+                android:background="@drawable/shape_register_bg_22dp"
+                android:gravity="center"
+                android:text="登入"
+                android:textColor="@color/colorWhite"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/login_forget_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="忘记密码?"
+                android:textColor="@color/forget_password_bg"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/login_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="40dp"
+                android:gravity="center"
+                android:text="没有账户？注册"
+                android:textColor="@color/forget_password_bg"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

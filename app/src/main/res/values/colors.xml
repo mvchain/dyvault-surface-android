@@ -3,14 +3,19 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="edit_bg">#C7C7D1</color>
     <color name="line_gray">#F2F2F2</color>
     <color name="login_content">#595971</color>
     <color name="trand_gray">#8E8E9E</color>
-    <color name="login_button_bg">#DADADB</color>
-    <color name="login_button_tv_bg">#ACACAC</color>
-    <color name="register_button_bg">#8B8B8B</color>
-    <color name="register_button_tv_bg">#DEDEDE</color>
+    <color name="login_button_bg">#5A5CC7</color>
+    <color name="register_button_bg">#2263AC</color>
     <color name="app_bg_status_bar">#E6E8F0</color>
+    <color name="login_title_tv_bg">#8B8B8B</color>
+    <color name="content_tv_bg">#555555</color>
+    <color name="login_edit_bg">#F1F1F1</color>
+    <color name="login_edit_tv_bg">#999999</color>
+    <color name="login_get_code_bg">#D3D3D3</color>
+    <color name="forget_password_bg">#888888</color>
 
 </resources>

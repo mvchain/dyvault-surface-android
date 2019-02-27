@@ -17,7 +17,9 @@ abstract class BaseMVPActivity<V, P : BasePresenter<*, V>> : BaseActivity(), IBa
 
     abstract fun initMVPData()
 
-    abstract fun initMVPView()
+    open fun initMVPView(){
+        super.initView()
+    }
 
     override fun initView() {
     }

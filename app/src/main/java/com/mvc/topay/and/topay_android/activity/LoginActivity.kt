@@ -7,10 +7,13 @@ import com.mvc.topay.and.topay_android.constract.ILoginConstract
 import com.mvc.topay.and.topay_android.presenter.LoginPresenter
 
 class LoginActivity : BaseMVPActivity<ILoginConstract.LoginView, ILoginConstract.LoginPresenter>() {
+    var httpUrl = "http://www.bilibili.com/video/av9526132/?from%3Dsearch%26seid%3D8875280544793868560"
     override fun initMVPData() {
     }
 
     override fun initMVPView() {
+        super.initMVPView()
+
     }
 
     override fun getLayoutId(): Int {

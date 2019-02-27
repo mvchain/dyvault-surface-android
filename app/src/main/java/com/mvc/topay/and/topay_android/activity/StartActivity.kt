@@ -3,13 +3,7 @@ package com.mvc.topay.and.topay_android.activity
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BaseActivity
 import android.content.Intent
-import android.os.Build
 import android.os.Handler
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.util.Pair
-import android.view.View
-import kotlinx.android.synthetic.main.activity_start.*
 
 
 class StartActivity : BaseActivity() {
