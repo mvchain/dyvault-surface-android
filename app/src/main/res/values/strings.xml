@@ -7,4 +7,7 @@
     <string name="login_null_code">请输入验证码</string>
     <string name="login_null_password">请输入登入密码</string>
     <string name="login_null_pay_password">请输入支付密码</string>
+    <string name="send_code_success">验证码发送成功</string>
+    <string name="reset_password_success">修改登入密码成功</string>
+    <string name="reset_pay_password_success">修改支付密码成功</string>
 </resources>

@@ -4,9 +4,14 @@ class Constant {
 
     object SP {
         const val TOKEN = "token"
-        const val REFRESH_TOKEN = "token"
+        const val REFRESH_TOKEN = "refresh_token"
+        const val TEMP_TOKEN = "temp_token"
+        const val TEMP_EMAIL = "temp_email"
         const val USER_ID = "userId"
         const val USER_EMAIL = "email"
+        const val USER_RESETPASSWORD_TYPE = "user_resetpassword_type"
+        const val RESETPASSWORD_LOGIN = 1
+        const val RESETPASSWORD_PAY = 2
     }
 
     object LANGUAGE {

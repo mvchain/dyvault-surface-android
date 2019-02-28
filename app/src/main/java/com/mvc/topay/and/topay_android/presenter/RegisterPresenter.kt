@@ -33,7 +33,20 @@ class RegisterPresenter : IRegisterContract.RegisterPresenter() {
     }
 
     override fun sendCode(email: String) {
-
+        if (email.isEmpty()) {
+            mIView!!.sendCodeError(MyApplication.getAppContext().getString(R.string.login_null_email))
+            return
+        }
+        mRxUtils.register(mIModel!!.sendCode(email)
+                .subscribe({ updateBean ->
+                    if (updateBean.code === 200) {
+                        mIView!!.sendCodeSuccess(MyApplication.getAppContext().getString(R.string.send_code_success))
+                    } else {
+                        mIView!!.sendCodeError(updateBean.message!!)
+                    }
+                }, {
+                    mIView!!.sendCodeError(it.message!!)
+                }))
     }
 
     override fun getModel(): IRegisterContract.RegisterModel {

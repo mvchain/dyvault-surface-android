@@ -3,7 +3,9 @@ package com.mvc.topay.and.topay_android.constract
 import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.base.IBaseActivity
 import com.mvc.topay.and.topay_android.base.IBaseModel
+import com.mvc.topay.and.topay_android.bean.CodeBean
 import com.mvc.topay.and.topay_android.bean.HttpDataBean
+import com.mvc.topay.and.topay_android.bean.HttpUpdateBean
 import io.reactivex.Observable
 
 interface IRegisterContract {
@@ -13,12 +15,14 @@ interface IRegisterContract {
     }
 
     interface RegisterModel : IBaseModel {
-//        fun sendCode(email: String): Observable<CodeBean>
+        fun sendCode(email: String): Observable<HttpUpdateBean>
         fun verifyUser(email: String, inviteCode: String, validCode: String?): Observable<HttpDataBean>
     }
 
     interface RegisterView : IBaseActivity {
         fun verifyFailed(msg:String)
         fun verifySuccess(httpDataBean: HttpDataBean)
+        fun sendCodeSuccess(msg:String)
+        fun sendCodeError(msg:String)
     }
 }

@@ -24,12 +24,19 @@
         <activity android:name=".activity.SelectLoginActivity" />
         <activity
             android:name=".activity.LoginActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.login" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.RegisterActivity"
             android:launchMode="singleTask" />
         <activity android:name=".activity.SetPasswordActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".activity.VerificationEmailActivity" />
+        <activity android:name=".activity.ResetPasswordActivity" />
     </application>
 
 </manifest>

@@ -16,6 +16,7 @@
     <color name="login_edit_bg">#F1F1F1</color>
     <color name="login_edit_tv_bg">#999999</color>
     <color name="login_get_code_bg">#D3D3D3</color>
+    <color name="login_get_code_unckeck_bg">#CCD3D3D3</color>
     <color name="forget_password_bg">#888888</color>
 
 </resources>

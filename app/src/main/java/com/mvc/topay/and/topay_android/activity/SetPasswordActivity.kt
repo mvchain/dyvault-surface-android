@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.View
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.MainActivity
+import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BaseMVPActivity
 import com.mvc.topay.and.topay_android.base.BasePresenter
@@ -23,6 +24,7 @@ class SetPasswordActivity : BaseMVPActivity<ISetPasswordContract.SetPasswordView
     override fun registerSuccess(registerBean: RegisterBean) {
         dismiss()
         var dataBean = registerBean.data
+        MyApplication.setTOKEN(dataBean.token)
         SPUtils.getInstance().put(TOKEN, dataBean.token)
         SPUtils.getInstance().put(REFRESH_TOKEN, dataBean.refreshToken)
         SPUtils.getInstance().put(USER_ID, dataBean.userId)

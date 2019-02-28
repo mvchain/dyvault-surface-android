@@ -5,8 +5,12 @@ import com.mvc.topay.and.topay_android.base.BaseActivity
 import android.content.Intent
 import android.os.Handler
 import com.blankj.utilcode.util.SPUtils
+import com.mvc.topay.and.topay_android.MainActivity
 import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.ACCEPT_CHINESE
 import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE
+import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.DEFAULT_LANGUAGE
+import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
+import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
 
 
 class StartActivity : BaseActivity() {
@@ -16,17 +20,24 @@ class StartActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
-        SPUtils.getInstance().put(DEFAULT_ACCEPT_LANGUAGE, ACCEPT_CHINESE)
+        val default_language = SPUtils.getInstance().getString(DEFAULT_LANGUAGE)
+        val default_accept_language = SPUtils.getInstance().getString(DEFAULT_ACCEPT_LANGUAGE)
+        //Set to Chinese if there is no default internationalization language  (app)
+        if (default_language == "") {
+            SPUtils.getInstance().put(DEFAULT_LANGUAGE, ACCEPT_CHINESE)
+        }
+        //Set to Chinese if there is no default internationalization language (web)
+        if (default_accept_language == "") {
+            SPUtils.getInstance().put(DEFAULT_ACCEPT_LANGUAGE, ACCEPT_CHINESE)
+        }
+        val refreshToken = SPUtils.getInstance().getString(REFRESH_TOKEN)
+        val token = SPUtils.getInstance().getString(TOKEN)
         Handler().postDelayed({
-            //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                val intent = Intent(this, SelectLoginActivity::class.java)
-//                val pair = Pair<View, String>(select_icon, "TransitionName")
-//                val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair)
-//                ActivityCompat.startActivity(this, intent, optionsCompat.toBundle())
+//            if (refreshToken != "" && token != "") {
+//                startActivity((Intent(this,MainActivity::class.java)))
 //                finish()
 //            } else {
-            startActivity(Intent(this, SelectLoginActivity::class.java))
-            finish()
+                startTaskActivity(this)
 //            }
         }, 300)
     }
