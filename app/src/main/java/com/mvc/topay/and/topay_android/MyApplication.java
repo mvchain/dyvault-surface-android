@@ -2,19 +2,24 @@ package com.mvc.topay.and.topay_android;
 
 import android.app.Application;
 import android.content.Context;
+import android.view.Gravity;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
 import com.mvc.topay.and.topay_android.common.Constant;
 
 public class MyApplication extends Application {
-    private static Context application;
+    private static Context mContext;
+    private static MyApplication myApplication;
     private static String TOKEN;
 
     public static Context getAppContext() {
-        return application;
+        return mContext;
     }
-
+    public static Context getApplication() {
+        return myApplication;
+    }
     public static String getTOKEN() {
         return TOKEN == null ? SPUtils.getInstance().getString(Constant.SP.INSTANCE.getTOKEN()) : TOKEN;
     }
@@ -26,7 +31,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        application = this;
+        myApplication = this;
+        mContext = getApplicationContext();
         Utils.init(this);
 //        JPushInterface.setDebugMode(true);
 //        JPushInterface.init(this);

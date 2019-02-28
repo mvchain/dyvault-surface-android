@@ -116,7 +116,7 @@ object AppInnerDownLoder {
         //判读版本是否在7.0以上
         if (Build.VERSION.SDK_INT >= 24) {
             //在AndroidManifest中的android:authorities值
-            val apkUri = FileProvider.getUriForFile(mContext, MyApplication.getAppContext().packageName + ".fileprovider", file)
+            val apkUri = FileProvider.getUriForFile(mContext, MyApplication.getApplication().packageName + ".fileprovider", file)
             val install = Intent(Intent.ACTION_VIEW)
             install.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             //添加这一句表示对目标应用临时授权该Uri所代表的文件

@@ -23,7 +23,7 @@ class SelectLoginActivity : BaseActivity() {
                 startActivity(Intent(this, LoginActivity::class.java))
             }
             R.id.register_submit -> {
-
+                startActivity(Intent(this, RegisterActivity::class.java))
             }
         }
     }

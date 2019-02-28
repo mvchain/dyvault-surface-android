@@ -16,16 +16,16 @@
         android:layout_height="48dp">
 
         <TextView
-            android:id="@+id/login_title"
+            android:id="@+id/register_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="登入"
+            android:text="注册"
             android:textColor="@color/login_title_tv_bg"
             android:textSize="15sp" />
 
         <ImageView
-            android:id="@+id/login_back"
+            android:id="@+id/register_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:onClick="onClick"
@@ -44,90 +44,60 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/login_content"
+                android:id="@+id/register_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:gravity="center"
-                android:text="登入"
+                android:text="注册"
                 android:textColor="@color/content_tv_bg"
                 android:textSize="35sp" />
 
             <EditText
-                android:id="@+id/login_email"
+                android:id="@+id/register_name"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/shape_login_edit_14dp"
-                android:hint="邮箱地址"
-                android:maxLines="1"
+                android:hint="用户名"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 android:textColor="@color/login_edit_tv_bg"
                 android:textSize="19sp" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/register_email"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/shape_login_edit_14dp"
-                android:orientation="horizontal"
-                android:paddingRight="12dp">
+                android:hint="邮箱地址"
+                android:paddingLeft="20dp"
+                android:textColor="@color/login_edit_tv_bg"
+                android:textSize="19sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp">
 
                 <EditText
-                    android:id="@+id/login_password"
-                    android:layout_width="0dp"
+                    android:id="@+id/register_code"
+                    android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1"
                     android:background="@drawable/shape_login_edit_14dp"
-                    android:hint="登入密码"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:textColor="@color/login_edit_tv_bg"
-                    android:textSize="19sp" />
-
-                <CheckBox
-                    android:id="@+id/login_pwd_show"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/selector_password_show_or_hide"
-                    android:button="@null"
-                    android:gravity="center" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/shape_login_edit_14dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/login_code"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_weight="1"
-                    android:background="@null"
                     android:hint="验证码"
-                    android:maxLength="6"
-                    android:maxLines="1"
                     android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
                     android:textColor="@color/login_edit_tv_bg"
                     android:textSize="19sp" />
 
                 <TextView
-                    android:id="@+id/login_send"
+                    android:id="@+id/register_send"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
@@ -141,10 +111,10 @@
                     android:text="获取验证码"
                     android:textColor="@color/content_tv_bg"
                     android:textSize="15sp" />
-            </LinearLayout>
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/login_submit"
+                android:id="@+id/register_submit"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginLeft="110dp"
@@ -153,21 +123,9 @@
                 android:background="@drawable/shape_register_bg_22dp"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:text="登入"
+                android:text="下一步"
                 android:textColor="@color/colorWhite"
                 android:textSize="19sp" />
-
-            <TextView
-                android:id="@+id/login_forget_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:onClick="onClick"
-                android:text="忘记密码?"
-                android:textColor="@color/forget_password_bg"
-                android:textSize="15sp"
-                android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
@@ -175,14 +133,14 @@
                 android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/login_register"
+                android:id="@+id/register_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="25dp"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:text="没有账户？注册"
+                android:text="已有账户？登入"
                 android:textColor="@color/forget_password_bg"
                 android:textSize="15sp"
                 android:textStyle="bold" />
