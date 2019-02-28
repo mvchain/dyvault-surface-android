@@ -18,5 +18,7 @@
     <color name="login_get_code_bg">#D3D3D3</color>
     <color name="login_get_code_unckeck_bg">#CCD3D3D3</color>
     <color name="forget_password_bg">#888888</color>
+    <color name="mine_email_tv_bg">#888888</color>
+    <color name="select_gray">#7A7A7C</color>
 
 </resources>

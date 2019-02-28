@@ -3,9 +3,12 @@ package com.mvc.topay.and.topay_android
 import android.support.v4.app.Fragment
 import com.mvc.topay.and.topay_android.adapter.HomePagerAdapter
 import com.mvc.topay.and.topay_android.base.BaseActivity
+import com.mvc.topay.and.topay_android.event.LanguageEvent
 import com.mvc.topay.and.topay_android.fragment.MineFragment
 import com.mvc.topay.and.topay_android.fragment.WallteFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -19,8 +22,14 @@ class MainActivity : BaseActivity() {
     override fun initData() {
     }
 
+    override fun onDestroy() {
+        EventBus.getDefault().unregister(this)
+        super.onDestroy()
+    }
+
     override fun initView() {
         super.initView()
+        EventBus.getDefault().register(this)
         mFragment = ArrayList()
         var wallteFragment = WallteFragment()
         mFragment.add(wallteFragment)
@@ -50,5 +59,10 @@ class MainActivity : BaseActivity() {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
+    }
+
+    @Subscribe
+    fun changeLanguage(language: LanguageEvent) {
+        recreate()
     }
 }

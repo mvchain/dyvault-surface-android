@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white" />
+
+    <RelativeLayout
+        android:id="@+id/about_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_below="@id/status_bar"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/language_title"
+            android:textColor="@color/login_content"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:id="@+id/language_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:scaleType="center"
+            android:src="@color/content_tv_bg" />
+    </RelativeLayout>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/switch_china"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:sBackgroundDrawableRes="@drawable/shape_login_edit_14dp"
+        app:sLeftTextColor="@color/select_gray"
+        app:sLeftTextString="中文"
+        app:sRightIconRes="@drawable/language_selected_icon" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/switch_english"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        app:sBackgroundDrawableRes="@drawable/shape_login_edit_14dp"
+        app:sDividerLineHeight="0dp"
+        app:sLeftTextColor="@color/select_gray"
+        app:sLeftTextString="English"
+        app:sRightIconRes="@drawable/language_unselected_icon" />
+</LinearLayout>

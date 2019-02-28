@@ -18,6 +18,7 @@
         android:id="@+id/main_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/colorWhite"
         android:layout_weight="1" />
 
     <View
@@ -54,7 +55,7 @@
             android:drawableTop="@drawable/select_home_button_main"
             android:gravity="center"
             android:paddingTop="5dp"
-            android:text="@string/navi_assets"
+            android:text="@string/navi_mine"
             android:textColor="@color/select_home_button_wallet"
             android:textSize="10sp" />
     </RadioGroup>

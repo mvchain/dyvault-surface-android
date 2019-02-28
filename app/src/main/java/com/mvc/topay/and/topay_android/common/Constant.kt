@@ -19,7 +19,7 @@ class Constant {
         const val DEFAULT_LANGUAGE = "zh_CN"
         const val CHINESE = "zh_CN"
         const val ENGLISH = "en"
-        const val DEFAULT_ENGLUSH = "default_englush"
+        const val DEFAULT_ENGLUSH = "default_english"
         //设置接口国际化
         const val DEFAULT_ACCEPT_LANGUAGE = "default_accept_language"
         const val ACCEPT_CHINESE = "zh-cn"

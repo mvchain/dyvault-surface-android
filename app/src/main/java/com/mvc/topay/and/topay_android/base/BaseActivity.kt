@@ -2,6 +2,7 @@ package com.mvc.topay.and.topay_android.base
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -19,8 +20,11 @@ import com.mvc.topay.and.topay_android.common.Constant
 import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_ID
+import com.mvc.topay.and.topay_android.utils.LanguageUtils
 import com.mvc.topay.and.topay_android.utils.WeiboDialogUtils
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import org.greenrobot.eventbus.EventBus
+import java.util.*
 
 abstract class BaseActivity : RxAppCompatActivity() {
     private lateinit var loadDialogUtils: Dialog
@@ -34,12 +38,15 @@ abstract class BaseActivity : RxAppCompatActivity() {
         initData()
     }
 
+    override fun onDestroy() {
+        ImmersionBar.with(this).destroy()
+        super.onDestroy()
+    }
     abstract fun initData()
 
     open fun initView() {
         ImmersionBar.with(this).statusBarView(R.id.status_bar).statusBarDarkFont(true).init()
     }
-
     abstract fun getLayoutId(): Int
 
     protected fun getToken(): String {
@@ -133,5 +140,12 @@ abstract class BaseActivity : RxAppCompatActivity() {
         val intent = Intent(activity, SelectLoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
+    }
+
+    /**
+     * change default language
+     */
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageUtils.wrapLocale(newBase, Locale(LanguageUtils.getUserSetLocal())))
     }
 }

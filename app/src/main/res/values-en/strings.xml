@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ToPay</string>
+
+    <!--App hint msg-->
+    <string name="login_null_username">Please Enter User Name</string>
+    <string name="login_null_email">Please Input Your Email</string>
+    <string name="login_null_code">Please Enter Verification Code</string>
+    <string name="login_null_password">Please Enter Your Login Password</string>
+    <string name="login_null_pay_password">Please Enter The Payment Password</string>
+    <string name="send_code_success">The Verification Code Was Sent Successfully.</string>
+    <string name="reset_password_success">Modified Login Password Successfully</string>
+    <string name="reset_pay_password_success">Modified Payment Password Successfully</string>
+    <!--App 双击退出-->
+    <string name="app_exit">Please press again to exit the app</string>
+    <!--应用内文字-->
+    <!---->
+    <string name="navi_assets">Assets</string>
+    <string name="navi_mine">Mine</string>
+    <string name="language_title">Language</string>
+</resources>
