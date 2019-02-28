@@ -2,5 +2,9 @@
     <string name="app_name">ToPay</string>
 
     <!--App hint msg-->
+    <string name="login_null_username">请输入用户名</string>
     <string name="login_null_email">请输入邮箱</string>
+    <string name="login_null_code">请输入验证码</string>
+    <string name="login_null_password">请输入登入密码</string>
+    <string name="login_null_pay_password">请输入支付密码</string>
 </resources>

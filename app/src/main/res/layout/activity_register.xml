@@ -56,7 +56,7 @@
             <EditText
                 android:id="@+id/register_name"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="20dp"
@@ -64,54 +64,56 @@
                 android:hint="用户名"
                 android:paddingLeft="20dp"
                 android:textColor="@color/login_edit_tv_bg"
-                android:textSize="19sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/register_email"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/shape_login_edit_14dp"
                 android:hint="邮箱地址"
                 android:paddingLeft="20dp"
                 android:textColor="@color/login_edit_tv_bg"
-                android:textSize="19sp" />
+                android:textSize="15sp" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_login_edit_14dp">
 
                 <EditText
                     android:id="@+id/register_code"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="@drawable/shape_login_edit_14dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
                     android:hint="验证码"
                     android:paddingLeft="20dp"
                     android:textColor="@color/login_edit_tv_bg"
-                    android:textSize="19sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/register_send"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="36dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="12dp"
-                    android:background="@drawable/shape_login_get_code_20dp"
+                    android:background="@drawable/shape_login_get_code_18dp"
                     android:gravity="center"
                     android:onClick="onClick"
                     android:paddingLeft="18dp"
                     android:paddingRight="18dp"
                     android:text="获取验证码"
                     android:textColor="@color/content_tv_bg"
-                    android:textSize="15sp" />
-            </RelativeLayout>
+                    android:textSize="13sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/register_submit"
@@ -125,7 +127,7 @@
                 android:onClick="onClick"
                 android:text="下一步"
                 android:textColor="@color/colorWhite"
-                android:textSize="19sp" />
+                android:textSize="15sp" />
 
             <View
                 android:layout_width="match_parent"

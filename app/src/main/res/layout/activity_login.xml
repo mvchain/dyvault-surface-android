@@ -56,7 +56,7 @@
             <EditText
                 android:id="@+id/login_email"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="20dp"
@@ -66,13 +66,13 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:textColor="@color/login_edit_tv_bg"
-                android:textSize="19sp" />
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/shape_login_edit_14dp"
                 android:orientation="horizontal"
@@ -81,7 +81,7 @@
                 <EditText
                     android:id="@+id/login_password"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/shape_login_edit_14dp"
@@ -91,7 +91,7 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:textColor="@color/login_edit_tv_bg"
-                    android:textSize="19sp" />
+                    android:textSize="15sp" />
 
                 <CheckBox
                     android:id="@+id/login_pwd_show"
@@ -105,9 +105,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/shape_login_edit_14dp"
                 android:orientation="horizontal">
@@ -115,7 +115,7 @@
                 <EditText
                     android:id="@+id/login_code"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="验证码"
@@ -124,23 +124,23 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:textColor="@color/login_edit_tv_bg"
-                    android:textSize="19sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/login_send"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="36dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="12dp"
-                    android:background="@drawable/shape_login_get_code_20dp"
+                    android:background="@drawable/shape_login_get_code_18dp"
                     android:gravity="center"
                     android:onClick="onClick"
                     android:paddingLeft="18dp"
                     android:paddingRight="18dp"
                     android:text="获取验证码"
                     android:textColor="@color/content_tv_bg"
-                    android:textSize="15sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <TextView
@@ -155,7 +155,7 @@
                 android:onClick="onClick"
                 android:text="登入"
                 android:textColor="@color/colorWhite"
-                android:textSize="19sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/login_forget_password"
@@ -165,7 +165,7 @@
                 android:gravity="center"
                 android:onClick="onClick"
                 android:text="忘记密码?"
-                android:textColor="@color/forget_password_bg"
+                android:textColor="@color/register_button_bg"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 

@@ -17,11 +17,13 @@ public class MyApplication extends Application {
     public static Context getAppContext() {
         return mContext;
     }
+
     public static Context getApplication() {
         return myApplication;
     }
+
     public static String getTOKEN() {
-        return TOKEN == null ? SPUtils.getInstance().getString(Constant.SP.INSTANCE.getTOKEN()) : TOKEN;
+        return TOKEN == null ? SPUtils.getInstance().getString(Constant.SP.TOKEN) : TOKEN;
     }
 
     public static void setTOKEN(String TOKEN) {

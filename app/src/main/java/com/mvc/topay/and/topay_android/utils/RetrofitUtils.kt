@@ -1,6 +1,8 @@
 package com.mvc.topay.and.topay_android.utils
 
 import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.SPUtils
+import com.mvc.topay.and.topay_android.common.Constant
 
 import java.security.SecureRandom
 import java.security.cert.CertificateException
@@ -26,13 +28,14 @@ class RetrofitUtils {
             Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("")
+                    .baseUrl("http://192.168.15.21:10086/")
                     .client(okhttpUtils).build()
         }
         private val okhttpUtils: OkHttpClient
             get() = OkHttpClient.Builder()
                     .addInterceptor { chain ->
                         val builder = chain.request().newBuilder()
+                        builder.header("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE))
                         val request = builder.build()
                         val response = chain.proceed(request)
                         response

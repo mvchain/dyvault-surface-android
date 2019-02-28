@@ -4,6 +4,9 @@ import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BaseActivity
 import android.content.Intent
 import android.os.Handler
+import com.blankj.utilcode.util.SPUtils
+import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.ACCEPT_CHINESE
+import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE
 
 
 class StartActivity : BaseActivity() {
@@ -13,6 +16,7 @@ class StartActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
+        SPUtils.getInstance().put(DEFAULT_ACCEPT_LANGUAGE, ACCEPT_CHINESE)
         Handler().postDelayed({
             //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                val intent = Intent(this, SelectLoginActivity::class.java)

@@ -1,5 +1,6 @@
 package com.mvc.topay.and.topay_android.base
 
+import android.app.Dialog
 import android.os.Bundle
 import android.os.Handler
 import android.view.Gravity
@@ -12,10 +13,11 @@ import com.gyf.barlibrary.ImmersionBar
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.common.Constant
+import com.mvc.topay.and.topay_android.utils.WeiboDialogUtils
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 
 abstract class BaseActivity : RxAppCompatActivity() {
-
+    private lateinit var loadDialogUtils: Dialog
     private var mToast: Toast? = null
     private var toastGravity = -1
 
@@ -28,7 +30,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
 
     abstract fun initData()
 
-    open fun initView(){
+    open fun initView() {
         ImmersionBar.with(this).statusBarView(R.id.status_bar).statusBarDarkFont(true).init()
     }
 
@@ -36,6 +38,17 @@ abstract class BaseActivity : RxAppCompatActivity() {
 
     protected fun getToken(): String {
         return SPUtils.getInstance().getString(Constant.SP.TOKEN)
+    }
+
+    protected fun showDialog(msg: String) {
+        loadDialogUtils = WeiboDialogUtils.createLoadingDialog(this, msg)
+        loadDialogUtils.show()
+    }
+
+    protected fun dismiss() {
+        if (loadDialogUtils !== null) {
+            loadDialogUtils.dismiss()
+        }
     }
 
     /**
@@ -55,11 +68,37 @@ abstract class BaseActivity : RxAppCompatActivity() {
         showToast(content, gravity, 0)
     }
 
+    fun showToast(content: String, gravity: Int) {
+        showToast(content, gravity, 0, 0)
+    }
+
     fun showToast(content: Int, gravity: Int, rid: Int) {
         showToast(content, gravity, rid, 0)
     }
 
     private fun showToast(content: Int, gravity: Int, rid: Int, index: Int) {
+        //永远执行在主线程
+        Handler(MyApplication.getAppContext().mainLooper).post {
+            //位置相同  复用
+            if (mToast == null || gravity != toastGravity) {
+                toastGravity = gravity
+                mToast = Toast.makeText(MyApplication.getAppContext(), content, Toast.LENGTH_SHORT)
+            }
+            if (gravity != Gravity.BOTTOM) {
+                mToast?.setGravity(gravity, 0, 0)
+            }
+            mToast?.setText(content)
+            if (rid != 0) {
+                val layout = mToast?.view as LinearLayout
+                val img = ImageView(MyApplication.getAppContext())
+                img.setImageResource(rid)
+                layout.addView(img, index)
+            }
+            mToast?.show()
+        }
+    }
+
+    private fun showToast(content: String, gravity: Int, rid: Int, index: Int) {
         //永远执行在主线程
         Handler(MyApplication.getAppContext().mainLooper).post {
             //位置相同  复用
