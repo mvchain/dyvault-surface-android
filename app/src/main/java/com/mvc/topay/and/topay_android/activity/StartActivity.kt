@@ -33,12 +33,12 @@ class StartActivity : BaseActivity() {
         val refreshToken = SPUtils.getInstance().getString(REFRESH_TOKEN)
         val token = SPUtils.getInstance().getString(TOKEN)
         Handler().postDelayed({
-//            if (refreshToken != "" && token != "") {
-//                startActivity((Intent(this,MainActivity::class.java)))
-//                finish()
-//            } else {
+            if (refreshToken != "" && token != "") {
+                startActivity((Intent(this,MainActivity::class.java)))
+                finish()
+            } else {
                 startTaskActivity(this)
-//            }
+            }
         }, 300)
     }
 

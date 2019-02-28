@@ -10,4 +10,8 @@
     <string name="send_code_success">验证码发送成功</string>
     <string name="reset_password_success">修改登入密码成功</string>
     <string name="reset_pay_password_success">修改支付密码成功</string>
+
+    <!---->
+    <string name="navi_assets">资产</string>
+    <string name="navi_mine">我的</string>
 </resources>
