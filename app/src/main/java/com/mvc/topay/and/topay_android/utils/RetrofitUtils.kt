@@ -46,6 +46,7 @@ class RetrofitUtils {
                     .addInterceptor { chain ->
                         val builder = chain.request().newBuilder()
                         builder.header("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE))
+                        builder.addHeader("versionCode", MyApplication.getAppVersionCode().toString())
                         val request = builder.build()
                         val response = chain.proceed(request)
                         response
@@ -54,7 +55,7 @@ class RetrofitUtils {
                         val body = RetrofitUtils.client(ApiStore::class.java).refreshToken(SPUtils.getInstance().getString(REFRESH_TOKEN)).execute().body()
                         if (body!!.code === 200) {
                             SPUtils.getInstance().put(TOKEN, body!!.data)
-                            MyApplication.setTOKEN(body!!.data)
+                            MyApplication.token = body!!.data
                         } else {
                             RxUtils.instance.unSubscribeAll()
                             ActivityUtils.getTopActivity().finish()

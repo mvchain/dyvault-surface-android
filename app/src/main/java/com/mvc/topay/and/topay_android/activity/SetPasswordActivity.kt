@@ -24,7 +24,7 @@ class SetPasswordActivity : BaseMVPActivity<ISetPasswordContract.SetPasswordView
     override fun registerSuccess(registerBean: RegisterBean) {
         dismiss()
         var dataBean = registerBean.data
-        MyApplication.setTOKEN(dataBean.token)
+        MyApplication.token = dataBean.token
         SPUtils.getInstance().put(TOKEN, dataBean.token)
         SPUtils.getInstance().put(REFRESH_TOKEN, dataBean.refreshToken)
         SPUtils.getInstance().put(USER_ID, dataBean.userId)

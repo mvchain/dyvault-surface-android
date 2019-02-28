@@ -113,13 +113,13 @@ object AppInnerDownLoder {
      * install apk
      */
     private fun installApk(mContext: Context, file: File) {
-        //判读版本是否在7.0以上
+        //Determine if the version is above 7.0
         if (Build.VERSION.SDK_INT >= 24) {
-            //在AndroidManifest中的android:authorities值
-            val apkUri = FileProvider.getUriForFile(mContext, MyApplication.getApplication().packageName + ".fileprovider", file)
+            //Android:authorities value in AndroidManifest
+            val apkUri = FileProvider.getUriForFile(mContext, MyApplication.application!!.packageName + ".fileprovider", file)
             val install = Intent(Intent.ACTION_VIEW)
             install.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            //添加这一句表示对目标应用临时授权该Uri所代表的文件
+            //Add this sentence to indicate that the target application is temporarily authorized to open the file we represent.
             install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             install.setDataAndType(apkUri, "application/vnd.android.package-archive")
             mContext.startActivity(install)
@@ -128,7 +128,7 @@ object AppInnerDownLoder {
             val it = Intent()
             it.action = Intent.ACTION_VIEW
             it.setDataAndType(fileUri, "application/vnd.android.package-archive")
-            // 防止打不开应用
+            // Prevent applications from opening
             it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             mContext.startActivity(it)
         }

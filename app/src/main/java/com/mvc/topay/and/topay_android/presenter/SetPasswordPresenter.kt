@@ -11,11 +11,11 @@ import com.mvc.topay.and.topay_android.model.SetPasswordModel
 class SetPasswordPresenter : ISetPasswordContract.SetPasswordPresenter() {
     override fun setPassword(email: String, inviteCode: String, nickname: String, password: String, token: String, transactionPassword: String) {
         if (password.isEmpty()) {
-            mIView!!.registerFailed(MyApplication.getAppContext().getString(R.string.login_null_password))
+            mIView!!.registerFailed(MyApplication.appContext.getString(R.string.login_null_password))
             return
         }
         if (transactionPassword.isEmpty()) {
-            mIView!!.registerFailed(MyApplication.getAppContext().getString(R.string.login_null_pay_password))
+            mIView!!.registerFailed(MyApplication.appContext.getString(R.string.login_null_pay_password))
             return
         }
         var md5Password = EncryptUtils.encryptMD5ToString(email + EncryptUtils.encryptMD5ToString(password))

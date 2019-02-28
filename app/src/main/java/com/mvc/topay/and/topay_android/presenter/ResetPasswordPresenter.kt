@@ -11,18 +11,18 @@ import com.mvc.topay.and.topay_android.model.ResetPasswordModel
 class ResetPasswordPresenter : IResetPasswordContract.ResetPasswordPresenter() {
     override fun resetPassword(email: String, password: String, token: String, type: Int) {
         if (password.isEmpty()) {
-            mIView!!.resetFailed(if (type === RESETPASSWORD_LOGIN) MyApplication.getAppContext().getString(R.string.login_null_password)
+            mIView!!.resetFailed(if (type === RESETPASSWORD_LOGIN) MyApplication.appContext.getString(R.string.login_null_password)
             else
-                MyApplication.getAppContext().getString(R.string.login_null_pay_password))
+                MyApplication.appContext.getString(R.string.login_null_pay_password))
             return
         }
         var md5Password = EncryptUtils.encryptMD5ToString(email + EncryptUtils.encryptMD5ToString(password))
         mRxUtils.register(mIModel!!.resetPassword(md5Password, token, type)
                 .subscribe({ updateBean ->
                     if (updateBean.code === 200) {
-                        mIView!!.resetSuccess(if (type === RESETPASSWORD_LOGIN) MyApplication.getAppContext().getString(R.string.reset_password_success)
+                        mIView!!.resetSuccess(if (type === RESETPASSWORD_LOGIN) MyApplication.appContext.getString(R.string.reset_password_success)
                         else
-                            MyApplication.getAppContext().getString(R.string.reset_pay_password_success))
+                            MyApplication.appContext.getString(R.string.reset_pay_password_success))
                     } else {
                         mIView!!.resetFailed(updateBean.message)
                     }

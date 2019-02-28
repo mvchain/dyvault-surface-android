@@ -25,13 +25,13 @@ class VerificationModel : BaseModel(), IVerificationContract.VerificationModel {
         }
         val validInfo = jsonObject.toString()
         val requestBody = RequestBody.create(MediaType.parse("text/html"), validInfo)
-        return RetrofitUtils.client(ApiStore::class.java).verificationEmailResetPassword(MyApplication.getTOKEN(), requestBody)
+        return RetrofitUtils.client(ApiStore::class.java).verificationEmailResetPassword(MyApplication.token, requestBody)
                 .compose(RxHelper.rxSchedulerHelper())
                 .map { dateBean -> dateBean }
     }
 
     override fun sendCode(email: String): Observable<HttpUpdateBean> {
-        return RetrofitUtils.client(ApiStore::class.java).sendCode(MyApplication.getTOKEN(), email)
+        return RetrofitUtils.client(ApiStore::class.java).sendCode(MyApplication.token, email)
                 .compose(RxHelper.rxSchedulerHelper())
                 .map { updateBean -> updateBean }
     }

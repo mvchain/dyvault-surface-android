@@ -26,7 +26,7 @@ class ResetPasswordModel : BaseModel(), IResetPasswordContract.ResetPasswordMode
         }
         val validInfo = jsonObject.toString()
         val requestBody = RequestBody.create(MediaType.parse("text/html"), validInfo)
-        return RetrofitUtils.client(ApiStore::class.java).resetPassword(MyApplication.getTOKEN(), requestBody)
+        return RetrofitUtils.client(ApiStore::class.java).resetPassword(MyApplication.token, requestBody)
                 .compose(RxHelper.rxSchedulerHelper())
                 .map { updateBean -> updateBean }
     }

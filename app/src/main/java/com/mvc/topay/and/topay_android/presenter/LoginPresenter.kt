@@ -9,13 +9,13 @@ import com.mvc.topay.and.topay_android.model.LoginModel
 class LoginPresenter : ILoginContract.LoginPresenter() {
     override fun sendCode(email: String) {
         if (email.isEmpty()) {
-            mIView!!.sendCodeError(MyApplication.getAppContext().getString(R.string.login_null_email))
+            mIView!!.sendCodeError(MyApplication.appContext.getString(R.string.login_null_email))
             return
         }
         mRxUtils.register(mIModel!!.sendCode(email)
                 .subscribe({ updateBean ->
                     if (updateBean.code === 200) {
-                        mIView!!.sendCodeSuccess(MyApplication.getAppContext().getString(R.string.send_code_success))
+                        mIView!!.sendCodeSuccess(MyApplication.appContext.getString(R.string.send_code_success))
                     } else {
                         mIView!!.sendCodeError(updateBean.message!!)
                     }
@@ -26,15 +26,15 @@ class LoginPresenter : ILoginContract.LoginPresenter() {
 
     override fun login(imageToken: String, password: String, username: String, validCode: String) {
         if (username.isEmpty()) {
-            mIView!!.loginFailed(MyApplication.getAppContext().getString(R.string.login_null_email))
+            mIView!!.loginFailed(MyApplication.appContext.getString(R.string.login_null_email))
             return
         }
         if (password.isEmpty()) {
-            mIView!!.loginFailed(MyApplication.getAppContext().getString(R.string.login_null_password))
+            mIView!!.loginFailed(MyApplication.appContext.getString(R.string.login_null_password))
             return
         }
         if (validCode!!.isEmpty()) {
-            mIView!!.loginFailed(MyApplication.getAppContext().getString(R.string.login_null_code))
+            mIView!!.loginFailed(MyApplication.appContext.getString(R.string.login_null_code))
             return
         }
         mRxUtils.register(mIModel!!.login(imageToken, password, username, validCode)

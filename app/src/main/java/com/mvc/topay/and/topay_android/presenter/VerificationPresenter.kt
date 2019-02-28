@@ -15,13 +15,13 @@ class VerificationPresenter : IVerificationContract.VerificationPresenter() {
 
     override fun sendCode(email: String) {
         if (email.isEmpty()) {
-            mIView!!.error(MyApplication.getAppContext().getString(R.string.login_null_email))
+            mIView!!.error(MyApplication.appContext.getString(R.string.login_null_email))
             return
         }
         mRxUtils.register(mIModel!!.sendCode(email)
                 .subscribe({ updateBean ->
                     if (updateBean.code === 200) {
-                        mIView!!.sendCodeSuccess(MyApplication.getAppContext().getString(R.string.send_code_success))
+                        mIView!!.sendCodeSuccess(MyApplication.appContext.getString(R.string.send_code_success))
                     } else {
                         mIView!!.error(updateBean.message!!)
                     }
@@ -32,11 +32,11 @@ class VerificationPresenter : IVerificationContract.VerificationPresenter() {
 
     override fun resetPassword(email: String, value: String) {
         if (email.isEmpty()) {
-            mIView!!.error(MyApplication.getAppContext().getString(R.string.login_null_email))
+            mIView!!.error(MyApplication.appContext!!.getString(R.string.login_null_email))
             return
         }
         if (value.isEmpty()) {
-            mIView!!.error(MyApplication.getAppContext().getString(R.string.login_null_code))
+            mIView!!.error(MyApplication.appContext!!.getString(R.string.login_null_code))
             return
         }
         mRxUtils.register(mIModel!!.resetPassword(email, value)

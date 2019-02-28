@@ -35,11 +35,11 @@ object ToastUtils {
 
     private fun showToast(content: Int, gravity: Int, rid: Int, index: Int) {
         //永远执行在主线程
-        Handler(MyApplication.getAppContext().mainLooper).post {
+        Handler(MyApplication.appContext.mainLooper).post {
             //位置相同  复用
             if (mToast == null || gravity != toastGravity) {
                 toastGravity = gravity
-                mToast = Toast.makeText(MyApplication.getAppContext(), content, Toast.LENGTH_SHORT)
+                mToast = Toast.makeText(MyApplication.appContext, content, Toast.LENGTH_SHORT)
             }
             if (gravity != Gravity.BOTTOM) {
                 mToast?.setGravity(gravity, 0, 0)
@@ -47,7 +47,7 @@ object ToastUtils {
             mToast?.setText(content)
             if (rid != 0) {
                 val layout = mToast?.view as LinearLayout
-                val img = ImageView(MyApplication.getAppContext())
+                val img = ImageView(MyApplication.appContext)
                 img.setImageResource(rid)
                 layout.addView(img, index)
             }

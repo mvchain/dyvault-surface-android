@@ -16,7 +16,7 @@ import org.json.JSONObject
 
 class LoginModel : BaseModel(), ILoginContract.LoginModel {
     override fun sendCode(email: String): Observable<HttpUpdateBean> {
-        return RetrofitUtils.client(ApiStore::class.java).sendCode(MyApplication.getTOKEN(), email)
+        return RetrofitUtils.client(ApiStore::class.java).sendCode(MyApplication.token, email)
                 .compose(RxHelper.rxSchedulerHelper())
                 .map { updateBean -> updateBean }
     }

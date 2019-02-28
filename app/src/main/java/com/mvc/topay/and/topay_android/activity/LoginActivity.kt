@@ -57,7 +57,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
     override fun loginSuccess(registerBean: RegisterBean) {
         dismiss()
         var dataBean = registerBean.data
-        MyApplication.setTOKEN(dataBean.token)
+        MyApplication.token = dataBean.token
         SPUtils.getInstance().put(TOKEN, dataBean.token)
         SPUtils.getInstance().put(REFRESH_TOKEN, dataBean.refreshToken)
         SPUtils.getInstance().put(USER_ID, dataBean.userId)
