@@ -1,6 +1,10 @@
 package com.mvc.topay.and.topay_android.utils
 
 
+import com.blankj.utilcode.util.SPUtils
+import com.mvc.topay.and.topay_android.base.ExchangeRateBean
+import com.mvc.topay.and.topay_android.common.Constant.SP.DEFAULT_RATE
+import com.mvc.topay.and.topay_android.common.Constant.SP.SET_RATE
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -55,15 +59,15 @@ object TextUtils {
 
     fun rateToPrice(price: Double): String {
         val format = DecimalFormat("0.00")
-        //        String set_rate = SPUtils.getInstance().getString(SET_RATE);
-        //        String default_rate = SPUtils.getInstance().getString(DEFAULE_RATE);
-        //        ExchangeRateBean.DataBean setBean = (ExchangeRateBean.DataBean) JsonHelper.stringToJson(set_rate, ExchangeRateBean.DataBean.class);
-        //        ExchangeRateBean.DataBean defaultBean = (ExchangeRateBean.DataBean) JsonHelper.stringToJson(default_rate, ExchangeRateBean.DataBean.class);
-        //        if (setBean.getName().equals("CNY")) {
-        //            return format.format(price * setBean.getValue());
-        //        } else {
-        //            return format.format(price / setBean.getValue());
-        //        }
+        var set_rate = SPUtils.getInstance().getString(SET_RATE)
+        var default_rate = SPUtils.getInstance().getString(DEFAULT_RATE)
+        var setBean = JsonHelper.stringToJson(set_rate, ExchangeRateBean.DataBean::class.java) as ExchangeRateBean.DataBean
+        var defaultBean = JsonHelper.stringToJson(default_rate, ExchangeRateBean.DataBean::class.java) as ExchangeRateBean.DataBean
+        if (setBean.name.equals("CNY")) {
+            return format.format(price * setBean.value);
+        } else {
+            return format.format(price / setBean.value);
+        }
         return ""
     }
 }

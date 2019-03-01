@@ -1,5 +1,8 @@
 package com.mvc.topay.and.topay_android.api
 
+import com.mvc.topay.and.topay_android.base.AssetListBean
+import com.mvc.topay.and.topay_android.base.CurrencyBean
+import com.mvc.topay.and.topay_android.base.ExchangeRateBean
 import com.mvc.topay.and.topay_android.bean.HttpDataBean
 import com.mvc.topay.and.topay_android.bean.HttpUpdateBean
 import com.mvc.topay.and.topay_android.bean.RegisterBean
@@ -51,5 +54,24 @@ interface ApiStore {
      */
     @PUT(HttpUrl.USER_FORGET)
     fun resetPassword(@Header("Authorization") token: String, @Body body: RequestBody): Observable<HttpUpdateBean>
+
+    /**
+     * Get the exchange rate list
+     */
+    @GET(HttpUrl.EXCHANGE_RATE)
+    fun getExchangeRate(@Header("Authorization") token: String): Observable<ExchangeRateBean>
+
+    /**
+     * Get currency list
+     */
+    @GET(HttpUrl.CURRENCY_LIST)
+    fun getCurrencyList(@Header("Authorization") token: String): Observable<CurrencyBean>
+
+    /**
+     * Get currency list
+     */
+    @GET(HttpUrl.ASSETS_LIST)
+    fun getAssetsList(@Header("Authorization") token: String): Observable<AssetListBean>
+
 }
 

@@ -21,5 +21,7 @@
     <color name="mine_email_tv_bg">#888888</color>
     <color name="select_gray">#7A7A7C</color>
     <color name="dialog_hint_tv">#393939</color>
+    <color name="translucent">#33CCCCCC</color>
+    <color name="buying_coins">#EE784C</color>
 
 </resources>

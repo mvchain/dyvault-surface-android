@@ -29,7 +29,8 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:onClick="onClick"
-            android:src="@color/trand_gray" />
+            android:scaleType="center"
+            android:src="@drawable/back_black" />
     </RelativeLayout>
 
     <ScrollView
@@ -116,9 +117,9 @@
                     android:id="@+id/login_code"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:layout_marginRight="20dp"
                     android:hint="验证码"
                     android:maxLength="6"
                     android:maxLines="1"

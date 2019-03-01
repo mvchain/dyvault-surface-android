@@ -72,6 +72,10 @@ abstract class BaseFragment : RxFragment() {
         ToastUtils.showShort(content)
     }
 
+    fun showToast(content: String, gravity: Int) {
+        showToast(content, gravity, 0, 0)
+    }
+
     fun showToast(content: Int, gravity: Int) {
         showToast(content, gravity, 0)
     }
@@ -81,6 +85,28 @@ abstract class BaseFragment : RxFragment() {
     }
 
     private fun showToast(content: Int, gravity: Int, rid: Int, index: Int) {
+        //永远执行在主线程
+        Handler(MyApplication.appContext.mainLooper).post {
+            //位置相同  复用
+            if (mToast == null || gravity != toastGravity) {
+                toastGravity = gravity
+                mToast = Toast.makeText(MyApplication.appContext, content, Toast.LENGTH_SHORT)
+            }
+            if (gravity != Gravity.BOTTOM) {
+                mToast?.setGravity(gravity, 0, 0)
+            }
+            mToast?.setText(content)
+            if (rid != 0) {
+                val layout = mToast?.view as LinearLayout
+                val img = ImageView(MyApplication.appContext)
+                img.setImageResource(rid)
+                layout.addView(img, index)
+            }
+            mToast?.show()
+        }
+    }
+
+    private fun showToast(content: String, gravity: Int, rid: Int, index: Int) {
         //永远执行在主线程
         Handler(MyApplication.appContext.mainLooper).post {
             //位置相同  复用

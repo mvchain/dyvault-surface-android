@@ -21,8 +21,9 @@
         <ImageView
             android:id="@+id/mine_icon"
             android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@color/register_button_bg" />
+            android:scaleType="center"
+            android:src="@drawable/home_mine_unselected"
+            android:layout_height="30dp"/>
 
         <TextView
             android:id="@+id/mine_nickname"
@@ -31,7 +32,7 @@
             android:layout_marginLeft="12dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="Android Studio"
+            android:text="-"
             android:textColor="@color/content_tv_bg"
             android:textSize="19sp"
             android:textStyle="bold" />
@@ -43,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="42dp"
         android:layout_marginTop="6dp"
-        android:text="601***31@qq.com"
+        android:text="-"
         android:textColor="@color/mine_email_tv_bg"
         android:textSize="15sp" />
 

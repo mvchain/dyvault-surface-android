@@ -20,9 +20,7 @@ import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
 
-import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLContext
-import javax.net.ssl.SSLSession
 import javax.net.ssl.SSLSocketFactory
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
@@ -57,6 +55,7 @@ class RetrofitUtils {
                             SPUtils.getInstance().put(TOKEN, body!!.data)
                             MyApplication.token = body!!.data
                         } else {
+                            LogUtils.e("token 失效")
                             RxUtils.instance.unSubscribeAll()
                             ActivityUtils.getTopActivity().finish()
                             SPUtils.getInstance().remove(REFRESH_TOKEN)
@@ -64,7 +63,7 @@ class RetrofitUtils {
                             SPUtils.getInstance().remove(USER_ID)
                             val intent = Intent()
                             intent.action = "android.login"
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                             Utils.getApp().startActivity(intent)
                         }
                         val builder = response.request().newBuilder()
@@ -81,45 +80,6 @@ class RetrofitUtils {
                     .connectTimeout(20, TimeUnit.SECONDS)
                     .build()
 
-        //                    .authenticator((route, response) ->
-//
-//        {
-//            if (body.getCode() == 200) {
-//                SPUtils.getInstance().put(TOKEN, body.getData());
-//                MyApplication.setTOKEN(body.getData());
-////                RetrofitUtils.client(ApiStore.class).getPushTag(MyApplication.getTOKEN()).compose(RxHelper.rxSchedulerHelper())
-////                        .subscribe(tagBean -> {
-////                    if (tagBean.getCode() == 200 && tagBean.getData() != null) {
-////                        SPUtils.getInstance().put(TAG_NAME, tagBean.getData());
-////                        String[] tags = tagBean.getData().split(",");
-////                        for (int i = 0; i < tags.length; i++) {
-////                            if (i == 0) {
-////                                JPushInterface.setTags(MyApplication.getAppContext(), Integer.parseInt(tags[i]), new HashSet<>(Arrays.asList(tags[i])));
-////                            } else {
-////                                JPushInterface.addTags(MyApplication.getAppContext(), Integer.parseInt(tags[i]), new HashSet<>(Arrays.asList(tags[i])));
-////                            }
-////                        }
-////                    }
-////                }, throwable -> {
-////                    LogUtils.e("ParameterInterceptor", throwable.getMessage());
-////                });
-//            } else {
-//                ActivityUtils.getTopActivity().finish();
-//                SPUtils.getInstance().remove(REFRESH_TOKEN);
-//                SPUtils.getInstance().remove(UPDATE_PASSWORD_TYPE);
-//                SPUtils.getInstance().remove(TOKEN);
-//                JPushInterface.deleteAlias(MyApplication.getAppContext().getApplicationContext(), SPUtils.getInstance().getInt(USER_ID));
-//                SPUtils.getInstance().remove(USER_ID);
-//                Intent intent = new Intent();
-//                intent.setAction("android.login");
-//                //                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                Utils.getApp().startActivity(intent);
-//            }
-//            Request.Builder builder = response . request ().newBuilder();
-//            builder.header("Authorization", SPUtils.getInstance().getString(TOKEN));
-//            builder.header("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE));
-//            return builder.build();
-//        })
         private fun createSSLSocketFactory(): SSLSocketFactory? {
             var ssfFactory: SSLSocketFactory? = null
             try {
@@ -135,47 +95,6 @@ class RetrofitUtils {
             return instance.create(clazz)
         }
     }
-
-
-//                builder.header("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE));
-    //                .authenticator((route, response) -> {
-    //                    HttpTokenBean body = RetrofitUtils.client(ApiStore.class).refreshToken(SPUtils.getInstance().getString(REFRESH_TOKEN)).execute().body();
-    //                    if (body.getCode() == 200) {
-    //                        SPUtils.getInstance().put(TOKEN, body.getData());
-    //                        MyApplication.setTOKEN(body.getData());
-    //                        RetrofitUtils.client(ApiStore.class).getPushTag(MyApplication.getTOKEN()).compose(RxHelper.rxSchedulerHelper())
-    //                                .subscribe(tagBean -> {
-    //                                    if (tagBean.getCode() == 200 && tagBean.getData() != null) {
-    //                                        SPUtils.getInstance().put(TAG_NAME, tagBean.getData());
-    //                                        String[] tags = tagBean.getData().split(",");
-    //                                        for (int i = 0; i < tags.length; i++) {
-    //                                            if (i == 0) {
-    //                                                JPushInterface.setTags(MyApplication.getAppContext(), Integer.parseInt(tags[i]), new HashSet<>(Arrays.asList(tags[i])));
-    //                                            } else {
-    //                                                JPushInterface.addTags(MyApplication.getAppContext(), Integer.parseInt(tags[i]), new HashSet<>(Arrays.asList(tags[i])));
-    //                                            }
-    //                                        }
-    //                                    }
-    //                                }, throwable -> {
-    //                                    LogUtils.e("ParameterInterceptor", throwable.getMessage());
-    //                                });
-    //                    } else {
-    //                        ActivityUtils.getTopActivity().finish();
-    //                        SPUtils.getInstance().remove(REFRESH_TOKEN);
-    //                        SPUtils.getInstance().remove(UPDATE_PASSWORD_TYPE);
-    //                        SPUtils.getInstance().remove(TOKEN);
-    //                        JPushInterface.deleteAlias(MyApplication.getAppContext().getApplicationContext(), SPUtils.getInstance().getInt(USER_ID));
-    //                        SPUtils.getInstance().remove(USER_ID);
-    //                        Intent intent = new Intent();
-    //                        intent.setAction("android.login");
-    ////                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-    //                        Utils.getApp().startActivity(intent);
-    //                    }
-    //                    Request.Builder builder = response.request().newBuilder();
-    //                    builder.header("Authorization", SPUtils.getInstance().getString(TOKEN));
-    //                    builder.header("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE));
-    //                    return builder.build();
-    //                })
 
 
     private class TrustAllCerts : X509TrustManager {

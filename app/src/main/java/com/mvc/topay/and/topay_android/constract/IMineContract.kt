@@ -6,7 +6,7 @@ import com.mvc.topay.and.topay_android.base.IBaseModel
 
 interface IMineContract {
     abstract class MinePresenter : BasePresenter<MineModel, MineView>() {
-        
+        abstract fun getUserInfo()
     }
 
     interface MineModel : IBaseModel {

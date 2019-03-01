@@ -5,7 +5,7 @@ import com.mvc.topay.and.topay_android.adapter.HomePagerAdapter
 import com.mvc.topay.and.topay_android.base.BaseActivity
 import com.mvc.topay.and.topay_android.event.LanguageEvent
 import com.mvc.topay.and.topay_android.fragment.MineFragment
-import com.mvc.topay.and.topay_android.fragment.WallteFragment
+import com.mvc.topay.and.topay_android.fragment.WalletFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -31,8 +31,8 @@ class MainActivity : BaseActivity() {
         super.initView()
         EventBus.getDefault().register(this)
         mFragment = ArrayList()
-        var wallteFragment = WallteFragment()
-        mFragment.add(wallteFragment)
+        var walletFragment = WalletFragment()
+        mFragment.add(walletFragment)
         var mineFragment = MineFragment()
         mFragment.add(mineFragment)
         pagerAdapter = HomePagerAdapter(supportFragmentManager, mFragment)

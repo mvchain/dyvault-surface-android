@@ -32,7 +32,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:scaleType="center"
-            android:src="@color/content_tv_bg" />
+            android:src="@drawable/back_black" />
     </RelativeLayout>
 
     <ImageView

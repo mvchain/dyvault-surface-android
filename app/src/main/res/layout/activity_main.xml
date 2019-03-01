@@ -21,11 +21,6 @@
         android:background="@color/colorWhite"
         android:layout_weight="1" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/login_get_code_bg" />
-
     <RadioGroup
         android:id="@+id/main_group"
         android:layout_width="match_parent"
