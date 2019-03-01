@@ -88,4 +88,17 @@
         android:text="关于Topay"
         android:textSize="15sp"
         android:textStyle="bold" />
+    <TextView
+        android:id="@+id/login_up"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="80dp"
+        android:background="@drawable/shape_check_update_bg_22dp"
+        android:gravity="center"
+        android:text="登出"
+        android:textColor="@color/white" />
 </LinearLayout>

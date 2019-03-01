@@ -40,9 +40,9 @@ class MyApplication : Application() {
 
         val application: Context?
             get() = myApplication
-        fun getAppVersionCode() : Long{
+        fun getAppVersionCode() : Int{
             val packageInfo = application!!.packageManager.getPackageInfo(application!!.packageName, 0)
-            return packageInfo.longVersionCode
+            return packageInfo.versionCode
         }
     }
 }

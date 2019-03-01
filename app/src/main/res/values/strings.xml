@@ -17,4 +17,6 @@
     <string name="navi_assets">资产</string>
     <string name="navi_mine">我的</string>
     <string name="language_title">语言</string>
+    <string name="about_title">关于</string>
+
 </resources>

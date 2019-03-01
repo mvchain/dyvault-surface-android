@@ -39,7 +39,7 @@
         <activity android:name=".activity.VerificationEmailActivity" />
         <activity android:name=".activity.ResetPasswordActivity" />
         <activity android:name=".activity.LanguageActivity" />
-
+        <activity android:name=".activity.AboutActivity" />
 
         <!--适配华为（hw）刘海屏-->
         <meta-data
