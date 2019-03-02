@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.activity.IncreaseCurrencyActivity
+import com.mvc.topay.and.topay_android.activity.MsgActivity
 import com.mvc.topay.and.topay_android.adapter.recyclerAdapter.WalletAssetsAdapter
 import com.mvc.topay.and.topay_android.base.AssetListBean
 import com.mvc.topay.and.topay_android.base.BalanceBean
@@ -69,7 +70,8 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         this.mWalletBuyingCoins = mRootView!!.findViewById(R.id.wallet_rate)
         this.mWalletRefresh = mRootView!!.findViewById(R.id.wallet_swipe)
         this.isRefresh = true
-        mWalletAddCurrency.setOnClickListener { startActivity(Intent(mActivity,IncreaseCurrencyActivity::class.java)) }
+        mWalletAddCurrency.setOnClickListener { startActivity(Intent(mActivity, IncreaseCurrencyActivity::class.java)) }
+        mWalletMsg.setOnClickListener { startActivity(Intent(mActivity, MsgActivity::class.java)) }
         assetsList = ArrayList()
         walletAdapter = WalletAssetsAdapter(R.layout.item_home_assets_type, assetsList)
         mWalletRecyclerView.layoutManager = object : LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false) {
@@ -109,7 +111,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     }
 
     @Subscribe
-    fun eventRefresh(walletAssetsListEvent: WalletAssetsListEvent){
+    fun eventRefresh(walletAssetsListEvent: WalletAssetsListEvent) {
         mPresenter.getAllAssets()
     }
 
@@ -117,6 +119,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
     }
+
     override fun onDestroy() {
         EventBus.getDefault().unregister(this)
         super.onDestroy()

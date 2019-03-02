@@ -77,4 +77,12 @@ object HttpUrl {
      */
     const val ASSET_BALANCE = "asset/balance"
 
+
+    /**
+     * Incoming timestamp to get notification information
+     */
+    const val MESSAGE = "message"
+
+
+
 }

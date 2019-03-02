@@ -31,7 +31,7 @@ class VerificationModel : BaseModel(), IVerificationContract.VerificationModel {
     }
 
     override fun sendCode(email: String): Observable<HttpUpdateBean> {
-        return RetrofitUtils.client(ApiStore::class.java).sendCode(MyApplication.token, email)
+        return RetrofitUtils.client(ApiStore::class.java).sendCode(email)
                 .compose(RxHelper.rxSchedulerHelper())
                 .map { updateBean -> updateBean }
     }

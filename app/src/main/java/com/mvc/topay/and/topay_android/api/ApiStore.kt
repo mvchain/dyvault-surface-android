@@ -4,10 +4,7 @@ import com.mvc.topay.and.topay_android.base.AssetListBean
 import com.mvc.topay.and.topay_android.base.BalanceBean
 import com.mvc.topay.and.topay_android.base.CurrencyBean
 import com.mvc.topay.and.topay_android.base.ExchangeRateBean
-import com.mvc.topay.and.topay_android.bean.HttpDataBean
-import com.mvc.topay.and.topay_android.bean.HttpUpdateBean
-import com.mvc.topay.and.topay_android.bean.RegisterBean
-import com.mvc.topay.and.topay_android.bean.UserInfoBean
+import com.mvc.topay.and.topay_android.bean.*
 import com.mvc.topay.and.topay_android.common.HttpUrl
 import io.reactivex.Observable
 import okhttp3.RequestBody
@@ -49,7 +46,7 @@ interface ApiStore {
      * Send the verification code
      */
     @GET(HttpUrl.USER_SEND_EMAIL)
-    fun sendCode(@Header("Authorization") token: String, @Query("email") email: String): Observable<HttpUpdateBean>
+    fun sendCode(@Query("email") email: String): Observable<HttpUpdateBean>
 
     /**
      * Send verification code (do not enter the email address, directly take the current user registration email)
@@ -124,6 +121,12 @@ interface ApiStore {
      * Set currency display switch, update priority queue is lower
      */
     @PUT(HttpUrl.ASSETS_LIST)
-    fun updateAssetList(@Header("Authorization") token: String, @Body body: RequestBody?):Observable<HttpUpdateBean>
+    fun updateAssetList(@Header("Authorization") token: String, @Body body: RequestBody?): Observable<HttpUpdateBean>
+
+    /**
+     * Incoming timestamp to get notification information
+     */
+    @GET(HttpUrl.MESSAGE)
+    fun getMessage(@Header("Authorization") token: String, @Query("pageSize") pageSize: Int, @Query("timestamp") timestamp: Long): Observable<MsgBean>
 }
 

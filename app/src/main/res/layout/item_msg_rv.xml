@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/shape_login_edit_14dp"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingTop="8dp"
+    android:paddingRight="12dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="2 月 24 日，2019 MWC（世界移动通信大会）如期在巴塞罗那拉开帷幕。当全球手机销量持续下行之际，一场秀肌肉的技术产品同台 PK 却盛大举办。这是 MWC 历史上最奇特的一届，是新技术、新产品和新营销的首次交锋，也是市场面临残酷竞争一个缩影"
+        android:textColor="@color/content_tv_bg"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/item_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="2018-12-16 18:23:00"
+        android:textColor="@color/login_edit_tv_bg"
+        android:textSize="11sp" />
+</LinearLayout>
