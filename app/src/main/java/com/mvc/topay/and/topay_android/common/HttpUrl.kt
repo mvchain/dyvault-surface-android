@@ -72,4 +72,9 @@ object HttpUrl {
      */
     const val UPDATE_PAY_PASSWORD = "user/transactionPassword"
 
+    /**
+     * Get the total value of the assets, the observation list does not exist but the balance exists will also be counted
+     */
+    const val ASSET_BALANCE = "asset/balance"
+
 }

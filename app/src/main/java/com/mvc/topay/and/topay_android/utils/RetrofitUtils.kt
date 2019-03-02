@@ -69,7 +69,8 @@ class RetrofitUtils {
                         }
                         val builder = response.request().newBuilder()
                         builder.header("Authorization", SPUtils.getInstance().getString(TOKEN))
-                        builder.header("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE))
+                        builder.addHeader("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE))
+                        builder.addHeader("versionCode", MyApplication.getAppVersionCode().toString())
                         builder.build()
                     }
                     .addInterceptor(HttpLoggingInterceptor

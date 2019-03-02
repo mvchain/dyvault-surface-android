@@ -8,6 +8,7 @@ class Constant {
         const val RATE_LIST = "rate_list"  //All exchange rate lists
         const val DEFAULT_SYMBOL = "default_symbol" //Default exchange rate unit
         const val DEFAULT_RATE = "default_rate"//Default exchange rate
+        const val ASSETS_LIST = "assets_list" //Default exchange rate unit
         const val REFRESH_TOKEN = "refresh_token"   //Long token for refreshing short tokens
         const val TEMP_TOKEN = "temp_token"     //Temporary token
         const val TEMP_EMAIL = "temp_email"//Temporary email

@@ -1,5 +1,6 @@
 package com.mvc.topay.and.topay_android.utils
 
+import com.blankj.utilcode.util.LogUtils
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -19,7 +20,8 @@ class RxUtils {
         compositeDisposable.dispose()
     }
 
-    fun unSubscribeAll(){
+    fun unSubscribeAll() {
+        LogUtils.e("取消全部订阅")
         compositeDisposable.clear()
     }
 }

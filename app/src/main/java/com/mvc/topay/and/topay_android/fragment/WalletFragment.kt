@@ -1,32 +1,53 @@
 package com.mvc.topay.and.topay_android.fragment
 
+import android.content.Intent
+import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.Gravity
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.R
+import com.mvc.topay.and.topay_android.activity.IncreaseCurrencyActivity
 import com.mvc.topay.and.topay_android.adapter.recyclerAdapter.WalletAssetsAdapter
 import com.mvc.topay.and.topay_android.base.AssetListBean
+import com.mvc.topay.and.topay_android.base.BalanceBean
 import com.mvc.topay.and.topay_android.base.BaseMVPFragment
 import com.mvc.topay.and.topay_android.base.BasePresenter
+import com.mvc.topay.and.topay_android.common.Constant.SP.ASSETS_LIST
 import com.mvc.topay.and.topay_android.constract.IWalletContract
+import com.mvc.topay.and.topay_android.event.WalletAssetsListEvent
 import com.mvc.topay.and.topay_android.presenter.WalletPresenter
+import com.mvc.topay.and.topay_android.utils.JsonHelper
+import com.mvc.topay.and.topay_android.utils.TextUtils
 import com.mvc.topay.and.topay_android.view.FadingRecyclerView
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContract.WalletPresenter>(), IWalletContract.WalletView {
+
+    override fun balanceSuccess(balanceBean: BalanceBean) {
+        mWalletBalance.text = TextUtils.doubleToDouble(balanceBean.data)
+    }
+
+    override fun balanceError() {
+        mWalletRefresh.post { mWalletRefresh.isRefreshing = false }
+        showToast("服务器繁忙", Gravity.CENTER)
+    }
+
     private lateinit var walletAdapter: WalletAssetsAdapter
     private lateinit var assetsList: ArrayList<AssetListBean.DataBean>
     private lateinit var mWalletRecyclerView: FadingRecyclerView
     private lateinit var mWalletAddCurrency: ImageView
     private lateinit var mWalletMsg: ImageView
+    private lateinit var mWalletBalance: TextView
     private lateinit var mWalletRate: TextView
     private lateinit var mWalletBuyingCoins: TextView
     private lateinit var mWalletRefresh: SwipeRefreshLayout
     private var isRefresh = false
     override fun assetsSuccess(assetListBean: AssetListBean) {
+        SPUtils.getInstance().put(ASSETS_LIST, JsonHelper.jsonToString(assetListBean))
         assetsList.clear()
         var dataBean = assetListBean.data
         assetsList.addAll(dataBean)
@@ -43,10 +64,12 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         this.mWalletRecyclerView = mRootView!!.findViewById(R.id.wallet_rv)
         this.mWalletAddCurrency = mRootView!!.findViewById(R.id.wallet_add_currency)
         this.mWalletMsg = mRootView!!.findViewById(R.id.wallet_msg)
+        this.mWalletBalance = mRootView!!.findViewById(R.id.wallet_balance)
         this.mWalletRate = mRootView!!.findViewById(R.id.wallet_buying_coins)
         this.mWalletBuyingCoins = mRootView!!.findViewById(R.id.wallet_rate)
         this.mWalletRefresh = mRootView!!.findViewById(R.id.wallet_swipe)
         this.isRefresh = true
+        mWalletAddCurrency.setOnClickListener { startActivity(Intent(mActivity,IncreaseCurrencyActivity::class.java)) }
         assetsList = ArrayList()
         walletAdapter = WalletAssetsAdapter(R.layout.item_home_assets_type, assetsList)
         mWalletRecyclerView.layoutManager = object : LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false) {
@@ -62,6 +85,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     override fun initData() {
         super.initData()
         mPresenter.getAllAssets()
+        mPresenter.getBalance()
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
@@ -73,6 +97,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
 
     private fun onRefresh() {
         mPresenter.getAllAssets()
+        mPresenter.getBalance()
     }
 
     override fun getLayoutId(): Int {
@@ -81,5 +106,19 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
 
     override fun initPresenter(): BasePresenter<*, *> {
         return WalletPresenter.newInstance()
+    }
+
+    @Subscribe
+    fun eventRefresh(walletAssetsListEvent: WalletAssetsListEvent){
+        mPresenter.getAllAssets()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        EventBus.getDefault().register(this)
+    }
+    override fun onDestroy() {
+        EventBus.getDefault().unregister(this)
+        super.onDestroy()
     }
 }

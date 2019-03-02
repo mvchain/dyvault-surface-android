@@ -1,5 +1,6 @@
 package com.mvc.topay.and.topay_android.presenter
 
+import com.blankj.utilcode.util.LogUtils
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BasePresenter
@@ -20,6 +21,7 @@ class LoginPresenter : ILoginContract.LoginPresenter() {
                         mIView!!.sendCodeError(updateBean.message!!)
                     }
                 }, {
+                    LogUtils.e(it.message!!)
                     mIView!!.sendCodeError(it.message!!)
                 }))
     }

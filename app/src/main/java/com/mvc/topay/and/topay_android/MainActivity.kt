@@ -23,14 +23,8 @@ class MainActivity : BaseActivity() {
     override fun initData() {
     }
 
-    override fun onDestroy() {
-        EventBus.getDefault().unregister(this)
-        super.onDestroy()
-    }
-
     override fun initView() {
         super.initView()
-        EventBus.getDefault().register(this)
         mFragment = ArrayList()
         var walletFragment = WalletFragment()
         mFragment.add(walletFragment)

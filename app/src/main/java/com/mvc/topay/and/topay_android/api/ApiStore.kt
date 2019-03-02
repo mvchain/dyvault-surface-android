@@ -1,6 +1,7 @@
 package com.mvc.topay.and.topay_android.api
 
 import com.mvc.topay.and.topay_android.base.AssetListBean
+import com.mvc.topay.and.topay_android.base.BalanceBean
 import com.mvc.topay.and.topay_android.base.CurrencyBean
 import com.mvc.topay.and.topay_android.base.ExchangeRateBean
 import com.mvc.topay.and.topay_android.bean.HttpDataBean
@@ -113,5 +114,16 @@ interface ApiStore {
     @PUT(HttpUrl.UPDATE_PAY_PASSWORD)
     fun updatePayPassword(@Header("Authorization") token: String, @Body body: RequestBody): Observable<HttpUpdateBean>
 
+    /**
+     * Get the total value of the assets, the observation list does not exist but the balance exists will also be counted
+     */
+    @GET(HttpUrl.ASSET_BALANCE)
+    fun getAssetBalance(@Header("Authorization") token: String): Observable<BalanceBean>
+
+    /**
+     * Set currency display switch, update priority queue is lower
+     */
+    @PUT(HttpUrl.ASSETS_LIST)
+    fun updateAssetList(@Header("Authorization") token: String, @Body body: RequestBody?):Observable<HttpUpdateBean>
 }
 

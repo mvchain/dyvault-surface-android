@@ -4,6 +4,7 @@ import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.base.AssetListBean
+import com.mvc.topay.and.topay_android.base.BalanceBean
 import com.mvc.topay.and.topay_android.base.BaseModel
 import com.mvc.topay.and.topay_android.base.ExchangeRateBean
 import com.mvc.topay.and.topay_android.common.Constant.SP.CURRENCY_LIST
@@ -18,6 +19,11 @@ import com.mvc.topay.and.topay_android.utils.RxHelper
 import io.reactivex.Observable
 
 class WalletModel : BaseModel(), IWalletContract.WalletModel {
+    override fun getBalance(): Observable<BalanceBean> {
+        return RetrofitUtils.client(ApiStore::class.java).getAssetBalance(MyApplication.token)
+                .compose(RxHelper.rxSchedulerHelper())
+                .map { balanceBean -> balanceBean }
+    }
 
     override fun getAllAssets(): Observable<AssetListBean> {
         return RetrofitUtils.client(ApiStore::class.java).getExchangeRate(MyApplication.token)

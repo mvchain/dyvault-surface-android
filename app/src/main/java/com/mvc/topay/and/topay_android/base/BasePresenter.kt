@@ -1,5 +1,6 @@
 package com.mvc.topay.and.topay_android.base
 
+import com.blankj.utilcode.util.LogUtils
 import com.mvc.topay.and.topay_android.utils.RxUtils
 
 abstract class BasePresenter<M, V> {
@@ -13,7 +14,8 @@ abstract class BasePresenter<M, V> {
         this.onStart()
     }
 
-    fun detachMVP(){
+    fun detachMVP() {
+        LogUtils.e("取消订阅")
         this.mRxUtils.unSubscribe()
         this.mIModel = null
         this.mIView = null

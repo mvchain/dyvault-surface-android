@@ -6,6 +6,20 @@ import com.mvc.topay.and.topay_android.constract.IWalletContract
 import com.mvc.topay.and.topay_android.model.WalletModel
 
 class WalletPresenter : IWalletContract.WalletPresenter() {
+    override fun getBalance() {
+        mRxUtils.register(mIModel!!.getBalance()
+                .subscribe({ balanceBean ->
+                    if(balanceBean.code === 200){
+                        mIView!!.balanceSuccess(balanceBean)
+                    }else{
+                        mIView!!.balanceError()
+                    }
+                }, {
+                    LogUtils.e(it.message)
+                    mIView!!.balanceError()
+                }))
+    }
+
     override fun getAllAssets() {
         mRxUtils.register(mIModel!!.getAllAssets()
                 .subscribe({ asslist ->
