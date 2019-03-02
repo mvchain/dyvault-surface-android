@@ -29,6 +29,7 @@ class MsgActivity : BaseMVPActivity<IMsgContrast.MsgView, IMsgContrast.MsgPresen
         super.initMVPView()
         mBean = ArrayList()
         msgAdapter = MsgAdapter(R.layout.item_msg_rv, mBean)
+        msg_back.setOnClickListener { finish() }
         msg_rv.adapter = msgAdapter
         msg_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
