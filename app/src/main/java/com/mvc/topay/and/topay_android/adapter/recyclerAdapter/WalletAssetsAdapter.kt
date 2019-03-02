@@ -21,7 +21,7 @@ class WalletAssetsAdapter(layoutRes: Int, dateBean: ArrayList<AssetListBean.Data
         val icon = helper.getView<CircleImageView>(R.id.item_assets_icon)
         val money = helper.getView<TextView>(R.id.item_assets_money)
         helper.addOnClickListener(R.id.item_assets_layout) //add onclick to the layout to jump startActivity
-        type.setText(item.tokenName)
+        type.text = item.tokenName
         money.text = SPUtils.getInstance().getString(DEFAULT_SYMBOL) + TextUtils.rateToPrice(item.ratio * item.value)
         actual.text = "${TextUtils.doubleToFour(item.value)} $tokenName"
 //        val options = RequestOptions().fallback(R.drawable.default_project).placeholder(R.drawable.loading_img).error(R.drawable.default_project)

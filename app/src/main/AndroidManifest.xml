@@ -46,6 +46,7 @@
         <activity android:name=".activity.SetEmailActivity" />
         <activity android:name=".activity.IncreaseCurrencyActivity" />
         <activity android:name=".activity.MsgActivity" />
+        <activity android:name=".activity.HistoryActivity" />
 
         <!--适配华为（hw）刘海屏-->
         <meta-data

@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.R
+import com.mvc.topay.and.topay_android.activity.HistoryActivity
 import com.mvc.topay.and.topay_android.activity.IncreaseCurrencyActivity
 import com.mvc.topay.and.topay_android.activity.MsgActivity
 import com.mvc.topay.and.topay_android.adapter.recyclerAdapter.WalletAssetsAdapter
@@ -80,6 +81,16 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
             }
         }
         mWalletRecyclerView.adapter = walletAdapter
+        walletAdapter.setOnItemChildClickListener { _, view, position ->
+            when (view.id) {
+                R.id.item_assets_layout -> {
+                    var tokenId = assetsList[position].tokenId
+                    var hisIntent = Intent(mActivity, HistoryActivity::class.java)
+                    startActivity(hisIntent)
+
+                }
+            }
+        }
         mWalletRefresh.post { mWalletRefresh.isRefreshing = true }
         mWalletRefresh.setOnRefreshListener(this::onRefresh)
     }

@@ -63,10 +63,10 @@ object TextUtils {
         var default_rate = SPUtils.getInstance().getString(DEFAULT_RATE)
         var setBean = JsonHelper.stringToJson(set_rate, ExchangeRateBean.DataBean::class.java) as ExchangeRateBean.DataBean
         var defaultBean = JsonHelper.stringToJson(default_rate, ExchangeRateBean.DataBean::class.java) as ExchangeRateBean.DataBean
-        if (setBean.name.equals("CNY")) {
-            return format.format(price * setBean.value);
+        if (setBean.name == "CNY") {
+            return format.format(price * setBean.value)
         } else {
-            return format.format(price / setBean.value);
+            return format.format(price / setBean.value)
         }
         return ""
     }
