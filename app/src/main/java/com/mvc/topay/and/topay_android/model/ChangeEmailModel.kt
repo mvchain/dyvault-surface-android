@@ -5,7 +5,7 @@ import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.base.BaseModel
 import com.mvc.topay.and.topay_android.bean.HttpDataBean
 import com.mvc.topay.and.topay_android.bean.HttpUpdateBean
-import com.mvc.topay.and.topay_android.constract.IChangeContract
+import com.mvc.topay.and.topay_android.constract.IChangeEmailContract
 import com.mvc.topay.and.topay_android.utils.RetrofitUtils
 import com.mvc.topay.and.topay_android.utils.RxHelper
 import io.reactivex.Observable
@@ -14,7 +14,7 @@ import okhttp3.RequestBody
 import org.json.JSONException
 import org.json.JSONObject
 
-class ChangeModel : BaseModel(), IChangeContract.ChangeModel {
+class ChangeEmailModel : BaseModel(), IChangeEmailContract.ChangeEmailModel {
     override fun verifyEmail(validCode: String): Observable<HttpDataBean> {
         val jsonObject = JSONObject()
         try {
@@ -36,7 +36,7 @@ class ChangeModel : BaseModel(), IChangeContract.ChangeModel {
     }
 
     companion object {
-        val instance: ChangeModel
-            get() = ChangeModel()
+        val instance: ChangeEmailModel
+            get() = ChangeEmailModel()
     }
 }

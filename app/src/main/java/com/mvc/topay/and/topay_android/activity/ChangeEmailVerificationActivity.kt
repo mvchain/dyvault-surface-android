@@ -12,14 +12,14 @@ import com.mvc.topay.and.topay_android.base.BaseMVPActivity
 import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.bean.UserInfoBean
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_INFO
-import com.mvc.topay.and.topay_android.constract.IChangeContract
+import com.mvc.topay.and.topay_android.constract.IChangeEmailContract
 import com.mvc.topay.and.topay_android.listener.OnTimeEndCallBack
-import com.mvc.topay.and.topay_android.presenter.ChangePresenter
+import com.mvc.topay.and.topay_android.presenter.ChangeEmailPresenter
 import com.mvc.topay.and.topay_android.utils.JsonHelper
 import com.mvc.topay.and.topay_android.utils.TimeVerification
 import kotlinx.android.synthetic.main.activity_changeemail.*
 
-class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeContract.ChangeView, IChangeContract.ChangePresenter>(), IChangeContract.ChangeView {
+class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.ChangeEmailView, IChangeEmailContract.ChangeEmailPresenter>(), IChangeEmailContract.ChangeEmailView {
     private var isEmail = false
     override fun sendEmailSuccess(msg: String) {
         dismiss()
@@ -75,7 +75,7 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeContract.ChangeVi
     }
 
     override fun initPresenter(): BasePresenter<*, *> {
-        return ChangePresenter.newIntance()
+        return ChangeEmailPresenter.newIntance()
     }
 
     fun onClick(v: View) {

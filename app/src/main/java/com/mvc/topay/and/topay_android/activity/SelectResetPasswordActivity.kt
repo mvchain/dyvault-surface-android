@@ -4,6 +4,8 @@ import android.content.Intent
 import android.view.View
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BaseActivity
+import com.mvc.topay.and.topay_android.common.Constant.SP.RESETPASSWORD_LOGIN
+import com.mvc.topay.and.topay_android.common.Constant.SP.RESETPASSWORD_PAY
 
 class SelectResetPasswordActivity : BaseActivity() {
     override fun initData() {
@@ -27,10 +29,14 @@ class SelectResetPasswordActivity : BaseActivity() {
                 startActivity(Intent(this,ChangeEmailVerificationActivity::class.java))
             }
             R.id.account_password -> {
-
+                var sIntent = Intent(this,ChangePasswordActivity::class.java)
+                sIntent.putExtra("type",RESETPASSWORD_LOGIN)
+                startActivity(sIntent)
             }
             R.id.account_pay_password -> {
-
+                var sIntent = Intent(this,ChangePasswordActivity::class.java)
+                sIntent.putExtra("type", RESETPASSWORD_PAY)
+                startActivity(sIntent)
             }
         }
     }

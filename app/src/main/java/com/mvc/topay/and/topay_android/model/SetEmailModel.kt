@@ -1,12 +1,10 @@
 package com.mvc.topay.and.topay_android.model
 
 import com.mvc.topay.and.topay_android.MyApplication
-import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.base.BaseModel
 import com.mvc.topay.and.topay_android.bean.HttpDataBean
 import com.mvc.topay.and.topay_android.bean.HttpUpdateBean
-import com.mvc.topay.and.topay_android.constract.IChangeContract
 import com.mvc.topay.and.topay_android.constract.ISetEmailContract
 import com.mvc.topay.and.topay_android.utils.RetrofitUtils
 import com.mvc.topay.and.topay_android.utils.RxHelper

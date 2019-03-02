@@ -99,5 +99,19 @@ interface ApiStore {
     @GET(HttpUrl.USER_INFO)
     fun getUserInfo(@Header("Authorization") token: String): Observable<UserInfoBean>
 
+
+    /**
+     * Login password modification
+     */
+    @PUT(HttpUrl.UPDATE_PASSWORD)
+    fun updatePassword(@Header("Authorization") token: String, @Body body: RequestBody): Observable<HttpUpdateBean>
+
+
+    /**
+     * Payment password modification
+     */
+    @PUT(HttpUrl.UPDATE_PAY_PASSWORD)
+    fun updatePayPassword(@Header("Authorization") token: String, @Body body: RequestBody): Observable<HttpUpdateBean>
+
 }
 

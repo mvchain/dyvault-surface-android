@@ -3,10 +3,10 @@ package com.mvc.topay.and.topay_android.presenter
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BasePresenter
-import com.mvc.topay.and.topay_android.constract.IChangeContract
-import com.mvc.topay.and.topay_android.model.ChangeModel
+import com.mvc.topay.and.topay_android.constract.IChangeEmailContract
+import com.mvc.topay.and.topay_android.model.ChangeEmailModel
 
-class ChangePresenter : IChangeContract.ChangePresenter() {
+class ChangeEmailPresenter : IChangeEmailContract.ChangeEmailPresenter() {
     override fun verifyEmail(validCode: String) {
         mRxUtils.register(mIModel!!.verifyEmail(validCode)
                 .subscribe({ dataBean ->
@@ -22,7 +22,7 @@ class ChangePresenter : IChangeContract.ChangePresenter() {
 
     companion object {
         fun newIntance(): BasePresenter<*, *> {
-            return ChangePresenter()
+            return ChangeEmailPresenter()
         }
     }
 
@@ -39,8 +39,8 @@ class ChangePresenter : IChangeContract.ChangePresenter() {
                 }))
     }
 
-    override fun getModel(): IChangeContract.ChangeModel {
-        return ChangeModel.instance
+    override fun getModel(): IChangeEmailContract.ChangeEmailModel {
+        return ChangeEmailModel.instance
     }
 
     override fun onStart() {

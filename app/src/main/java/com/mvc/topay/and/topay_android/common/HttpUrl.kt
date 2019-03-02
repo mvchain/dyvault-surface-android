@@ -6,7 +6,6 @@ object HttpUrl {
      */
     const val USER_SEND_EMAIL = "user/email/logout"
 
-
     /**
      * Send verification code (do not enter the email address, directly take the current user registration email)
      */
@@ -60,5 +59,17 @@ object HttpUrl {
      * User information acquisition
      */
     const val USER_INFO = "user/info"
+
+
+    /**
+     * User information acquisition
+     */
+    const val UPDATE_PASSWORD = "user/password"
+
+
+    /**
+     * User information acquisition
+     */
+    const val UPDATE_PAY_PASSWORD = "user/transactionPassword"
 
 }

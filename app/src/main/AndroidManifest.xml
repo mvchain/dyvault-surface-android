@@ -42,6 +42,7 @@
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.SelectResetPasswordActivity" />
         <activity android:name=".activity.ChangeEmailVerificationActivity" />
+        <activity android:name=".activity.ChangePasswordActivity" />
         <activity android:name=".activity.SetEmailActivity" />
 
         <!--适配华为（hw）刘海屏-->

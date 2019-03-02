@@ -7,18 +7,18 @@ import com.mvc.topay.and.topay_android.bean.HttpDataBean
 import com.mvc.topay.and.topay_android.bean.HttpUpdateBean
 import io.reactivex.Observable
 
-interface IChangeContract {
-    abstract class ChangePresenter : BasePresenter<ChangeModel, ChangeView>() {
+interface IChangeEmailContract {
+    abstract class ChangeEmailPresenter : BasePresenter<ChangeEmailModel, ChangeEmailView>() {
         abstract fun sendEmail()
         abstract fun verifyEmail(validCode:String)
     }
 
-    interface ChangeModel : IBaseModel {
+    interface ChangeEmailModel : IBaseModel {
         fun sendEmail(): Observable<HttpUpdateBean>
         fun verifyEmail(validCode:String): Observable<HttpDataBean>
     }
 
-    interface ChangeView : IBaseActivity {
+    interface ChangeEmailView : IBaseActivity {
         fun sendEmailSuccess(msg: String)
         fun sendEmailFailed(msg: String)
         fun verifyEmailSuccess(msg: String)

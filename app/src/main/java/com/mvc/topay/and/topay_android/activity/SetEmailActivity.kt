@@ -11,6 +11,8 @@ import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BaseMVPActivity
 import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.common.Constant
+import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.constract.ISetEmailContract
 import com.mvc.topay.and.topay_android.listener.OnTimeEndCallBack
 import com.mvc.topay.and.topay_android.presenter.SetEmailPresenter
@@ -65,11 +67,12 @@ class SetEmailActivity : BaseMVPActivity<ISetEmailContract.SetEmailView, ISetEma
     override fun verifyEmailSuccess(token: String) {
         dismiss()
         showToast("邮箱修改成功", Gravity.CENTER)
-        SPUtils.getInstance().put(Constant.SP.TOKEN, token)
+        SPUtils.getInstance().put(TOKEN, token)
+        SPUtils.getInstance().put(USER_EMAIL, email_address.text.toString())
         MyApplication.token = token
 //        EventBus.getDefault().post(MineUserEvent())
-        var mainIntent = Intent(this,MainActivity::class.java)
-        mainIntent.putExtra("page",1)
+        var mainIntent = Intent(this, MainActivity::class.java)
+        mainIntent.putExtra("page", 1)
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(mainIntent)
     }
