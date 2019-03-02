@@ -6,6 +6,7 @@ import com.mvc.topay.and.topay_android.base.ExchangeRateBean
 import com.mvc.topay.and.topay_android.bean.HttpDataBean
 import com.mvc.topay.and.topay_android.bean.HttpUpdateBean
 import com.mvc.topay.and.topay_android.bean.RegisterBean
+import com.mvc.topay.and.topay_android.bean.UserInfoBean
 import com.mvc.topay.and.topay_android.common.HttpUrl
 import io.reactivex.Observable
 import okhttp3.RequestBody
@@ -50,6 +51,25 @@ interface ApiStore {
     fun sendCode(@Header("Authorization") token: String, @Query("email") email: String): Observable<HttpUpdateBean>
 
     /**
+     * Send verification code (do not enter the email address, directly take the current user registration email)
+     */
+    @GET(HttpUrl.USER_EMAIL)
+    fun getEmailOnToken(@Header("Authorization") token: String): Observable<HttpUpdateBean>
+
+    /**
+     * Verify the mailbox status (the first step when modifying the password)
+     */
+    @POST(HttpUrl.USER_EMAIL)
+    fun verifyEmailCode(@Header("Authorization") token: String, @Body body: RequestBody): Observable<HttpDataBean>
+
+    /**
+     * Verify the mailbox status (the first step when modifying the password)
+     */
+    @PUT(HttpUrl.USER_EMAIL)
+    fun updateEmail(@Header("Authorization") token: String, @Body body: RequestBody): Observable<HttpDataBean>
+
+
+    /**
      * forget password  change password
      */
     @PUT(HttpUrl.USER_FORGET)
@@ -72,6 +92,12 @@ interface ApiStore {
      */
     @GET(HttpUrl.ASSETS_LIST)
     fun getAssetsList(@Header("Authorization") token: String): Observable<AssetListBean>
+
+    /**
+     * get user info
+     */
+    @GET(HttpUrl.USER_INFO)
+    fun getUserInfo(@Header("Authorization") token: String): Observable<UserInfoBean>
 
 }
 

@@ -34,7 +34,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:scaleType="center"
-            android:src="@color/content_tv_bg" />
+            android:src="@drawable/back_black" />
     </RelativeLayout>
 
     <com.allen.library.SuperTextView
@@ -63,6 +63,5 @@
         app:sBackgroundDrawableRes="@drawable/shape_login_edit_14dp"
         app:sDividerLineHeight="0dp"
         app:sLeftTextColor="@color/select_gray"
-        app:sLeftTextString="English"
-        app:sRightIconRes="@drawable/language_unselected_icon" />
+        app:sLeftTextString="English" />
 </LinearLayout>

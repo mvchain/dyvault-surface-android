@@ -15,23 +15,23 @@ class LanguageActivity : BaseActivity() {
     override fun getLayoutId(): Int {
         return R.layout.activity_language
     }
+
     override fun initData() {
         switch_china.setOnSuperTextViewClickListener {
             LanguageUtils.changeLocale(CHINESE, ACCEPT_CHINESE, resources.configuration, baseContext)
             switch_china.setRightIcon(R.drawable.language_selected_icon)
-            switch_english.setRightIcon(R.drawable.language_unselected_icon)
+            switch_english.setRightIcon(null)
             recreate()
         }
         switch_english.setOnSuperTextViewClickListener {
             LanguageUtils.changeLocale(ENGLISH, ACCEPT_ENGLISH, resources.configuration, baseContext)
             switch_english.setRightIcon(R.drawable.language_selected_icon)
-            switch_china.setRightIcon(R.drawable.language_unselected_icon)
+            switch_china.setRightIcon(null)
             recreate()
         }
         language_back.setOnClickListener {
             finish()
         }
-//        baseContext.createConfigurationContext()
     }
 
     override fun initView() {
@@ -39,10 +39,10 @@ class LanguageActivity : BaseActivity() {
         default_language = LanguageUtils.getUserSetLocal()
         if (default_language == CHINESE) {
             switch_china.setRightIcon(R.drawable.language_selected_icon)
-            switch_english.setRightIcon(R.drawable.language_unselected_icon)
+            switch_english.setRightIcon(null)
         } else if (default_language == ENGLISH) {
             switch_english.setRightIcon(R.drawable.language_selected_icon)
-            switch_china.setRightIcon(R.drawable.language_unselected_icon)
+            switch_china.setRightIcon(null)
         }
     }
 }

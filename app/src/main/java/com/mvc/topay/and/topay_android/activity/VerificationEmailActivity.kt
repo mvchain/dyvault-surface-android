@@ -46,15 +46,13 @@ class VerificationEmailActivity : BaseMVPActivity<IVerificationContract.Verifica
         TimeVerification.instance.setOnTimeEndCallBack(object : OnTimeEndCallBack {
             override fun updata(time: Int) {
                 verification_send.isEnabled = false
-                verification_send.setBackgroundResource(R.drawable.shape_login_get_code_uncheck_18dp)
                 verification_send.setTextColor(ContextCompat.getColor(baseContext, R.color.edit_bg))
                 verification_send.text = time.toString() + "s"
             }
 
             override fun exit() {
                 verification_send.isEnabled = true
-                verification_send.setBackgroundResource(R.drawable.shape_login_get_code_18dp)
-                verification_send.setTextColor(ContextCompat.getColor(baseContext, R.color.content_tv_bg))
+                verification_send.setTextColor(ContextCompat.getColor(baseContext, R.color.register_button_bg))
                 verification_send.text = "获取验证码"
             }
         }).updataTime()

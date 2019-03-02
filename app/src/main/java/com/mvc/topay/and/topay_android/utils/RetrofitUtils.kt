@@ -51,6 +51,7 @@ class RetrofitUtils {
                     }
                     .authenticator { _, response ->
                         val body = RetrofitUtils.client(ApiStore::class.java).refreshToken(SPUtils.getInstance().getString(REFRESH_TOKEN)).execute().body()
+                        LogUtils.e("401  body.code ${body!!.code}")
                         if (body!!.code === 200) {
                             SPUtils.getInstance().put(TOKEN, body!!.data)
                             MyApplication.token = body!!.data

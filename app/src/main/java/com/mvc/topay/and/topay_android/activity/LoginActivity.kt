@@ -35,15 +35,13 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
         TimeVerification.instance.setOnTimeEndCallBack(object : OnTimeEndCallBack {
             override fun updata(time: Int) {
                 login_send.isEnabled = false
-                login_send.setBackgroundResource(R.drawable.shape_login_get_code_uncheck_18dp)
                 login_send.setTextColor(ContextCompat.getColor(baseContext, R.color.edit_bg))
                 login_send.text = time.toString() + "s"
             }
 
             override fun exit() {
                 login_send.isEnabled = true
-                login_send.setBackgroundResource(R.drawable.shape_login_get_code_18dp)
-                login_send.setTextColor(ContextCompat.getColor(baseContext, R.color.content_tv_bg))
+                login_send.setTextColor(ContextCompat.getColor(baseContext, R.color.register_button_bg))
                 login_send.text = "获取验证码"
             }
         }).updataTime()

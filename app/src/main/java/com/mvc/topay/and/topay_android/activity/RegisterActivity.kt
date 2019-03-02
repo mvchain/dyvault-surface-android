@@ -23,15 +23,13 @@ class RegisterActivity : BaseMVPActivity<IRegisterContract.RegisterView, IRegist
         TimeVerification.instance.setOnTimeEndCallBack(object : OnTimeEndCallBack {
             override fun updata(time: Int) {
                 register_send.isEnabled = false
-                register_send.setBackgroundResource(R.drawable.shape_login_get_code_uncheck_18dp)
                 register_send.setTextColor(ContextCompat.getColor(baseContext, R.color.edit_bg))
                 register_send.text = time.toString() + "s"
             }
 
             override fun exit() {
                 register_send.isEnabled = true
-                register_send.setBackgroundResource(R.drawable.shape_login_get_code_18dp)
-                register_send.setTextColor(ContextCompat.getColor(baseContext, R.color.content_tv_bg))
+                register_send.setTextColor(ContextCompat.getColor(baseContext, R.color.register_button_bg))
                 register_send.text = "获取验证码"
             }
         }).updataTime()

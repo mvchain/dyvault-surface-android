@@ -135,11 +135,10 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="12dp"
-                    android:background="@drawable/shape_login_get_code_18dp"
                     android:gravity="center"
                     android:onClick="onClick"
                     android:text="获取验证码"
-                    android:textColor="@color/content_tv_bg"
+                    android:textColor="@color/register_button_bg"
                     android:textSize="13sp" />
             </LinearLayout>
 

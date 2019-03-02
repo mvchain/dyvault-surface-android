@@ -8,6 +8,10 @@ object HttpUrl {
 
 
     /**
+     * Send verification code (do not enter the email address, directly take the current user registration email)
+     */
+    const val USER_EMAIL = "user/email"
+    /**
      * User registration, you need to bring the previous information and token together for verification.
      */
     const val USER_REGISTER = "user/register"
@@ -52,5 +56,9 @@ object HttpUrl {
      * Get the balance, suggest caching. Currency name icon and other information
      */
     const val ASSETS_LIST = "asset"
+    /**
+     * User information acquisition
+     */
+    const val USER_INFO = "user/info"
 
 }

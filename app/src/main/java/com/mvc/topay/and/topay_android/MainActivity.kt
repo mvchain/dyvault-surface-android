@@ -1,6 +1,7 @@
 package com.mvc.topay.and.topay_android
 
 import android.support.v4.app.Fragment
+import android.widget.RadioButton
 import com.mvc.topay.and.topay_android.adapter.HomePagerAdapter
 import com.mvc.topay.and.topay_android.base.BaseActivity
 import com.mvc.topay.and.topay_android.event.LanguageEvent
@@ -40,6 +41,11 @@ class MainActivity : BaseActivity() {
         val childCount = main_group.childCount
         for (i in 0 until childCount) {
             main_group.getChildAt(i).setOnClickListener { main_pager.currentItem = i }
+        }
+        var page = intent.getIntExtra("page", -1)
+        if (page !== -1) {
+            main_pager.currentItem = page
+            (main_group.getChildAt(page) as RadioButton).isChecked = true
         }
     }
 

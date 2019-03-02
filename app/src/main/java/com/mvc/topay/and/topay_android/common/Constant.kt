@@ -14,6 +14,7 @@ class Constant {
         const val USER_ID = "userId"
         const  val CURRENCY_LIST = "currency_list" //save all currency
         const val USER_EMAIL = "email"
+        const val USER_INFO = "user_info"
         const val USER_RESETPASSWORD_TYPE = "user_resetpassword_type"   //Temporarily save the type of password change
         const val RESETPASSWORD_LOGIN = 1   //change login password
         const val RESETPASSWORD_PAY = 2//change pay password
