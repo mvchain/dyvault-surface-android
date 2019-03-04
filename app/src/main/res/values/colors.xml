@@ -28,4 +28,6 @@
     <color name="buying_coins">#EE784C</color>
     <color name="increase_remove">#D1D2DE</color>
     <color name="increase_search_edit_tv">#D5D7E6</color>
+    <color name="detail_sxf_bg">#B9B9B9</color>
+
 </resources>

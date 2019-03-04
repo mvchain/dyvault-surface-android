@@ -50,6 +50,7 @@
         <activity android:name=".activity.QCodeActivity" />
         <activity android:name=".activity.TransferActivity" />
         <activity android:name=".activity.MineQCodeActivity" />
+        <activity android:name=".activity.DetailActivity" />
 
         <!--适配华为（hw）刘海屏-->
         <meta-data
