@@ -5,23 +5,24 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 class RxUtils {
-    companion object {
+//    companion object {
         private var compositeDisposable = CompositeDisposable()
-        val instance: RxUtils by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
-            RxUtils()
-        }
-    }
+//        val instance: RxUtils by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+//            RxUtils()
+//        }
+//    }
 
     fun register(dp: Disposable) {
+        LogUtils.e("订阅")
         compositeDisposable.add(dp)
     }
 
     fun unSubscribe() {
+        LogUtils.e("取消订阅")
         compositeDisposable.dispose()
     }
 
-    fun unSubscribeAll() {
-        LogUtils.e("取消全部订阅")
-        compositeDisposable.clear()
+    fun isDisposed(): Boolean {
+        return compositeDisposable.isDisposed
     }
 }

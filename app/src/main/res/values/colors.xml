@@ -5,9 +5,11 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="edit_bg">#C7C7D1</color>
+    <color name="text_gray">#8B8B8B</color>
     <color name="line_gray">#F2F2F2</color>
     <color name="login_content">#595971</color>
     <color name="trand_gray">#8E8E9E</color>
+    <color name="qcode_blue">#007AFF</color>
     <color name="login_button_bg">#5A5CC7</color>
     <color name="register_button_bg">#2263AC</color>
     <color name="app_bg_status_bar">#E6E8F0</color>

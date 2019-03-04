@@ -63,6 +63,9 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.Cha
             val infoBean = JsonHelper.stringToJson(userJson, UserInfoBean.DataBean::class.java) as UserInfoBean.DataBean
             change_user_email.text = infoBean.username
             isEmail = true
+        }else{
+            showToast("登入失效，请重新登入")
+            startTaskActivity(this)
         }
     }
 

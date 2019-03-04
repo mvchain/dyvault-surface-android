@@ -91,7 +91,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
     }
 
     override fun initPresenter(): BasePresenter<*, *> {
-        return LoginPresenter.newIntance()
+        return LoginPresenter.newInstance()
     }
 
     fun onClick(v: View) {

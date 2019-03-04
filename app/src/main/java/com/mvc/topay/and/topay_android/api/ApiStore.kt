@@ -128,5 +128,23 @@ interface ApiStore {
      */
     @GET(HttpUrl.MESSAGE)
     fun getMessage(@Header("Authorization") token: String, @Query("pageSize") pageSize: Int, @Query("timestamp") timestamp: Long): Observable<MsgBean>
+
+
+    /**
+     * Get asset transfer list
+     */
+    @GET(HttpUrl.ASSET_TRANSACTIONS)
+    fun getTransferList(@Header("Authorization") token: String
+                        , @Query("id") id: Int
+                        , @Query("pageSize") pageSize: Int
+                        , @Query("tokenId") tokenId: Int
+                        , @Query("transactionType") transactionType: Int): Observable<TransactionsBean>
+
+    /**
+     * get receipt qcode
+     */
+    @GET(HttpUrl.ASSETS_QCODE)
+    fun getMineQCode(@Header("Authorization") token: String, @Query("tokenId ") tokenId : Int): Observable<ReceiptBean>
+
 }
 

@@ -10,6 +10,7 @@
     <string name="send_code_success">验证码发送成功</string>
     <string name="reset_password_success">修改登入密码成功</string>
     <string name="reset_pay_password_success">修改支付密码成功</string>
+
     <!--App 双击退出-->
     <string name="app_exit">请再按一次退出App</string>
     <!--应用内文字-->
@@ -19,6 +20,7 @@
     <string name="language_title">语言</string>
     <string name="about_title">关于</string>
     <string name="account_security">账户安全</string>
+    <string name="select_photo">从相册选择</string>
 
 
     <string name="increase_remove">移除</string>

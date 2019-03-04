@@ -36,7 +36,7 @@ class RetrofitUtils {
             Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("http://192.168.15.31:10086/")
+                    .baseUrl("http://47.110.144.216/api/app/")
                     .client(okhttpUtils).build()
         }
         private val okhttpUtils: OkHttpClient
@@ -57,7 +57,6 @@ class RetrofitUtils {
                             MyApplication.token = body!!.data
                         } else {
                             LogUtils.e("token 失效")
-                            RxUtils.instance.unSubscribeAll()
                             ActivityUtils.getTopActivity().finish()
                             SPUtils.getInstance().remove(REFRESH_TOKEN)
                             SPUtils.getInstance().remove(TOKEN)
@@ -74,7 +73,9 @@ class RetrofitUtils {
                         builder.build()
                     }
                     .addInterceptor(HttpLoggingInterceptor
-                    { message -> LogUtils.e("RetrofitUtils", message) }
+                    { message ->
+                        LogUtils.e("RetrofitUtils", message)
+                    }
                             .setLevel(HttpLoggingInterceptor.Level.BODY))
                     .sslSocketFactory(createSSLSocketFactory()!!)
                     .writeTimeout(15, TimeUnit.SECONDS)

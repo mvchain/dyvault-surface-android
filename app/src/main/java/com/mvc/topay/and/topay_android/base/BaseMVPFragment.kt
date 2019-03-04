@@ -6,7 +6,7 @@ abstract class BaseMVPFragment<V,P:BasePresenter<*,V>> :BaseFragment(),IBaseFrag
     override fun initData() {
         mPresenter = initPresenter() as P
         if(mPresenter !== null){
-            mPresenter?.attchMVP(this as V)
+            mPresenter?.attachMVP(this as V)
         }
     }
 

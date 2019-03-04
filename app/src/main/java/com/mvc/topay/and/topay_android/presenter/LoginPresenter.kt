@@ -6,6 +6,7 @@ import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.constract.ILoginContract
 import com.mvc.topay.and.topay_android.model.LoginModel
+import com.mvc.topay.and.topay_android.utils.RxUtils
 
 class LoginPresenter : ILoginContract.LoginPresenter() {
     override fun sendCode(email: String) {
@@ -60,7 +61,7 @@ class LoginPresenter : ILoginContract.LoginPresenter() {
     }
 
     companion object {
-        fun newIntance(): BasePresenter<*, *> {
+        fun newInstance(): BasePresenter<*, *> {
             return LoginPresenter()
         }
     }

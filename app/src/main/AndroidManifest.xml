@@ -47,6 +47,9 @@
         <activity android:name=".activity.IncreaseCurrencyActivity" />
         <activity android:name=".activity.MsgActivity" />
         <activity android:name=".activity.HistoryActivity" />
+        <activity android:name=".activity.QCodeActivity" />
+        <activity android:name=".activity.TransferActivity" />
+        <activity android:name=".activity.MineQCodeActivity" />
 
         <!--适配华为（hw）刘海屏-->
         <meta-data

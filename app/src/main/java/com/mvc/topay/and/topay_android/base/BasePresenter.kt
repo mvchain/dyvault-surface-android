@@ -6,16 +6,15 @@ import com.mvc.topay.and.topay_android.utils.RxUtils
 abstract class BasePresenter<M, V> {
     protected var mIModel: M? = null
     protected var mIView: V? = null
-    protected var mRxUtils = RxUtils.instance
+    protected var mRxUtils = RxUtils()
 
-    fun attchMVP(v: V) {
+    fun attachMVP(v: V) {
         this.mIModel = getModel()
         this.mIView = v
         this.onStart()
     }
 
     fun detachMVP() {
-        LogUtils.e("取消订阅")
         this.mRxUtils.unSubscribe()
         this.mIModel = null
         this.mIView = null

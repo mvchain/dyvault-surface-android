@@ -21,6 +21,7 @@ import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_ID
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_INFO
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYPE
 import com.mvc.topay.and.topay_android.utils.LanguageUtils
 import com.mvc.topay.and.topay_android.utils.WeiboDialogUtils
@@ -143,6 +144,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
         SPUtils.getInstance().remove(USER_ID)
         SPUtils.getInstance().remove(USER_RESETPASSWORD_TYPE)
         SPUtils.getInstance().remove(USER_EMAIL)
+        SPUtils.getInstance().remove(USER_INFO)
         val intent = Intent(activity, SelectLoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)

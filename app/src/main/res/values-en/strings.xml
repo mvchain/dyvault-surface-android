@@ -19,4 +19,13 @@
     <string name="navi_mine">Mine</string>
     <string name="language_title">Language</string>
     <string name="about_title">About</string>
+    <string name="account_security">account security</string>
+    <string name="select_photo">Choose from album</string>
+
+    <string name="increase_remove">Remove</string>
+    <string name="increase_add">Add to</string>
+
+    <string name="account_update_email">Modify mailbox</string>
+    <string name="account_update_password">Modify the login password</string>
+    <string name="account_update_pay_password">Modify payment password</string>
 </resources>

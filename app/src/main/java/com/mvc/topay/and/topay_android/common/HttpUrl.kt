@@ -83,6 +83,15 @@ object HttpUrl {
      */
     const val MESSAGE = "message"
 
+    /**
+     *  Get asset transfer list
+     */
+    const val ASSET_TRANSACTIONS = "asset/transactions"
+
+    /**
+     * get receipt qcode
+     */
+    const val ASSETS_QCODE = "asset/address"
 
 
 }

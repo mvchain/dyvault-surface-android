@@ -9,7 +9,7 @@ abstract class BaseMVPActivity<V, P : BasePresenter<*, V>> : BaseActivity(), IBa
         super.onCreate(savedInstanceState)
         mPresenter = initPresenter() as P
         if (mPresenter !== null) {
-            mPresenter.attchMVP(this as V)
+            mPresenter.attachMVP(this as V)
         }
         initMVPView()
         initMVPData()
@@ -17,7 +17,7 @@ abstract class BaseMVPActivity<V, P : BasePresenter<*, V>> : BaseActivity(), IBa
 
     abstract fun initMVPData()
 
-    open fun initMVPView(){
+    open fun initMVPView() {
         super.initView()
     }
 
@@ -25,5 +25,12 @@ abstract class BaseMVPActivity<V, P : BasePresenter<*, V>> : BaseActivity(), IBa
     }
 
     override fun initData() {
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mPresenter != null) {
+            mPresenter.detachMVP()
+        }
     }
 }

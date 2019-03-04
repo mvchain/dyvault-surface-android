@@ -86,8 +86,8 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
                 R.id.item_assets_layout -> {
                     var tokenId = assetsList[position].tokenId
                     var hisIntent = Intent(mActivity, HistoryActivity::class.java)
+                    hisIntent.putExtra("tokenId",tokenId)
                     startActivity(hisIntent)
-
                 }
             }
         }
