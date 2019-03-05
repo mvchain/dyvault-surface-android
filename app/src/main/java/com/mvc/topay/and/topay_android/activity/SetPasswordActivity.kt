@@ -35,7 +35,7 @@ class SetPasswordActivity : BaseMVPActivity<ISetPasswordContract.SetPasswordView
     }
 
     override fun registerFailed(msg: String) {
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         dismiss()
     }
 

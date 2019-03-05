@@ -1,14 +1,12 @@
 package com.mvc.topay.and.topay_android.utils
 
 import android.content.Intent
-import android.os.AsyncTask.execute
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.Utils
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.api.ApiStore
-import com.mvc.topay.and.topay_android.bean.HttpDataBean
 import com.mvc.topay.and.topay_android.common.Constant
 import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
@@ -36,6 +34,7 @@ class RetrofitUtils {
             Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
+//                    http://47.110.144.216/api/app/       http://192.168.15.21:10086/
                     .baseUrl("http://47.110.144.216/api/app/")
                     .client(okhttpUtils).build()
         }
@@ -55,22 +54,22 @@ class RetrofitUtils {
                         if (body!!.code === 200) {
                             SPUtils.getInstance().put(TOKEN, body!!.data)
                             MyApplication.token = body!!.data
+                            val builder = response.request().newBuilder()
+                            builder.header("Authorization", SPUtils.getInstance().getString(TOKEN))
+                            builder.addHeader("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE))
+                            builder.addHeader("versionCode", MyApplication.getAppVersionCode().toString())
+                            builder.build()
                         } else {
                             LogUtils.e("token 失效")
-                            ActivityUtils.getTopActivity().finish()
                             SPUtils.getInstance().remove(REFRESH_TOKEN)
                             SPUtils.getInstance().remove(TOKEN)
                             SPUtils.getInstance().remove(USER_ID)
                             val intent = Intent()
-                            intent.action = "android.login"
+                            intent.action = "${MyApplication.application!!.packageName}.android.login"
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                             Utils.getApp().startActivity(intent)
+                            null
                         }
-                        val builder = response.request().newBuilder()
-                        builder.header("Authorization", SPUtils.getInstance().getString(TOKEN))
-                        builder.addHeader("Accept-Language", SPUtils.getInstance().getString(Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE))
-                        builder.addHeader("versionCode", MyApplication.getAppVersionCode().toString())
-                        builder.build()
                     }
                     .addInterceptor(HttpLoggingInterceptor
                     { message ->

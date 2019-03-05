@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
 import com.blankj.utilcode.util.SPUtils
@@ -28,14 +27,13 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContract.WalletPresenter>(), IWalletContract.WalletView {
+    override fun networkError() {
+        showToast("服务器繁忙")
+        mWalletRefresh.post { mWalletRefresh.isRefreshing = false }
+    }
 
     override fun balanceSuccess(balanceBean: BalanceBean) {
         mWalletBalance.text = TextUtils.doubleToDouble(balanceBean.data)
-    }
-
-    override fun balanceError() {
-        mWalletRefresh.post { mWalletRefresh.isRefreshing = false }
-        showToast("服务器繁忙", Gravity.CENTER)
     }
 
     private lateinit var walletAdapter: WalletAssetsAdapter
@@ -57,11 +55,6 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         mWalletRefresh.post { mWalletRefresh.isRefreshing = false }
     }
 
-    override fun assetsError() {
-        mWalletRefresh.post { mWalletRefresh.isRefreshing = false }
-        showToast("服务器繁忙", Gravity.CENTER)
-    }
-
     override fun initView() {
         this.mWalletRecyclerView = mRootView!!.findViewById(R.id.wallet_rv)
         this.mWalletAddCurrency = mRootView!!.findViewById(R.id.wallet_add_currency)
@@ -71,7 +64,13 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         this.mWalletBuyingCoins = mRootView!!.findViewById(R.id.wallet_rate)
         this.mWalletRefresh = mRootView!!.findViewById(R.id.wallet_swipe)
         this.isRefresh = true
-        mWalletAddCurrency.setOnClickListener { startActivity(Intent(mActivity, IncreaseCurrencyActivity::class.java)) }
+        mWalletAddCurrency.setOnClickListener {
+            if (SPUtils.getInstance().getString(ASSETS_LIST) === "") {
+                showToast("服务器繁忙")
+            } else {
+                startActivity(Intent(mActivity, IncreaseCurrencyActivity::class.java))
+            }
+        }
         mWalletMsg.setOnClickListener { startActivity(Intent(mActivity, MsgActivity::class.java)) }
         assetsList = ArrayList()
         walletAdapter = WalletAssetsAdapter(R.layout.item_home_assets_type, assetsList)
@@ -86,7 +85,8 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
                 R.id.item_assets_layout -> {
                     var tokenId = assetsList[position].tokenId
                     var hisIntent = Intent(mActivity, HistoryActivity::class.java)
-                    hisIntent.putExtra("tokenId",tokenId)
+                    hisIntent.putExtra("tokenId", tokenId)
+                    hisIntent.putExtra("rateType", mWalletBuyingCoins.text.toString())
                     startActivity(hisIntent)
                 }
             }

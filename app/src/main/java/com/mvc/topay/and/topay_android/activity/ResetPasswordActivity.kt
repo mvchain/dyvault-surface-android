@@ -22,7 +22,7 @@ class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswo
     private lateinit var mEmail: String
     override fun resetSuccess(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         if (type === RESETPASSWORD_LOGIN) {
             startTaskActivity(this)
         } else {
@@ -32,7 +32,7 @@ class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswo
 
     override fun resetFailed(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
     }
 
     override fun initMVPData() {

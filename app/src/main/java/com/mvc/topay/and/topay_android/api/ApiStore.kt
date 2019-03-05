@@ -144,7 +144,21 @@ interface ApiStore {
      * get receipt qcode
      */
     @GET(HttpUrl.ASSETS_QCODE)
-    fun getMineQCode(@Header("Authorization") token: String, @Query("tokenId ") tokenId : Int): Observable<ReceiptBean>
+    fun getMineQCode(@Header("Authorization") token: String, @Query("tokenId ") tokenId: Int): Observable<ReceiptBean>
+
+    /**\
+     * Get transfer details based on transfer transaction ID
+     */
+    @Headers("Accept-Language: zh-cn")
+    @GET(HttpUrl.ASSETS_TRANSACTIONS_ID + "{id}")
+    fun getDetailOnID(@Header("Authorization") token: String, @Path("id") id: Int): Observable<DetailBean>
+
+
+    /**\
+     * Get a currency balance,
+     */
+    @GET(HttpUrl.ASSETS_LIST + "/{tokenId}")
+    fun getCurrencyBalance(@Header("Authorization") token: String, @Path("tokenId") id: Int): Observable<BalancnOnIdBean>
 
 }
 

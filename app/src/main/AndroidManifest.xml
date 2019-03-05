@@ -27,7 +27,7 @@
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.login" />
+                <action android:name="com.mvc.topay.and.topay_android.android.login" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

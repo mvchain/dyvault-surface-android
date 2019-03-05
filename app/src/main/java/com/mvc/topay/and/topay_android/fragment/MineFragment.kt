@@ -44,7 +44,7 @@ class MineFragment : BaseMVPFragment<IMineContract.MineView, IMineContract.MineP
     }
 
     override fun getUserFailed(msg: String) {
-        showToast("$msg", Gravity.CENTER)
+        showToast("$msg")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

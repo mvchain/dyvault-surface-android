@@ -73,7 +73,7 @@ class MsgActivity : BaseMVPActivity<IMsgContrast.MsgView, IMsgContrast.MsgPresen
 
     override fun msgError(msg: String) {
         isRefresh = false
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         msg_null.visibility = View.VISIBLE
         msg_rv.visibility = View.GONE
         msg_swipe.post { msg_swipe.isRefreshing = false }

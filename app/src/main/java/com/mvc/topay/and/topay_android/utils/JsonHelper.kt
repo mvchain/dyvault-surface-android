@@ -3,13 +3,13 @@ package com.mvc.topay.and.topay_android.utils
 import com.google.gson.Gson
 
 object JsonHelper {
-    private val gson = Gson()
+    private val sGson = Gson()
 
     fun jsonToString(obj: Any): String {
-        return gson.toJson(obj)
+        return sGson.toJson(obj)
     }
 
     fun stringToJson(json: String, clazz: Class<*>): Any {
-        return gson.fromJson<Any>(json, clazz)
+        return sGson.fromJson<Any>(json, clazz)
     }
 }

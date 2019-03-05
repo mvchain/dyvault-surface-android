@@ -23,7 +23,7 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.Cha
     private var isEmail = false
     override fun sendEmailSuccess(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         TimeVerification.instance.setOnTimeEndCallBack(object : OnTimeEndCallBack {
             override fun updata(time: Int) {
                 change_send.isEnabled = false
@@ -41,7 +41,7 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.Cha
 
     override fun sendEmailFailed(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
     }
 
     override fun verifyEmailSuccess(token: String) {
@@ -53,7 +53,7 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.Cha
 
     override fun verifyEmailFailed(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
     }
 
     override fun initMVPData() {
@@ -96,7 +96,7 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.Cha
             R.id.change_next -> {
                 var code = change_code.text.toString()
                 if (code === "") {
-                    showToast(MyApplication.application!!.getString(R.string.login_null_code), Gravity.CENTER)
+                    showToast(MyApplication.application!!.getString(R.string.login_null_code))
                     return
                 }
                 showDialog("请稍后...")

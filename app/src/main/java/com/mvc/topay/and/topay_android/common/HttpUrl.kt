@@ -94,4 +94,10 @@ object HttpUrl {
     const val ASSETS_QCODE = "asset/address"
 
 
+    /**
+     *  Get transfer details based on transfer transaction ID
+     */
+    const val ASSETS_TRANSACTIONS_ID = "/asset/transaction/"
+
+
 }

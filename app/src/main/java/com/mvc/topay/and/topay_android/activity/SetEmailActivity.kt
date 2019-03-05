@@ -41,7 +41,7 @@ class SetEmailActivity : BaseMVPActivity<ISetEmailContract.SetEmailView, ISetEma
 
     override fun sendEmailSuccess(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         TimeVerification.instance.resume()
         TimeVerification.instance.setOnTimeEndCallBack(object : OnTimeEndCallBack {
             override fun updata(time: Int) {
@@ -60,13 +60,13 @@ class SetEmailActivity : BaseMVPActivity<ISetEmailContract.SetEmailView, ISetEma
 
     override fun sendEmailFailed(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
 
     }
 
     override fun verifyEmailSuccess(token: String) {
         dismiss()
-        showToast("邮箱修改成功", Gravity.CENTER)
+        showToast("邮箱修改成功")
         SPUtils.getInstance().put(TOKEN, token)
         SPUtils.getInstance().put(USER_EMAIL, email_address.text.toString())
         MyApplication.token = token
@@ -79,7 +79,7 @@ class SetEmailActivity : BaseMVPActivity<ISetEmailContract.SetEmailView, ISetEma
 
     override fun verifyEmailFailed(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
 
     }
 
@@ -91,7 +91,7 @@ class SetEmailActivity : BaseMVPActivity<ISetEmailContract.SetEmailView, ISetEma
             R.id.email_send -> {
                 var emailAddress = email_address.text.toString()
                 if (emailAddress === "") {
-                    showToast(MyApplication.application!!.getString(R.string.login_null_email), Gravity.CENTER)
+                    showToast(MyApplication.application!!.getString(R.string.login_null_email))
                     return
                 }
                 showDialog("发送验证码中...")
@@ -101,11 +101,11 @@ class SetEmailActivity : BaseMVPActivity<ISetEmailContract.SetEmailView, ISetEma
                 var emailAddress = email_address.text.toString()
                 var emailCode = email_code.text.toString()
                 if (emailAddress === "") {
-                    showToast(MyApplication.application!!.getString(R.string.login_null_email), Gravity.CENTER)
+                    showToast(MyApplication.application!!.getString(R.string.login_null_email))
                     return
                 }
                 if (emailCode === "") {
-                    showToast(MyApplication.application!!.getString(R.string.login_null_code), Gravity.CENTER)
+                    showToast(MyApplication.application!!.getString(R.string.login_null_code))
                     return
                 }
                 showDialog("修改中...")

@@ -18,7 +18,6 @@ interface IWalletContract {
     interface WalletView : IBaseActivity {
         fun assetsSuccess(assetListBean: AssetListBean)
         fun balanceSuccess(balanceBean: BalanceBean)
-        fun balanceError()
-        fun assetsError()
+        fun networkError()
     }
 }

@@ -9,8 +9,12 @@ import com.mvc.topay.and.topay_android.presenter.DetailPresenter
 
 class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContract.DetailPresenter>(), IDetailContract.DetailView {
     override fun initMVPData() {
+//        mPresenter.getDetailOnID()
     }
 
+    override fun initMVPView() {
+        super.initMVPView()
+    }
     override fun getLayoutId(): Int {
         return R.layout.activity_detail
     }

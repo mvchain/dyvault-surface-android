@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 class RegisterActivity : BaseMVPActivity<IRegisterContract.RegisterView, IRegisterContract.RegisterPresenter>(), IRegisterContract.RegisterView {
     override fun sendCodeSuccess(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         TimeVerification.instance.resume()
         TimeVerification.instance.setOnTimeEndCallBack(object : OnTimeEndCallBack {
             override fun updata(time: Int) {
@@ -36,12 +36,12 @@ class RegisterActivity : BaseMVPActivity<IRegisterContract.RegisterView, IRegist
     }
 
     override fun sendCodeError(msg: String) {
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         dismiss()
     }
 
     override fun verifyFailed(msg: String) {
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         dismiss()
     }
 

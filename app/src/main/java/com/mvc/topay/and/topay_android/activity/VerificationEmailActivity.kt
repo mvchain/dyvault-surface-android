@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_verification_email.*
 class VerificationEmailActivity : BaseMVPActivity<IVerificationContract.VerificationView, IVerificationContract.VerificationPresenter>(), IVerificationContract.VerificationView {
     override fun error(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
     }
 
     override fun initMVPData() {
@@ -41,7 +41,7 @@ class VerificationEmailActivity : BaseMVPActivity<IVerificationContract.Verifica
 
     override fun sendCodeSuccess(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         TimeVerification.instance.resume()
         TimeVerification.instance.setOnTimeEndCallBack(object : OnTimeEndCallBack {
             override fun updata(time: Int) {

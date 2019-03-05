@@ -13,12 +13,10 @@ class RxUtils {
 //    }
 
     fun register(dp: Disposable) {
-        LogUtils.e("订阅")
         compositeDisposable.add(dp)
     }
 
     fun unSubscribe() {
-        LogUtils.e("取消订阅")
         compositeDisposable.dispose()
     }
 

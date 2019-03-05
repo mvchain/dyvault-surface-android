@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.LoginPresenter>(), ILoginContract.LoginView {
     override fun sendCodeSuccess(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         TimeVerification.instance.resume()
         TimeVerification.instance.setOnTimeEndCallBack(object : OnTimeEndCallBack {
             override fun updata(time: Int) {
@@ -49,7 +49,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
 
     override fun sendCodeError(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
     }
 
     override fun loginSuccess(registerBean: RegisterBean) {
@@ -67,7 +67,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
 
     override fun loginFailed(msg: String) {
         dismiss()
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
     }
 
     override fun initMVPData() {

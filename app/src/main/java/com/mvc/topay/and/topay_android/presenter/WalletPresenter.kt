@@ -11,12 +11,10 @@ class WalletPresenter : IWalletContract.WalletPresenter() {
                 .subscribe({ balanceBean ->
                     if(balanceBean.code === 200){
                         mIView!!.balanceSuccess(balanceBean)
-                    }else{
-                        mIView!!.balanceError()
                     }
                 }, {
                     LogUtils.e(it.message)
-                    mIView!!.balanceError()
+                    mIView!!.networkError()
                 }))
     }
 
@@ -26,7 +24,7 @@ class WalletPresenter : IWalletContract.WalletPresenter() {
                     mIView!!.assetsSuccess(asslist)
                 }, {
                     LogUtils.e(it.message)
-                    mIView!!.assetsError()
+//                    mIView!!.networkError()
                 }))
     }
 

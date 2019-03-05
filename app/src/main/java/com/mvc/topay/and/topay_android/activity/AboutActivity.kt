@@ -56,7 +56,7 @@ class AboutActivity : BaseActivity() {
 
     @SuppressLint("CheckResult")
     fun onClick(view: View) {
-        showToast("当前版本已是最新", Gravity.CENTER)
+        showToast("当前版本已是最新")
 //        RetrofitUtils.client(ApiStore::class.java).updateApk(MyApplication.getTOKEN(), "apk")
 //                .compose(RxHelper.rxSchedulerHelper())
 //                .subscribe({ installApkBean ->

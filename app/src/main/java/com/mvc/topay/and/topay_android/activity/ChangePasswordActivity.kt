@@ -22,7 +22,7 @@ class ChangePasswordActivity : BaseMVPActivity<IChangePasswordContract.ChangePas
     private var TYPE = 0
 
     override fun updateSuccess(msg: String, type: Int) {
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
         if (type === RESETPASSWORD_LOGIN) {
             startTaskActivity(this)
         } else {
@@ -31,7 +31,7 @@ class ChangePasswordActivity : BaseMVPActivity<IChangePasswordContract.ChangePas
     }
 
     override fun updateFailed(msg: String, type: Int) {
-        showToast(msg, Gravity.CENTER)
+        showToast(msg)
     }
 
     override fun initMVPData() {
@@ -79,11 +79,11 @@ class ChangePasswordActivity : BaseMVPActivity<IChangePasswordContract.ChangePas
                 var oldPsw = update_old_password.text.toString()
                 var newPsw = update_new_password.text.toString()
                 if (oldPsw === "") {
-                    showToast("原密码不可为空", Gravity.CENTER)
+                    showToast("原密码不可为空")
                     return
                 }
                 if (newPsw === "") {
-                    showToast("新密码不可为空", Gravity.CENTER)
+                    showToast("新密码不可为空")
                     return
                 }
                 if (TYPE === RESETPASSWORD_LOGIN) {
