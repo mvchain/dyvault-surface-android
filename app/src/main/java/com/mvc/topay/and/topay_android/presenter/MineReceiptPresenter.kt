@@ -13,7 +13,7 @@ class MineReceiptPresenter : IReceiptQRContract.ReceiptQRPresenter() {
 
     override fun getMineQcode(tokenId: Int) {
         mRxUtils.register(mIModel!!.getMineQcode(tokenId).subscribe({ receiptBean ->
-            if (receiptBean.data != "") {
+            if (receiptBean.code === 200) {
                 mIView!!.showSuccess(receiptBean)
             }
         }, { throwable ->

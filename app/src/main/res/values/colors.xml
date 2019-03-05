@@ -15,6 +15,7 @@
     <color name="app_bg_status_bar">#E6E8F0</color>
     <color name="login_title_tv_bg">#8B8B8B</color>
     <color name="content_tv_bg">#555555</color>
+    <color name="colorRed">#FF0000</color>
     <color name="login_edit_bg">#F1F1F1</color>
     <color name="login_edit_tv_bg">#999999</color>
     <color name="login_get_code_bg">#D3D3D3</color>

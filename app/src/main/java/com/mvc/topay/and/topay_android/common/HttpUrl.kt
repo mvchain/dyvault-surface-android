@@ -97,7 +97,6 @@ object HttpUrl {
     /**
      *  Get transfer details based on transfer transaction ID
      */
-    const val ASSETS_TRANSACTIONS_ID = "/asset/transaction/"
-
+    const val ASSETS_TRANSACTION_ID = "asset/transaction"
 
 }

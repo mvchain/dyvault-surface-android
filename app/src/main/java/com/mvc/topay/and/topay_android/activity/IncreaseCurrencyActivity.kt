@@ -159,13 +159,15 @@ class IncreaseCurrencyActivity : BaseMVPActivity<IIncreaseContract.IIncreaseView
                     //全部列表结果
                     LogUtils.e(mBean.size)
                     if (!mBean[position].isAdd) {
-                        dialogHelper.create(this, "确定删除币种" + mBean[position].title + "?", IDialogViewClickListener { viewId ->
-                            when (viewId) {
-                                R.id.hint_cancle -> {
-                                }
-                                R.id.hint_enter -> {
-                                    dialogHelper.dismiss()
-                                    pullStack(position)
+                        dialogHelper.create(this, "确定删除币种" + mBean[position].title + "?", object :IDialogViewClickListener {
+                            override fun click(viewId: Int) {
+                                when (viewId) {
+                                    R.id.hint_cancle -> {
+                                    }
+                                    R.id.hint_enter -> {
+                                        dialogHelper.dismiss()
+                                        pullStack(position)
+                                    }
                                 }
                             }
                         }).show()

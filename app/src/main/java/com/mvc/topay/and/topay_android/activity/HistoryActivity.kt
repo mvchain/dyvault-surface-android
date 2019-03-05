@@ -15,18 +15,22 @@ import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.adapter.HistoryPagerAdapter
 import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.base.BaseActivity
+import com.mvc.topay.and.topay_android.event.HistoryEvent
 import com.mvc.topay.and.topay_android.fragment.HistoryFragment
 import com.mvc.topay.and.topay_android.utils.RetrofitUtils
 import com.mvc.topay.and.topay_android.utils.RxHelper
 import com.mvc.topay.and.topay_android.utils.TextUtils
 import com.per.rslibrary.IPermissionRequest
 import com.per.rslibrary.RsPermission
+import com.uuzuche.lib_zxing.activity.CodeUtils
 import kotlinx.android.synthetic.main.activity_history.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class HistoryActivity : BaseActivity() {
     private var tokenId = 0
     private lateinit var rateType: String
-
+    private lateinit var tokenName: String
     private lateinit var fragments: ArrayList<Fragment>
     private lateinit var historyAdapter: HistoryPagerAdapter
     override fun initData() {
@@ -59,17 +63,29 @@ class HistoryActivity : BaseActivity() {
         super.initView()
         tokenId = intent.getIntExtra("tokenId", 0)
         rateType = intent.getStringExtra("rateType")
+        tokenName = intent.getStringExtra("tokenName")
         fragments = ArrayList()
         historyAdapter = HistoryPagerAdapter(supportFragmentManager, fragments)
         history_vp.adapter = historyAdapter
         history_table.setupWithViewPager(history_vp)
-        history_swipe.setOnRefreshListener { this.refresh() }
+        history_swipe.setOnRefreshListener { this.refresh(null) }
         history_swipe.post { history_swipe.isRefreshing = true }
     }
 
-    private fun refresh() {
+    @Subscribe
+    fun refresh(event: HistoryEvent?) {
         loadAssetsOnId(tokenId)
         (fragments[history_vp.currentItem] as HistoryFragment).historyRefresh()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 
     override fun getLayoutId(): Int {
@@ -105,6 +121,18 @@ class HistoryActivity : BaseActivity() {
                     startActivityForResult(intent, 200)
                 }
             }
+            R.id.his_out -> {
+                val intent = Intent(this@HistoryActivity, TransferActivity::class.java)
+                intent.putExtra("tokenId", tokenId)
+                intent.putExtra("tokenName", tokenName)
+                startActivity(intent)
+            }
+            R.id.his_in -> {
+                var intent = Intent(this, MineQCodeActivity::class.java)
+                intent.putExtra("tokenId", tokenId)
+                intent.putExtra("tokenName", tokenName)
+                startActivity(intent)
+            }
         }
     }
 
@@ -126,5 +154,26 @@ class HistoryActivity : BaseActivity() {
                     LogUtils.e(it!!.message)
                     showToast("服务器繁忙")
                 })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data != null) {
+            when (resultCode) {
+                200 -> {
+                    val qode = data.getBooleanExtra("QODE", false)
+                    if (!qode) {
+                        showToast("无效地址")
+                        return
+                    }
+                    val stringExtra = data.getStringExtra(CodeUtils.RESULT_STRING)
+                    val intent = Intent(this@HistoryActivity, TransferActivity::class.java)
+                    intent.putExtra("hash", stringExtra)
+                    intent.putExtra("tokenId", tokenId)
+                    intent.putExtra("tokenName", tokenName)
+                    startActivity(intent)
+                }
+            }
+        }
     }
 }

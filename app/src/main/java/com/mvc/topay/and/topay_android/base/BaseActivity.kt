@@ -84,6 +84,12 @@ abstract class BaseActivity : RxAppCompatActivity() {
         ToastUtils.showShort(content)
     }
 
+    protected fun setAlpha(alpha: Float) {
+        val attributes = window.attributes
+        attributes.alpha = alpha
+        window.attributes = attributes
+    }
+
     protected fun startTaskActivity(activity: Activity) {
         SPUtils.getInstance().remove(REFRESH_TOKEN)
         SPUtils.getInstance().remove(TOKEN)

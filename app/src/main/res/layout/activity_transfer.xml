@@ -20,29 +20,31 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/m_back"
+            android:id="@+id/transfer_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="6dp"
+            android:onClick="onClick"
             android:scaleType="center"
             android:src="@drawable/back_black" />
 
         <TextView
-            android:id="@+id/m_title"
+            android:id="@+id/transfer_title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="BTC转帐"
+            android:text="- 转帐"
             android:textColor="@color/login_content"
             android:textSize="17sp" />
 
         <ImageView
-            android:id="@+id/m_qcode"
+            android:id="@+id/transfer_qcode"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="5dp"
+            android:onClick="onClick"
             android:scaleType="center"
             android:src="@drawable/scan_qrcode" />
     </LinearLayout>
@@ -63,7 +65,7 @@
 
 
         <EditText
-            android:id="@+id/btc_trans_address"
+            android:id="@+id/transfer_trans_address"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
@@ -87,7 +89,7 @@
             android:layout_marginTop="30dp">
 
             <EditText
-                android:id="@+id/btc_trans_price"
+                android:id="@+id/transfer_trans_price"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_login_edit_14dp"
@@ -140,10 +142,11 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/transfer_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="123456.0000 BTC"
+                android:text="-"
                 android:textColor="@color/content_tv_bg" />
         </LinearLayout>
 
@@ -167,10 +170,11 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/transfer_fees"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="123456.0000 BTC"
+                android:text="-"
                 android:textColor="@color/content_tv_bg" />
         </LinearLayout>
 
@@ -179,7 +183,7 @@
 
 
     <TextView
-        android:id="@+id/btc_submit"
+        android:id="@+id/transfer_submit"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_alignParentBottom="true"
@@ -188,6 +192,7 @@
         android:layout_marginBottom="35dp"
         android:background="@drawable/shape_login_bg_22dp"
         android:gravity="center"
+        android:onClick="onClick"
         android:text="确认"
         android:textColor="@color/white"
         android:textSize="15sp"

@@ -87,6 +87,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
                     var hisIntent = Intent(mActivity, HistoryActivity::class.java)
                     hisIntent.putExtra("tokenId", tokenId)
                     hisIntent.putExtra("rateType", mWalletBuyingCoins.text.toString())
+                    hisIntent.putExtra("tokenName", assetsList[position].tokenName)
                     startActivity(hisIntent)
                 }
             }

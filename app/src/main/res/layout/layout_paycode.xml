@@ -8,11 +8,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_login_edit_14dp"
+        android:background="@drawable/shape_pay_bg"
         android:orientation="vertical"
         android:paddingBottom="10dp">
 
-    <RelativeLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:gravity="center"
-                android:text="确认转账"
+                android:text="确认支付密码"
                 android:textColor="@color/login_content"
                 android:textSize="15sp" />
 
@@ -46,8 +46,8 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="转账金额"
-            android:textColor="@color/login_edit_bg"
-            android:textSize="12sp" />
+            android:textColor="@color/login_title_tv_bg"
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/pay_price"
@@ -55,9 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:gravity="center"
-            android:text="12.1424 BTC"
+            android:text="-"
             android:textColor="@color/login_content"
-            android:textSize="27sp" />
+            android:textSize="35sp" />
 
         <LinearLayout
             android:id="@+id/pay_address_layout"
@@ -72,8 +72,9 @@
                 android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="收款地址"
-                android:textColor="@color/login_edit_bg" />
+                android:text="地址"
+                android:textColor="@color/select_gray"
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/pay_address"
@@ -84,14 +85,15 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:singleLine="true"
-                android:text="0x2051dd2bab0051dd2bab0051dd2bab0e5ffa196ccc2448"
-                android:textColor="@color/login_edit_bg" />
+                android:text="-"
+                android:textColor="@color/select_gray"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <View
+            android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:id="@+id/line"
             android:background="@color/line_gray" />
 
         <LinearLayout
@@ -108,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="交易手续费"
-                android:textColor="@color/login_edit_bg" />
+                android:textColor="@color/select_gray" />
 
             <TextView
                 android:id="@+id/pay_fee"
@@ -119,8 +121,9 @@
                 android:ellipsize="middle"
                 android:gravity="right"
                 android:singleLine="true"
-                android:text="0.01BTC"
-                android:textColor="@color/login_edit_bg" />
+                android:text="-"
+                android:textColor="@color/select_gray"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <View
@@ -128,7 +131,7 @@
             android:layout_height="1dp"
             android:background="@color/line_gray" />
 
-        <com.mvc.cryptovault_android.view.PswText
+        <com.mvc.topay.and.topay_android.view.PswText
             android:id="@+id/pay_text"
             android:layout_width="match_parent"
             android:layout_height="44dp"
@@ -147,6 +150,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="忘记密码？"
-            android:textColor="@color/login_button_bg" />
+            android:textColor="@color/login_button_bg"
+            android:textSize="13sp" />
     </LinearLayout>
 </LinearLayout>

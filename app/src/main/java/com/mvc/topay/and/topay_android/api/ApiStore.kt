@@ -144,21 +144,33 @@ interface ApiStore {
      * get receipt qcode
      */
     @GET(HttpUrl.ASSETS_QCODE)
-    fun getMineQCode(@Header("Authorization") token: String, @Query("tokenId ") tokenId: Int): Observable<ReceiptBean>
+    fun getMineQCode(@Header("Authorization") token: String, @Query("tokenId") tokenId: Int): Observable<ReceiptBean>
 
-    /**\
+    /**
      * Get transfer details based on transfer transaction ID
      */
     @Headers("Accept-Language: zh-cn")
-    @GET(HttpUrl.ASSETS_TRANSACTIONS_ID + "{id}")
+    @GET(HttpUrl.ASSETS_TRANSACTION_ID + "/{id}")
     fun getDetailOnID(@Header("Authorization") token: String, @Path("id") id: Int): Observable<DetailBean>
 
 
-    /**\
+    /**
      * Get a currency balance,
      */
     @GET(HttpUrl.ASSETS_LIST + "/{tokenId}")
     fun getCurrencyBalance(@Header("Authorization") token: String, @Path("tokenId") id: Int): Observable<BalancnOnIdBean>
+
+    /**
+     * Incoming currency id takes the information required for transfer, not case sensitive
+     */
+    @GET(HttpUrl.ASSETS_TRANSACTION_ID)
+    fun getTransaction(@Header("Authorization") token: String, @Query("tokenId") tokenId : Int): Observable<IDToTransferBean>
+
+    /**
+     * Initiate a transfer
+     */
+    @POST(HttpUrl.ASSETS_TRANSACTION_ID)
+    fun sendTransferRequest(@Header("Authorization") token: String, @Body body: RequestBody): Observable<HttpUpdateBean>
 
 }
 
