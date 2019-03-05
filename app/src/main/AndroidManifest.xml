@@ -51,6 +51,7 @@
         <activity android:name=".activity.TransferActivity" />
         <activity android:name=".activity.MineQCodeActivity" />
         <activity android:name=".activity.DetailActivity" />
+        <activity android:name=".activity.BuyingCoinsActivity" />
 
         <!--适配华为（hw）刘海屏-->
         <meta-data

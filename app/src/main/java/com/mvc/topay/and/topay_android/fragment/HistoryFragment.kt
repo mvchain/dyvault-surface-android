@@ -31,6 +31,8 @@ class HistoryFragment : BaseMVPFragment<IHistoryChindContract.HistoryChindView, 
         recyclerView = mRootView!!.findViewById(R.id.history_child_rv)
         dataNull = mRootView!!.findViewById(R.id.history_child_null)
         recyclerView.adapter = historyChildAdapter
+        recyclerView.setHasFixedSize(true)
+        recyclerView.isNestedScrollingEnabled = false
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
@@ -64,7 +66,7 @@ class HistoryFragment : BaseMVPFragment<IHistoryChindContract.HistoryChindView, 
             dateBean.clear()
         }
         dateBean.addAll(transactionsBean)
-        if (transactionsBean.size > 0) {
+        if (dateBean.size > 0) {
             dataNull.visibility = View.GONE
             recyclerView.visibility = View.VISIBLE
             historyChildAdapter.notifyDataSetChanged()
@@ -82,6 +84,7 @@ class HistoryFragment : BaseMVPFragment<IHistoryChindContract.HistoryChindView, 
 
     fun historyRefresh() {
         isRefresh = true
+        dateBean.clear()
         mPresenter.getTransferList(0, 10, tokenId, type)
     }
 }

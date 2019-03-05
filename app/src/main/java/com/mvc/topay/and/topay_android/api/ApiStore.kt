@@ -172,5 +172,12 @@ interface ApiStore {
     @POST(HttpUrl.ASSETS_TRANSACTION_ID)
     fun sendTransferRequest(@Header("Authorization") token: String, @Body body: RequestBody): Observable<HttpUpdateBean>
 
+
+    /**
+     * get channel list
+     */
+    @GET(HttpUrl.CHANNEL)
+    fun getChannelList(@Header("Authorization") token: String, @Query("id") id: Int,@Query("pageSize") pageSize: Int): Observable<ChannelBean>
+
 }
 

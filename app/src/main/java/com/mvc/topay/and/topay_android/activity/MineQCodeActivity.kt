@@ -24,7 +24,10 @@ import kotlinx.android.synthetic.main.activity_mineqcode.*
 
 class MineQCodeActivity : BaseMVPActivity<IReceiptQRContract.ReceiptQRView, IReceiptQRContract.ReceiptQRPresenter>(), IReceiptQRContract.ReceiptQRView {
     private var tokenId: Int = 0
+    private lateinit var tokenName: String
     override fun initMVPData() {
+        m_title.text = "$tokenName 收款"
+        m_qcode_content.text = "$tokenName 收款地址"
         mPresenter.getMineQcode(tokenId)
     }
 
@@ -35,6 +38,7 @@ class MineQCodeActivity : BaseMVPActivity<IReceiptQRContract.ReceiptQRView, IRec
     override fun initMVPView() {
         super.initMVPView()
         tokenId = intent.getIntExtra("tokenId", 0)
+        tokenName = intent.getStringExtra("tokenName")
     }
 
     override fun initPresenter(): BasePresenter<*, *> {
@@ -45,8 +49,7 @@ class MineQCodeActivity : BaseMVPActivity<IReceiptQRContract.ReceiptQRView, IRec
         val hash = receiptBean.data
         m_qcode_hash.text = hash
         val mBitmap = CodeUtils.createImage(hash, 400, 400, null)
-        Glide.with(this).load(mBitmap).into(m_qcode_protrait)
-
+        Glide.with(this).load(mBitmap).into(m_qcode_qc_img)
     }
 
     override fun showError() {

@@ -99,4 +99,12 @@ object HttpUrl {
      */
     const val ASSETS_TRANSACTION_ID = "asset/transaction"
 
+
+
+    /**
+     *  Get transfer details based on transfer transaction ID
+     */
+    const val CHANNEL = "channel"
+
+
 }

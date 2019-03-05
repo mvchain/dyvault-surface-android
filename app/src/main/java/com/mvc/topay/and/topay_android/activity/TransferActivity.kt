@@ -26,6 +26,7 @@ import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYPE
 import com.mvc.topay.and.topay_android.constract.ITransferContract
 import com.mvc.topay.and.topay_android.event.HistoryEvent
+import com.mvc.topay.and.topay_android.event.WalletAssetsListEvent
 import com.mvc.topay.and.topay_android.listener.IPayWindowListener
 import com.mvc.topay.and.topay_android.listener.PswMaxListener
 import com.mvc.topay.and.topay_android.presenter.TransferPresenter
@@ -101,6 +102,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
         if (bean.code === 200) {
             showToast("操作成功")
         }
+        EventBus.getDefault().post(WalletAssetsListEvent())
         EventBus.getDefault().post(HistoryEvent())
         finish()
         tranDialog.dismiss()
@@ -194,8 +196,10 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                                 setAlpha(0.5f)
                             }
                             R.id.pay_forget -> {
+                                var sIntent = Intent(this@TransferActivity,ChangePasswordActivity::class.java)
                                 SPUtils.getInstance().put(USER_RESETPASSWORD_TYPE, RESETPASSWORD_PAY)
-                                startActivity(Intent(this@TransferActivity, VerificationEmailActivity::class.java))
+                                sIntent.putExtra("type", RESETPASSWORD_PAY)
+                                startActivity(sIntent)
                             }
                         }
                     }

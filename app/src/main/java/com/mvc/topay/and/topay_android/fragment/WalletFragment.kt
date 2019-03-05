@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.R
+import com.mvc.topay.and.topay_android.activity.BuyingCoinsActivity
 import com.mvc.topay.and.topay_android.activity.HistoryActivity
 import com.mvc.topay.and.topay_android.activity.IncreaseCurrencyActivity
 import com.mvc.topay.and.topay_android.activity.MsgActivity
@@ -64,6 +65,9 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         this.mWalletBuyingCoins = mRootView!!.findViewById(R.id.wallet_rate)
         this.mWalletRefresh = mRootView!!.findViewById(R.id.wallet_swipe)
         this.isRefresh = true
+        mWalletRate.setOnClickListener {
+            startActivity(Intent(mActivity, BuyingCoinsActivity::class.java))
+        }
         mWalletAddCurrency.setOnClickListener {
             if (SPUtils.getInstance().getString(ASSETS_LIST) === "") {
                 showToast("服务器繁忙")
@@ -125,6 +129,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     @Subscribe
     fun eventRefresh(walletAssetsListEvent: WalletAssetsListEvent) {
         mPresenter.getAllAssets()
+        mPresenter.getBalance()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
