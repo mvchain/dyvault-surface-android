@@ -75,6 +75,7 @@
             android:focusableInTouchMode="true"
             android:gravity="center_vertical"
             android:hint="输入地址"
+            android:inputType=""
             android:paddingLeft="12dp"
             android:paddingRight="10dp"
             android:singleLine="true"

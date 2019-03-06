@@ -12,9 +12,7 @@ import com.mvc.topay.and.topay_android.model.ChangePasswordModel
 class ChangePasswordPresenter : IChangePasswordContract.ChangePasswordPresenter() {
     override fun updateLoginPasssword(newPassword: String, oldPassword: String) {
         var email = SPUtils.getInstance().getString(USER_EMAIL)
-        var md5OldPwd = EncryptUtils.encryptMD5ToString(email + EncryptUtils.encryptMD5ToString(oldPassword))
-        var md5NewPwd = EncryptUtils.encryptMD5ToString(email + EncryptUtils.encryptMD5ToString(newPassword))
-        mRxUtils.register(mIModel!!.updateLoginPasssword(md5NewPwd, md5OldPwd)
+        mRxUtils.register(mIModel!!.updateLoginPasssword(newPassword, oldPassword)
                 .subscribe({ update ->
                     if (update.code === 200) {
                         mIView!!.updateSuccess("登入密码修改成功", RESETPASSWORD_LOGIN)
@@ -28,9 +26,7 @@ class ChangePasswordPresenter : IChangePasswordContract.ChangePasswordPresenter(
 
     override fun updatePaypassword(newPassword: String, oldPassword: String) {
         var email = SPUtils.getInstance().getString(USER_EMAIL)
-        var md5OldPwd = EncryptUtils.encryptMD5ToString(email + EncryptUtils.encryptMD5ToString(oldPassword))
-        var md5NewPwd = EncryptUtils.encryptMD5ToString(email + EncryptUtils.encryptMD5ToString(newPassword))
-        mRxUtils.register(mIModel!!.updatePaypassword(md5NewPwd, md5OldPwd)
+        mRxUtils.register(mIModel!!.updatePaypassword(newPassword, oldPassword)
                 .subscribe({ update ->
                     if (update.code === 200) {
                         mIView!!.updateSuccess("支付密码修改成功", RESETPASSWORD_PAY)

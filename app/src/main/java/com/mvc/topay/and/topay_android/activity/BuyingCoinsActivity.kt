@@ -25,6 +25,7 @@ class BuyingCoinsActivity : BaseMVPActivity<IBuyingContract.BuyingView, IBuyingC
         super.initMVPView()
         channelBean = ArrayList()
         channelAdapter = ChannelAdapter(R.layout.item_buying_coins, channelBean)
+        coins_rv.adapter = channelAdapter
         coins_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
@@ -36,6 +37,7 @@ class BuyingCoinsActivity : BaseMVPActivity<IBuyingContract.BuyingView, IBuyingC
                 }
             }
         })
+        buying_back.setOnClickListener { finish() }
     }
 
     override fun getLayoutId(): Int {

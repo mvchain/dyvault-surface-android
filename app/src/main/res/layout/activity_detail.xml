@@ -24,6 +24,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="6dp"
+            android:onClick="onClick"
             android:scaleType="center"
             android:src="@drawable/back_black" />
 
@@ -34,9 +35,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="订单详情"
-            android:textStyle="bold"
             android:textColor="@color/detail_sxf_bg"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/detail_share"
@@ -44,13 +45,15 @@
             android:layout_height="40dp"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="5dp"
+            android:onClick="onClick"
             android:scaleType="center"
             android:src="@drawable/share" />
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
 
         <LinearLayout
             android:id="@+id/share_layout"
@@ -112,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="0.0001 USDT"
+                        android:text="-"
                         android:textColor="@color/content_tv_bg"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -140,7 +143,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="0.0001 USDT"
+                        android:text="-"
                         android:textColor="@color/detail_sxf_bg"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -168,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="right"
-                        android:text="0xc68b5D7d31993A8D53512da7bd4a63e64d096497"
+                        android:text="-"
                         android:textColor="@color/detail_sxf_bg"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -196,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:gravity="right"
-                        android:text="0xc68b5D7d31993A8D53512da7bd4a63e64d096497"
+                        android:text="-"
                         android:textColor="@color/login_button_bg"
                         android:textSize="13sp" />
                 </LinearLayout>

@@ -10,7 +10,11 @@ import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.common.Constant
 import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_ID
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_INFO
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYPE
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_SALT
 import okhttp3.*
 
 import java.security.SecureRandom
@@ -50,7 +54,6 @@ class RetrofitUtils {
                     }
                     .authenticator { _, response ->
                         val body = RetrofitUtils.client(ApiStore::class.java).refreshToken(SPUtils.getInstance().getString(REFRESH_TOKEN)).execute().body()
-                        LogUtils.e("401  body.code ${body!!.code}")
                         if (body!!.code === 200) {
                             SPUtils.getInstance().put(TOKEN, body!!.data)
                             MyApplication.token = body!!.data
@@ -64,6 +67,10 @@ class RetrofitUtils {
                             SPUtils.getInstance().remove(REFRESH_TOKEN)
                             SPUtils.getInstance().remove(TOKEN)
                             SPUtils.getInstance().remove(USER_ID)
+                            SPUtils.getInstance().remove(USER_RESETPASSWORD_TYPE)
+                            SPUtils.getInstance().remove(USER_EMAIL)
+                            SPUtils.getInstance().remove(USER_SALT)
+                            SPUtils.getInstance().remove(USER_INFO)
                             val intent = Intent()
                             intent.action = "${MyApplication.application!!.packageName}.android.login"
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

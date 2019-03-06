@@ -63,6 +63,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/shape_login_edit_14dp"
                 android:hint="用户名"
+                android:inputType=""
                 android:paddingLeft="20dp"
                 android:textColor="@color/login_edit_tv_bg"
                 android:textSize="15sp" />
@@ -76,6 +77,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/shape_login_edit_14dp"
                 android:hint="邮箱地址"
+                android:inputType=""
                 android:paddingLeft="20dp"
                 android:textColor="@color/login_edit_tv_bg"
                 android:textSize="15sp" />

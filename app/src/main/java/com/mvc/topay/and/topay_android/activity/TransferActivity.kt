@@ -24,6 +24,7 @@ import com.mvc.topay.and.topay_android.bean.IDToTransferBean
 import com.mvc.topay.and.topay_android.common.Constant.SP.RESETPASSWORD_PAY
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYPE
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_SALT
 import com.mvc.topay.and.topay_android.constract.ITransferContract
 import com.mvc.topay.and.topay_android.event.HistoryEvent
 import com.mvc.topay.and.topay_android.event.WalletAssetsListEvent
@@ -213,8 +214,9 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                     override fun maxPsw(num: String) {
                         tranDialog.show()
                         KeyboardUtils.hideSoftInput(mPopView.contentView.findViewById<View>(R.id.pay_text))
-                        val email = SPUtils.getInstance().getString(USER_EMAIL)
-                        var md5Password = EncryptUtils.encryptMD5ToString(email + EncryptUtils.encryptMD5ToString(num))
+                        val salt = SPUtils.getInstance().getString(USER_SALT)
+                        var md5Password = EncryptUtils.encryptMD5ToString(salt + EncryptUtils.encryptMD5ToString(num))
+                        LogUtils.e(md5Password)
                         mPresenter.sendTransferMsg(transfer_address.trim(), md5Password, tokenId, transfer_price)
                         mPopView.dismiss()
                     }

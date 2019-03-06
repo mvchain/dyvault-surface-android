@@ -12,11 +12,11 @@ class MinePresenter : IMineContract.MinePresenter() {
                     if (it.code === 200) {
                         mIView!!.getUserSuccess(it.data)
                     } else {
-                        mIView!!.getUserFailed(it.message)
+                        mIView!!.getUserFailed(it)
                     }
                 }, {
                     LogUtils.e(it.message!!)
-                    mIView!!.getUserFailed(it.message!!)
+                    mIView!!.getUserFailed(null)
                 }))
     }
 

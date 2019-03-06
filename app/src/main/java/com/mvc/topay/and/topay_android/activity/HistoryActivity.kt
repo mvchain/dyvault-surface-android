@@ -12,6 +12,7 @@ import com.blankj.utilcode.util.SpanUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.R
+import com.mvc.topay.and.topay_android.R.id.history_swipe
 import com.mvc.topay.and.topay_android.adapter.HistoryPagerAdapter
 import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.base.BaseActivity
@@ -68,8 +69,6 @@ class HistoryActivity : BaseActivity() {
         historyAdapter = HistoryPagerAdapter(supportFragmentManager, fragments)
         history_vp.adapter = historyAdapter
         history_table.setupWithViewPager(history_vp)
-        history_swipe.setOnRefreshListener { this.refresh(null) }
-        history_swipe.post { history_swipe.isRefreshing = true }
     }
 
     @Subscribe
@@ -147,10 +146,8 @@ class HistoryActivity : BaseActivity() {
                         wallet_balance.text = SpanUtils().append("${TextUtils.rateToPrice(dataBean.ratio * dataBean.value)} ").setFontSize(36, true).create()
                         wallet_rate.text = rateType
                         wallet_buying_coins.text = "${TextUtils.doubleToFour(dataBean.value)}  ${dataBean.tokenName}"
-                        history_swipe.post { history_swipe.isRefreshing = false }
                     }
                 }, {
-                    history_swipe.post { history_swipe.isRefreshing = false }
                     LogUtils.e(it!!.message)
                     showToast("服务器繁忙")
                 })

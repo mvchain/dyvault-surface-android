@@ -17,6 +17,6 @@ interface IMineContract {
 
     interface MineView : IBaseActivity {
         fun getUserSuccess(userInfoBean: UserInfoBean.DataBean)
-        fun getUserFailed(msg: String)
+        fun getUserFailed(userInfoBean: UserInfoBean?)
     }
 }

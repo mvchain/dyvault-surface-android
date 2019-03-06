@@ -23,20 +23,19 @@ class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean
         var sb = StringBuffer()
         if (item.classify === 0) {
             if (item.transactionType === 1) {
-                Glide.with(mContext).load(R.drawable.receive).into(icon)
-                sb.append("收款：")
-            } else {
-                Glide.with(mContext).load(R.drawable.transfer).into(icon)
-                sb.append("转账：")
-            }
-        } else if (item.classify === 5) {
-
-            if (item.transactionType === 1) {
                 Glide.with(mContext).load(R.drawable.recharge).into(icon)
                 sb.append("充值：")
             } else {
                 Glide.with(mContext).load(R.drawable.withdraw).into(icon)
                 sb.append("提现：")
+            }
+        } else if (item.classify === 5) {
+            if (item.transactionType === 1) {
+                Glide.with(mContext).load(R.drawable.receive).into(icon)
+                sb.append("收款：")
+            } else {
+                Glide.with(mContext).load(R.drawable.transfer).into(icon)
+                sb.append("转账：")
             }
         }
         title.text = sb.append("${item.orderRemark}").toString()

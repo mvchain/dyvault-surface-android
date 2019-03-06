@@ -21,6 +21,7 @@ import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_ID
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYPE
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_SALT
 import com.mvc.topay.and.topay_android.constract.ILoginContract
 import com.mvc.topay.and.topay_android.listener.OnTimeEndCallBack
 import com.mvc.topay.and.topay_android.presenter.LoginPresenter
@@ -60,6 +61,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
         SPUtils.getInstance().put(REFRESH_TOKEN, dataBean.refreshToken)
         SPUtils.getInstance().put(USER_ID, dataBean.userId)
         SPUtils.getInstance().put(USER_EMAIL, dataBean.email)
+        SPUtils.getInstance().put(USER_SALT, dataBean.salt)
         var mainIntent = Intent(this, MainActivity::class.java)
         mainIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(mainIntent)
@@ -106,7 +108,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
             R.id.login_submit -> {
                 showDialog("登入中...")
                 var userName = login_email.text.toString()
-                var login_password = EncryptUtils.encryptMD5ToString(userName + EncryptUtils.encryptMD5ToString(login_password.text.toString()))
+                var login_password = login_password.text.toString()
                 var login_code = login_code.text.toString()
                 mPresenter.login("", login_password, userName, login_code)
             }

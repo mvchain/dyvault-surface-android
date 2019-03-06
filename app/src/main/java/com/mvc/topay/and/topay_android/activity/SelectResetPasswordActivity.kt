@@ -13,7 +13,6 @@ class SelectResetPasswordActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
-
     }
 
     override fun getLayoutId(): Int {

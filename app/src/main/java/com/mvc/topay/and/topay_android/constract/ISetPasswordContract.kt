@@ -15,7 +15,7 @@ interface ISetPasswordContract {
         /**
          * register
          */
-        fun setPassword(email: String, inviteCode: String, nickname: String, password: String, token: String, transactionPassword: String): Observable<RegisterBean>
+        fun setPassword(email: String, inviteCode: String, nickname: String, password: String, uuid: String, token: String, transactionPassword: String): Observable<RegisterBean>
     }
 
     interface SetPasswordView : IBaseActivity {

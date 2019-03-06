@@ -1,5 +1,7 @@
 package com.mvc.topay.and.topay_android.model
 
+import com.blankj.utilcode.util.EncryptUtils
+import com.blankj.utilcode.util.LogUtils
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.base.BaseModel
@@ -21,21 +23,25 @@ class LoginModel : BaseModel(), ILoginContract.LoginModel {
                 .map { updateBean -> updateBean }
     }
 
-    override fun login(imageToken: String, password: String, username: String, validCode: String): Observable<RegisterBean> {
-        val jsonObject = JSONObject()
-        try {
-            jsonObject.put("imageToken", "")
-            jsonObject.put("password", password)
-            jsonObject.put("username", username)
-            jsonObject.put("validCode", validCode)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        val validInfo = jsonObject.toString()
-        val requestBody = RequestBody.create(MediaType.parse("text/html"), validInfo)
-        return RetrofitUtils.client(ApiStore::class.java).login(requestBody)
+    override fun login(imageToken: String, password: String, email: String, validCode: String): Observable<RegisterBean> {
+        return RetrofitUtils.client(ApiStore::class.java).getUserSalt(MyApplication.token, email)
                 .compose(RxHelper.rxSchedulerHelper())
-                .map { loginBean -> loginBean }
+                .flatMap {
+                    httpData->
+                    val jsonObject = JSONObject()
+                    try {
+                        jsonObject.put("imageToken", "")
+                        jsonObject.put("password", EncryptUtils.encryptMD5ToString(httpData.data + EncryptUtils.encryptMD5ToString(password)))
+                        jsonObject.put("username", email)
+                        jsonObject.put("validCode", validCode)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                    val validInfo = jsonObject.toString()
+                    val requestBody = RequestBody.create(MediaType.parse("text/html"), validInfo)
+                    RetrofitUtils.client(ApiStore::class.java).login(requestBody).compose(RxHelper.rxSchedulerHelper())
+                }.map { loginBean -> loginBean }
+
     }
 
     companion object {

@@ -13,13 +13,14 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class SetPasswordModel : BaseModel(), ISetPasswordContract.SetPasswordModel {
-    override fun setPassword(email: String, inviteCode: String, nickname: String, password: String, token: String, transactionPassword: String): Observable<RegisterBean> {
+    override fun setPassword(email: String, inviteCode: String, nickname: String, password: String, salt: String, token: String, transactionPassword: String): Observable<RegisterBean> {
         val jsonObject = JSONObject()
         try {
             jsonObject.put("email", email)
             jsonObject.put("inviteCode", inviteCode)
             jsonObject.put("nickname", nickname)
             jsonObject.put("password", password)
+            jsonObject.put("salt", salt)
             jsonObject.put("token", token)
             jsonObject.put("transactionPassword", transactionPassword)
         } catch (e: JSONException) {

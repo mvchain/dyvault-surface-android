@@ -43,6 +43,7 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/shape_login_edit_14dp"
         android:hint="新邮箱"
+        android:inputType=""
         android:maxLines="1"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"

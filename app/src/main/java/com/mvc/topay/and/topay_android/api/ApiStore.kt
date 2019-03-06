@@ -164,7 +164,7 @@ interface ApiStore {
      * Incoming currency id takes the information required for transfer, not case sensitive
      */
     @GET(HttpUrl.ASSETS_TRANSACTION_ID)
-    fun getTransaction(@Header("Authorization") token: String, @Query("tokenId") tokenId : Int): Observable<IDToTransferBean>
+    fun getTransaction(@Header("Authorization") token: String, @Query("tokenId") tokenId: Int): Observable<IDToTransferBean>
 
     /**
      * Initiate a transfer
@@ -177,7 +177,14 @@ interface ApiStore {
      * get channel list
      */
     @GET(HttpUrl.CHANNEL)
-    fun getChannelList(@Header("Authorization") token: String, @Query("id") id: Int,@Query("pageSize") pageSize: Int): Observable<ChannelBean>
+    fun getChannelList(@Header("Authorization") token: String, @Query("id") id: Int, @Query("pageSize") pageSize: Int): Observable<ChannelBean>
+
+
+    /**
+     * get channel list
+     */
+    @POST(HttpUrl.USER_SALT)
+    fun getUserSalt(@Header("Authorization") token: String, @Query("email") email: String): Observable<HttpDataBean>
 
 }
 

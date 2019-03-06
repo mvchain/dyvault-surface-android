@@ -27,6 +27,8 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 class MineFragment : BaseMVPFragment<IMineContract.MineView, IMineContract.MinePresenter>(), IMineContract.MineView, View.OnClickListener {
+
+
     private lateinit var mMineRefresh: SwipeRefreshLayout
     private lateinit var mUserName: TextView
     private lateinit var mUserEmail: TextView
@@ -43,8 +45,13 @@ class MineFragment : BaseMVPFragment<IMineContract.MineView, IMineContract.MineP
         mPresenter.getUserInfo()
     }
 
-    override fun getUserFailed(msg: String) {
-        showToast("$msg")
+    override fun getUserFailed(userInfoBean: UserInfoBean?) {
+        if (userInfoBean != null) {
+            if (userInfoBean.code === 200) {
+                startTaskActivity(mActivity)
+            }
+            showToast(userInfoBean.message)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

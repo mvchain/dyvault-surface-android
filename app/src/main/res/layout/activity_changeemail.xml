@@ -46,17 +46,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:layout_marginLeft="40dp"
+                android:layout_marginTop="40dp"
                 android:text="请先验证原来邮箱"
                 android:textColor="@color/forget_password_bg"
                 android:textSize="13sp" />
+
             <TextView
                 android:id="@+id/change_user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
                 android:layout_marginLeft="40dp"
+                android:layout_marginTop="25dp"
                 android:singleLine="true"
                 android:text="-"
                 android:textColor="@color/content_tv_bg"
@@ -78,9 +79,9 @@
                     android:layout_height="48dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:inputType="number"
                     android:background="@null"
                     android:hint="验证码"
+                    android:inputType="number"
                     android:maxLength="6"
                     android:maxLines="1"
                     android:paddingLeft="20dp"

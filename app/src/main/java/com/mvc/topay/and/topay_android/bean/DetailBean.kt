@@ -20,6 +20,7 @@ data class DetailBean(
              * fromAddress : string
              * hashLink : string
              * height : 0
+             * orderNumber :String
              * orderRemark : string
              * status : 0
              * toAddress : string
@@ -36,6 +37,7 @@ data class DetailBean(
             var fromAddress: String,
             var hashLink: String,
             var height: Int,
+            var orderNumber: String,
             var orderRemark: String,
             var status: Int,
             var toAddress: String,

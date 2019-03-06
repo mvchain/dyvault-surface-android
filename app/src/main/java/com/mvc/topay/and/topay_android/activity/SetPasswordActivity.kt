@@ -3,8 +3,8 @@ package com.mvc.topay.and.topay_android.activity
 import android.content.Intent
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.view.Gravity
 import android.view.View
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.MainActivity
 import com.mvc.topay.and.topay_android.MyApplication
@@ -12,10 +12,12 @@ import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BaseMVPActivity
 import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.bean.RegisterBean
+import com.mvc.topay.and.topay_android.common.Constant
 import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_ID
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_SALT
 import com.mvc.topay.and.topay_android.constract.ISetPasswordContract
 import com.mvc.topay.and.topay_android.presenter.SetPasswordPresenter
 import kotlinx.android.synthetic.main.activity_setpassword.*
@@ -29,6 +31,7 @@ class SetPasswordActivity : BaseMVPActivity<ISetPasswordContract.SetPasswordView
         SPUtils.getInstance().put(REFRESH_TOKEN, dataBean.refreshToken)
         SPUtils.getInstance().put(USER_ID, dataBean.userId)
         SPUtils.getInstance().put(USER_EMAIL, dataBean.email)
+        SPUtils.getInstance().put(USER_SALT, dataBean.salt)
         var mainIntent = Intent(this, MainActivity::class.java)
         mainIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(mainIntent)
@@ -86,7 +89,7 @@ class SetPasswordActivity : BaseMVPActivity<ISetPasswordContract.SetPasswordView
     }
 
     override fun initPresenter(): BasePresenter<*, *> {
-        return SetPasswordPresenter.newIntance()
+        return SetPasswordPresenter.newInstance()
     }
 
     fun onClick(v: View) {
