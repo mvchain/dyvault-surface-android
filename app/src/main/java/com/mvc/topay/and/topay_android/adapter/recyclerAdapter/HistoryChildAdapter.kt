@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.bean.TransactionsBean
 import com.mvc.topay.and.topay_android.utils.TextUtils
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
@@ -24,22 +25,22 @@ class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean
         if (item.classify === 0) {
             if (item.transactionType === 1) {
                 Glide.with(mContext).load(R.drawable.recharge).into(icon)
-                sb.append("充值：")
+                sb.append("充值：来自")
             } else {
                 Glide.with(mContext).load(R.drawable.withdraw).into(icon)
-                sb.append("提现：")
+                sb.append("提现：提到")
             }
         } else if (item.classify === 5) {
             if (item.transactionType === 1) {
                 Glide.with(mContext).load(R.drawable.receive).into(icon)
-                sb.append("收款：")
+                sb.append("收款：来自")
             } else {
                 Glide.with(mContext).load(R.drawable.transfer).into(icon)
-                sb.append("转账：")
+                sb.append("转账：转到")
             }
         }
-        title.text = sb.append("${item.orderRemark}").toString()
-        time.text = TimeUtils.millis2String(item.createdAt, SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
+        title.text = sb.append("${if (item.transactionType === 1) item.fromAddress else item.toAddress}").toString()
+        time.text = TimeUtils.millis2String(item.createdAt, SimpleDateFormat("yyyy-MM-dd HH:mm:ss") as DateFormat)
         price.text = "${if (item.transactionType === 1) "+" else "-"}${TextUtils.toBigDecimal(item.value)}"
         status.visibility = View.INVISIBLE
         helper.addOnClickListener(R.id.his_layout)

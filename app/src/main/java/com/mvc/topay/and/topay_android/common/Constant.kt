@@ -5,6 +5,7 @@ class Constant {
     object SP {
         const val TOKEN = "token"
         const val SET_RATE = "set_rate"
+        const val BALANCE = "balance"
         const val RATE_LIST = "rate_list"  //All exchange rate lists
         const val DEFAULT_SYMBOL = "default_symbol" //Default exchange rate unit
         const val DEFAULT_RATE = "default_rate"//Default exchange rate

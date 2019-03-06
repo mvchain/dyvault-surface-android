@@ -44,8 +44,8 @@ class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswo
         this.mToken = intent.getStringExtra(TEMP_TOKEN)
         this.mEmail = intent.getStringExtra(TEMP_EMAIL)
         if (type === RESETPASSWORD_LOGIN) {
-            reset_title.text = "修改登入密码"
-            reset_email.hint = "新登入密码"
+            reset_title.text = "修改登录密码"
+            reset_email.hint = "新登录密码"
         } else {
             reset_title.text = "修改支付密码"
             reset_email.hint = "新支付密码"

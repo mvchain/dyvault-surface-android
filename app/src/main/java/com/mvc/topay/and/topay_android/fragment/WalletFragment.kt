@@ -2,9 +2,12 @@ package com.mvc.topay.and.topay_android.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Gravity
 import android.widget.ImageView
+import android.widget.PopupWindow
 import android.widget.TextView
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.R
@@ -13,17 +16,21 @@ import com.mvc.topay.and.topay_android.activity.HistoryActivity
 import com.mvc.topay.and.topay_android.activity.IncreaseCurrencyActivity
 import com.mvc.topay.and.topay_android.activity.MsgActivity
 import com.mvc.topay.and.topay_android.adapter.recyclerAdapter.WalletAssetsAdapter
-import com.mvc.topay.and.topay_android.base.AssetListBean
-import com.mvc.topay.and.topay_android.base.BalanceBean
-import com.mvc.topay.and.topay_android.base.BaseMVPFragment
-import com.mvc.topay.and.topay_android.base.BasePresenter
+import com.mvc.topay.and.topay_android.base.*
 import com.mvc.topay.and.topay_android.common.Constant.SP.ASSETS_LIST
+import com.mvc.topay.and.topay_android.common.Constant.SP.BALANCE
+import com.mvc.topay.and.topay_android.common.Constant.SP.DEFAULT_SYMBOL
+import com.mvc.topay.and.topay_android.common.Constant.SP.RATE_LIST
+import com.mvc.topay.and.topay_android.common.Constant.SP.SET_RATE
 import com.mvc.topay.and.topay_android.constract.IWalletContract
 import com.mvc.topay.and.topay_android.event.WalletAssetsListEvent
+import com.mvc.topay.and.topay_android.listener.IPopViewListener
 import com.mvc.topay.and.topay_android.presenter.WalletPresenter
 import com.mvc.topay.and.topay_android.utils.JsonHelper
 import com.mvc.topay.and.topay_android.utils.TextUtils
+import com.mvc.topay.and.topay_android.utils.ViewDrawUtils
 import com.mvc.topay.and.topay_android.view.FadingRecyclerView
+import com.mvc.topay.and.topay_android.view.PopViewHelper
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -34,7 +41,8 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     }
 
     override fun balanceSuccess(balanceBean: BalanceBean) {
-        mWalletBalance.text = TextUtils.doubleToDouble(balanceBean.data)
+        SPUtils.getInstance().put(BALANCE, JsonHelper.jsonToString(balanceBean))
+        mWalletBalance.text = TextUtils.rateToPrice(balanceBean.data)
     }
 
     private lateinit var walletAdapter: WalletAssetsAdapter
@@ -46,6 +54,9 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     private lateinit var mWalletRate: TextView
     private lateinit var mWalletBuyingCoins: TextView
     private lateinit var mWalletRefresh: SwipeRefreshLayout
+    private lateinit var mPopView: PopupWindow
+    private lateinit var mExchange: ArrayList<ExchangeRateBean.DataBean>
+
     private var isRefresh = false
     override fun assetsSuccess(assetListBean: AssetListBean) {
         SPUtils.getInstance().put(ASSETS_LIST, JsonHelper.jsonToString(assetListBean))
@@ -54,6 +65,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         assetsList.addAll(dataBean)
         walletAdapter.notifyDataSetChanged()
         mWalletRefresh.post { mWalletRefresh.isRefreshing = false }
+        initPop()
     }
 
     override fun initView() {
@@ -61,12 +73,23 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         this.mWalletAddCurrency = mRootView!!.findViewById(R.id.wallet_add_currency)
         this.mWalletMsg = mRootView!!.findViewById(R.id.wallet_msg)
         this.mWalletBalance = mRootView!!.findViewById(R.id.wallet_balance)
-        this.mWalletRate = mRootView!!.findViewById(R.id.wallet_buying_coins)
-        this.mWalletBuyingCoins = mRootView!!.findViewById(R.id.wallet_rate)
+        this.mWalletRate = mRootView!!.findViewById(R.id.wallet_rate)
+        this.mWalletBuyingCoins = mRootView!!.findViewById(R.id.wallet_buying_coins)
         this.mWalletRefresh = mRootView!!.findViewById(R.id.wallet_swipe)
         this.isRefresh = true
-        mWalletRate.setOnClickListener {
+        mExchange = ArrayList()
+        mWalletBuyingCoins.setOnClickListener {
             startActivity(Intent(mActivity, BuyingCoinsActivity::class.java))
+        }
+        mWalletRate.setOnClickListener {
+            if (mPopView != null) {
+                if (mPopView.isShowing) {
+                    mPopView.dismiss()
+                } else {
+                    mPopView.showAsDropDown(mWalletRate, (mWalletRate.left / 2), 0, Gravity.CENTER)
+                    ViewDrawUtils.setRigthDraw(ContextCompat.getDrawable(mActivity, R.drawable.arrow)!!, mWalletRate)
+                }
+            }
         }
         mWalletAddCurrency.setOnClickListener {
             if (SPUtils.getInstance().getString(ASSETS_LIST) === "") {
@@ -104,6 +127,42 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         super.initData()
         mPresenter.getAllAssets()
         mPresenter.getBalance()
+        val defaultBean = JsonHelper.stringToJson(SPUtils.getInstance().getString(SET_RATE)
+                , ExchangeRateBean.DataBean::class.java) as ExchangeRateBean.DataBean
+        if (defaultBean != null) {
+            val default_type = defaultBean.name
+            mWalletRate.text = default_type.substring(1, default_type.length)
+        }
+    }
+
+    private fun initPop() {
+        val content = java.util.ArrayList<String>()
+        val rate_list = SPUtils.getInstance().getString(RATE_LIST)
+        if (rate_list != "") {
+            val rateBean = JsonHelper.stringToJson(rate_list, ExchangeRateBean::class.java) as ExchangeRateBean
+            for (dataBean in rateBean.data) {
+                content.add(dataBean.name)
+                mExchange.add(dataBean)
+            }
+            mPopView = PopViewHelper.instance.create(mActivity, R.layout.layout_rate_pop, content, object : IPopViewListener {
+                override fun changeRate(position: Int) {
+                    val dataBean = mExchange[position]
+                    SPUtils.getInstance().put(SET_RATE, JsonHelper.jsonToString(dataBean))
+                    val symbol = dataBean.name
+                    val newSymbol = symbol.substring(0, 1)
+                    SPUtils.getInstance().put(DEFAULT_SYMBOL, "$newSymbol ")
+                    val default_type = dataBean.name
+                    mWalletRate.text = default_type.substring(1, default_type.length)
+                    val assetBean = JsonHelper.stringToJson(SPUtils.getInstance().getString(BALANCE), BalanceBean::class.java) as BalanceBean
+                    mWalletBalance.text = TextUtils.rateToPrice(assetBean.data)
+                    walletAdapter.notifyDataSetChanged()
+                }
+
+                override fun dismiss() {
+
+                }
+            })
+        }
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

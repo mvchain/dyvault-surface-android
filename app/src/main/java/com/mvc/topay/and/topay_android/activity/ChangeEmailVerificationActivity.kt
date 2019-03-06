@@ -64,7 +64,7 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.Cha
             change_user_email.text = infoBean.username
             isEmail = true
         }else{
-            showToast("登入失效，请重新登入")
+            showToast("登录失效，请重新登录")
             startTaskActivity(this)
         }
     }

@@ -124,6 +124,7 @@ class HistoryActivity : BaseActivity() {
                 val intent = Intent(this@HistoryActivity, TransferActivity::class.java)
                 intent.putExtra("tokenId", tokenId)
                 intent.putExtra("tokenName", tokenName)
+                intent.putExtra("hash", "")
                 startActivity(intent)
             }
             R.id.his_in -> {

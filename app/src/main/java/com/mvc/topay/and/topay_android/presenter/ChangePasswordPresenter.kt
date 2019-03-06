@@ -15,7 +15,7 @@ class ChangePasswordPresenter : IChangePasswordContract.ChangePasswordPresenter(
         mRxUtils.register(mIModel!!.updateLoginPasssword(newPassword, oldPassword)
                 .subscribe({ update ->
                     if (update.code === 200) {
-                        mIView!!.updateSuccess("登入密码修改成功", RESETPASSWORD_LOGIN)
+                        mIView!!.updateSuccess("登录密码修改成功", RESETPASSWORD_LOGIN)
                     } else {
                         mIView!!.updateFailed(update.message!!, RESETPASSWORD_LOGIN)
                     }

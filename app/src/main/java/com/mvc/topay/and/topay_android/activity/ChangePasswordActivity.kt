@@ -50,9 +50,9 @@ class ChangePasswordActivity : BaseMVPActivity<IChangePasswordContract.ChangePas
             update_old_password.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD or InputType.TYPE_CLASS_NUMBER
             update_new_password.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD or InputType.TYPE_CLASS_NUMBER
         } else {
-            update_title.text = "修改登入密码"
-            update_old_password.hint = "原登入密码"
-            update_new_password.hint = "新登入密码"
+            update_title.text = "修改登录密码"
+            update_old_password.hint = "原登录密码"
+            update_new_password.hint = "新登录密码"
             update_old_password.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
             update_new_password.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
         }

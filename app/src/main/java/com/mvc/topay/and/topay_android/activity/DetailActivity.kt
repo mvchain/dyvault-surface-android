@@ -43,22 +43,38 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
     }
 
     override fun detailSuccess(detailBean: DetailBean.DataBean) {
+        var sb = StringBuffer()
+        var iconResId = R.drawable.waiting //default icon
         detail_price_content.text = TextUtils.doubleToFour(detailBean.value)
         if (detailBean.classify === 5) {
             detail_fees_title.text = "订单号"
             detail_fees_content.text = detailBean.orderNumber
             detail_coll_layout.visibility = View.GONE
             detail_hash_layout.visibility = View.GONE
+            sb.append("转账：转到${detailBean.toAddress}")
+            iconResId = R.drawable.success
         } else if (detailBean.classify === 0) {
+            when (detailBean.status) {
+                0, 1 -> {
+                    sb.append("等待中")
+                    iconResId = R.drawable.waiting
+                }
+                2 -> {
+                    sb.append("提现成功")
+                    iconResId = R.drawable.success
+                }
+                3 -> {
+                    sb.append("提现失败")
+                    iconResId = R.drawable.failure
+                }
+            }
             detail_fees_title.text = "交易手续费"
             detail_fees_content.text = "${detailBean.fee} ${detailBean.feeTokenType}"
             detail_colladd_content.text = if (detailBean.transactionType == 1) detailBean.fromAddress else detailBean.toAddress
             detail_hash_content.text = detailBean.blockHash
             detail_colladd_content.setOnClickListener {
                 var cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                // 创建普通字符型ClipData
                 var mClipData = ClipData.newPlainText("hash", detail_colladd_content.text.toString())
-                // 将ClipData内容放到系统剪贴板里。
                 cm.primaryClip = mClipData
                 showToast("hash地址已复制到剪贴板")
             }
@@ -69,16 +85,14 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
             }
             detail_hash_content.setOnLongClickListener {
                 var cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                // 创建普通字符型ClipData
                 var mClipData = ClipData.newPlainText("hash", detail_hash_content.text.toString())
-                // 将ClipData内容放到系统剪贴板里。
                 cm.primaryClip = mClipData
                 showToast("交易hash已复制到剪贴板")
                 true
             }
         }
-        Glide.with(this).load(R.color.colorRed).into(detail_icon)
-        detail_title.text = (if (detailBean.transactionType == 1) "+" else "-") + TextUtils.doubleToFour(detailBean.value) + " " + detailBean.tokenName
+        Glide.with(this).load(iconResId).into(detail_icon)
+        detail_title.text = sb.toString()
         detail_time.text = TimeUtils.millis2String(detailBean.createdAt)
     }
 

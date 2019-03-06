@@ -14,10 +14,12 @@ data class TransactionsBean(
             /**
              * classify : 0
              * createdAt : 0
+             * fromAddress:601905931@qq.com
              * id : 0
              * orderRemark : string
              * ratio : 0
              * status : 0
+             * toAddress:0x00c7c06e450ed64a6dbf388e08be3e999ff94563
              * tokenId : 0
              * tokenName : string
              * transactionType : 0
@@ -26,11 +28,13 @@ data class TransactionsBean(
              */
             var classify: Int,
             var createdAt: Long,
+            var fromAddress: String,
             var id: Int,
             var orderRemark: String,
             var ratio: Double,
             var status: Int,
             var tokenId: Int,
+            var toAddress: String,
             var tokenName: String,
             var transactionType: Int,
             var updatedAt: Long,

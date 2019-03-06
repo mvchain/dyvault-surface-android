@@ -4,11 +4,9 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.text.InputFilter
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.PopupWindow
@@ -22,7 +20,6 @@ import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.bean.HttpUpdateBean
 import com.mvc.topay.and.topay_android.bean.IDToTransferBean
 import com.mvc.topay.and.topay_android.common.Constant.SP.RESETPASSWORD_PAY
-import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYPE
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_SALT
 import com.mvc.topay.and.topay_android.constract.ITransferContract
@@ -45,6 +42,7 @@ import org.greenrobot.eventbus.EventBus
 
 class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransferContract.TransferPresenter>(), ITransferContract.TransferView {
     private lateinit var tokenName: String
+    private lateinit var mHash: String
     private var tokenId = 0
     private lateinit var mTransBean: IDToTransferBean.DataBean
     private lateinit var mPopView: PopupWindow
@@ -53,6 +51,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
     override fun initMVPData() {
         btc_price.text = tokenName
         transfer_title.text = "${tokenName}转账"
+        transfer_trans_address.setText(mHash)
         mPresenter.getDetail(tokenId)
         transfer_trans_price.filters = arrayOf<InputFilter>(PointLengthFilter())
     }
@@ -61,6 +60,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
         super.initMVPView()
         tokenName = intent.getStringExtra("tokenName")
         tokenId = intent.getIntExtra("tokenId", 0)
+        mHash = intent.getStringExtra("hash")
         tranDialog = WeiboDialogUtils.createLoadingDialog(this@TransferActivity, "转帐中")
         transfer_trans_price.addTextChangedListener(object : EditTextWatcher() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -197,7 +197,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                                 setAlpha(0.5f)
                             }
                             R.id.pay_forget -> {
-                                var sIntent = Intent(this@TransferActivity,ChangePasswordActivity::class.java)
+                                var sIntent = Intent(this@TransferActivity, ChangePasswordActivity::class.java)
                                 SPUtils.getInstance().put(USER_RESETPASSWORD_TYPE, RESETPASSWORD_PAY)
                                 sIntent.putExtra("type", RESETPASSWORD_PAY)
                                 startActivity(sIntent)
