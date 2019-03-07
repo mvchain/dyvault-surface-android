@@ -4,11 +4,13 @@ import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BaseActivity
 import android.content.Intent
 import android.os.Handler
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.MainActivity
 import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.ACCEPT_CHINESE
 import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE
 import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.DEFAULT_LANGUAGE
+import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.ENGLISH
 import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
 
@@ -23,8 +25,9 @@ class StartActivity : BaseActivity() {
         val default_language = SPUtils.getInstance().getString(DEFAULT_LANGUAGE)
         val default_accept_language = SPUtils.getInstance().getString(DEFAULT_ACCEPT_LANGUAGE)
         //Set to Chinese if there is no default internationalization language  (app)
+        LogUtils.e(default_language)
         if (default_language == "") {
-            SPUtils.getInstance().put(DEFAULT_LANGUAGE, ACCEPT_CHINESE)
+            SPUtils.getInstance().put(DEFAULT_LANGUAGE, ENGLISH)
         }
         //Set to Chinese if there is no default internationalization language (web)
         if (default_accept_language == "") {

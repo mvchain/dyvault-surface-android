@@ -46,7 +46,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     }
 
     private lateinit var walletAdapter: WalletAssetsAdapter
-    private lateinit var assetsList: ArrayList<AssetListBean.DataBean>
+    private lateinit var assetsList: ArrayList<AssetLanguageBean.DataBean>
     private lateinit var mWalletRecyclerView: FadingRecyclerView
     private lateinit var mWalletAddCurrency: ImageView
     private lateinit var mWalletMsg: ImageView
@@ -58,7 +58,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     private lateinit var mExchange: ArrayList<ExchangeRateBean.DataBean>
 
     private var isRefresh = false
-    override fun assetsSuccess(assetListBean: AssetListBean) {
+    override fun assetsSuccess(assetListBean: AssetLanguageBean) {
         SPUtils.getInstance().put(ASSETS_LIST, JsonHelper.jsonToString(assetListBean))
         assetsList.clear()
         var dataBean = assetListBean.data
@@ -66,6 +66,13 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         walletAdapter.notifyDataSetChanged()
         mWalletRefresh.post { mWalletRefresh.isRefreshing = false }
         initPop()
+        var defaultRate = SPUtils.getInstance().getString(SET_RATE)
+        if (defaultRate !== "") {
+            val defaultBean = JsonHelper.stringToJson(
+                    defaultRate, ExchangeRateBean.DataBean::class.java) as ExchangeRateBean.DataBean
+            val default_type = defaultBean.name
+            mWalletRate.text = default_type.substring(1, default_type.length)
+        }
     }
 
     override fun initView() {
@@ -113,7 +120,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
                     var tokenId = assetsList[position].tokenId
                     var hisIntent = Intent(mActivity, HistoryActivity::class.java)
                     hisIntent.putExtra("tokenId", tokenId)
-                    hisIntent.putExtra("rateType", mWalletBuyingCoins.text.toString())
+                    hisIntent.putExtra("rateType", mWalletRate.text.toString())
                     hisIntent.putExtra("tokenName", assetsList[position].tokenName)
                     startActivity(hisIntent)
                 }
@@ -127,12 +134,6 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         super.initData()
         mPresenter.getAllAssets()
         mPresenter.getBalance()
-        val defaultBean = JsonHelper.stringToJson(SPUtils.getInstance().getString(SET_RATE)
-                , ExchangeRateBean.DataBean::class.java) as ExchangeRateBean.DataBean
-        if (defaultBean != null) {
-            val default_type = defaultBean.name
-            mWalletRate.text = default_type.substring(1, default_type.length)
-        }
     }
 
     private fun initPop() {

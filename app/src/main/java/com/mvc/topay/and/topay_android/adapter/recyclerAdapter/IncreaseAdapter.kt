@@ -29,7 +29,6 @@ class IncreaseAdapter(layoutResId: Int, data: List<IncreaseBean>?) : BaseQuickAd
         } else {
             helper.setText(R.id.item_increase_content, item.enContent)
         }
-        add.visibility = if (item.isVisible) View.VISIBLE else View.GONE
         if (!item.isAdd) {
             add.background = ContextCompat.getDrawable(mContext, R.drawable.shape_remove_increase_16dp)
             add.setText(R.string.increase_remove)

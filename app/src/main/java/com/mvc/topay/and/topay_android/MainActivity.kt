@@ -26,6 +26,7 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         super.initView()
         mFragment = ArrayList()
+        EventBus.getDefault().register(this)
         var walletFragment = WalletFragment()
         mFragment.add(walletFragment)
         var mineFragment = MineFragment()
@@ -43,6 +44,10 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    override fun onDestroy() {
+        EventBus.getDefault().unregister(this)
+        super.onDestroy()
+    }
     override fun onBackPressed() {
         if (isBack) {
             super.onBackPressed()

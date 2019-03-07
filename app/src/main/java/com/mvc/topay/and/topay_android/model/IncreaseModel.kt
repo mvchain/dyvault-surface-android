@@ -5,6 +5,7 @@ import com.blankj.utilcode.util.SPUtils
 import com.google.gson.Gson
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.api.ApiStore
+import com.mvc.topay.and.topay_android.base.AssetLanguageBean
 import com.mvc.topay.and.topay_android.base.AssetListBean
 import com.mvc.topay.and.topay_android.base.BaseModel
 import com.mvc.topay.and.topay_android.bean.IncreaseBean
@@ -18,7 +19,7 @@ import io.reactivex.Observable
 import java.util.ArrayList
 
 class IncreaseModel : BaseModel(), IIncreaseContract.IIncreaseModel {
-    private var assetListBean: AssetListBean = JsonHelper.stringToJson(SPUtils.getInstance().getString(ASSETS_LIST), AssetListBean::class.java) as AssetListBean
+    private var assetListBean: AssetLanguageBean = JsonHelper.stringToJson(SPUtils.getInstance().getString(ASSETS_LIST), AssetLanguageBean::class.java) as AssetLanguageBean
     private val mList = ArrayList<IncreaseBean>()
     private val mSearchList = ArrayList<IncreaseBean>()
 
@@ -32,9 +33,6 @@ class IncreaseModel : BaseModel(), IIncreaseContract.IIncreaseModel {
                     val currdata = currencyBean.data
                     val assetBean = assetListBean.data
                     for (i in currdata.indices) {
-                        if (currdata[i].visible === 0) {
-                            continue
-                        }
                         val increaseBean = IncreaseBean(currdata[i].tokenId
                                 , false
                                 , currdata[i].tokenImage
@@ -43,7 +41,6 @@ class IncreaseModel : BaseModel(), IIncreaseContract.IIncreaseModel {
                                 , currdata[i].tokenEnName
                                 , i >= 1)
                         for (j in assetBean.indices) {
-                            LogUtils.e("${currdata[i].tokenId}   ${assetBean[j].tokenId}")
                             if (currdata[i].tokenId === assetBean[j].tokenId) {
                                 increaseBean.isAdd = false
                                 break

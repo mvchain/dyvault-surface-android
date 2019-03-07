@@ -1,12 +1,10 @@
 package com.mvc.topay.and.topay_android.model
 
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.api.ApiStore
-import com.mvc.topay.and.topay_android.base.AssetListBean
-import com.mvc.topay.and.topay_android.base.BalanceBean
-import com.mvc.topay.and.topay_android.base.BaseModel
-import com.mvc.topay.and.topay_android.base.ExchangeRateBean
+import com.mvc.topay.and.topay_android.base.*
 import com.mvc.topay.and.topay_android.common.Constant.SP.CURRENCY_LIST
 import com.mvc.topay.and.topay_android.common.Constant.SP.DEFAULT_RATE
 import com.mvc.topay.and.topay_android.common.Constant.SP.DEFAULT_SYMBOL
@@ -25,7 +23,7 @@ class WalletModel : BaseModel(), IWalletContract.WalletModel {
                 .map { balanceBean -> balanceBean }
     }
 
-    override fun getAllAssets(): Observable<AssetListBean> {
+    override fun getAllAssets(): Observable<AssetLanguageBean> {
         return RetrofitUtils.client(ApiStore::class.java).getExchangeRate(MyApplication.token)
                 .compose(RxHelper.rxSchedulerHelper())
                 .flatMap { exchangeRateBean ->
@@ -58,7 +56,25 @@ class WalletModel : BaseModel(), IWalletContract.WalletModel {
                     //Save all tokens
                     SPUtils.getInstance().put(CURRENCY_LIST, JsonHelper.jsonToString(currencyBean))
                     RetrofitUtils.client(ApiStore::class.java).getAssetsList(MyApplication.token).compose(RxHelper.rxSchedulerHelper())
-                }.map { asslist -> asslist }
+                }.flatMap { asslist ->
+                    var dataBean = JsonHelper.stringToJson(SPUtils.getInstance().getString(CURRENCY_LIST), CurrencyBean::class.java) as CurrencyBean
+                    var assetsLanguageBean = ArrayList<AssetLanguageBean.DataBean>()
+                    for (assetBean in asslist.data) {
+                        for (position in dataBean.data.indices) {
+                            var bean = dataBean.data[position]
+                            if (assetBean.tokenId === bean.tokenId) {
+                                assetsLanguageBean.add(AssetLanguageBean.DataBean(assetBean.ratio
+                                        , assetBean.tokenId
+                                        , assetBean.tokenImage
+                                        , bean.tokenCnName
+                                        , bean.tokenEnName
+                                        , assetBean.tokenName
+                                        , assetBean.value))
+                            }
+                        }
+                    }
+                    Observable.just(AssetLanguageBean(asslist.code, asslist.message, assetsLanguageBean))
+                }
     }
 
     companion object {

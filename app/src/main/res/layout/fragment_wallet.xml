@@ -84,14 +84,15 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="11dp"
-                        android:drawableEnd="@drawable/arrow"
                         android:layout_marginBottom="11dp"
                         android:background="@drawable/shape_home_rato_bg"
+                        android:drawableEnd="@drawable/arrow"
                         android:drawablePadding="3dp"
                         android:paddingLeft="9dp"
                         android:paddingTop="2dp"
                         android:paddingRight="9dp"
                         android:paddingBottom="2dp"
+                        android:text="CNY"
                         android:textColor="@color/colorWhite"
                         android:textSize="13sp" />
 

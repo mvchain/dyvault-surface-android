@@ -11,12 +11,12 @@ interface IWalletContract {
     }
 
     interface WalletModel : IBaseModel {
-        fun getAllAssets(): Observable<AssetListBean>
+        fun getAllAssets(): Observable<AssetLanguageBean>
         fun getBalance(): Observable<BalanceBean>
     }
 
     interface WalletView : IBaseActivity {
-        fun assetsSuccess(assetListBean: AssetListBean)
+        fun assetsSuccess(assetListBean: AssetLanguageBean)
         fun balanceSuccess(balanceBean: BalanceBean)
         fun networkError()
     }
