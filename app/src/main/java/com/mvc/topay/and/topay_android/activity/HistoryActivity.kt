@@ -75,7 +75,6 @@ class HistoryActivity : BaseActivity() {
     @Subscribe
     fun refresh(event: HistoryEvent?) {
         loadAssetsOnId(tokenId)
-        (fragments[history_vp.currentItem] as HistoryFragment).historyRefresh()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

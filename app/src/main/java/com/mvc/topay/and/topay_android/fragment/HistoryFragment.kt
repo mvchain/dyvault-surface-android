@@ -13,7 +13,10 @@ import com.mvc.topay.and.topay_android.base.BaseMVPFragment
 import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.bean.TransactionsBean
 import com.mvc.topay.and.topay_android.constract.IHistoryChindContract
+import com.mvc.topay.and.topay_android.event.HistoryEvent
 import com.mvc.topay.and.topay_android.presenter.HistoryChildPresenter
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.util.*
 
 class HistoryFragment : BaseMVPFragment<IHistoryChindContract.HistoryChindView, IHistoryChindContract.HistoryChindPresenter>(), IHistoryChindContract.HistoryChindView {
@@ -26,6 +29,7 @@ class HistoryFragment : BaseMVPFragment<IHistoryChindContract.HistoryChindView, 
     private lateinit var mRefreshView: SwipeRefreshLayout
     private lateinit var dataNull: TextView
     override fun initView() {
+        EventBus.getDefault().register(this)
         type = arguments!!.getInt("type")
         tokenId = arguments!!.getInt("tokenId")
         dateBean = ArrayList()
@@ -107,5 +111,19 @@ class HistoryFragment : BaseMVPFragment<IHistoryChindContract.HistoryChindView, 
         isRefresh = true
         dateBean.clear()
         mPresenter.getTransferList(0, 10, tokenId, type)
+        EventBus.getDefault().post(HistoryEvent())
+    }
+
+
+    @Subscribe
+    fun refresh(event: HistoryEvent?) {
+        isRefresh = true
+        dateBean.clear()
+        mPresenter.getTransferList(0, 10, tokenId, type)
+    }
+
+    override fun onDestroy() {
+        EventBus.getDefault().unregister(this)
+        super.onDestroy()
     }
 }

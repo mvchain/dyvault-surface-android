@@ -171,18 +171,21 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
             R.id.transfer_submit -> {
                 var transfer_address = transfer_trans_address.text.toString()
                 var transfer_price = transfer_trans_price.text.toString()
-                LogUtils.e(transfer_price)
-//                if (transfer_address == "") {
-//                    showToast("收款地址不能为空")
-//                    return
-//                }
-//                if (transfer_price == "") {
-//                    showToast("转账金额不能为空")
-//                    return
-//                }
+                if (transfer_address == "") {
+                    showToast("收款地址不能为空")
+                    return
+                }
+                if (transfer_price == "") {
+                    showToast("转账金额不能为空")
+                    return
+                }
+                if (java.lang.Double.parseDouble(transfer_price) <= 0) {
+                    showToast("转账金额不正确")
+                    return
+                }
                 mPopView = PopViewHelper.instance.create(this
                         , R.layout.layout_paycode
-                        , transfer_price + tokenName
+                        , "$transfer_price $tokenName"
                         , transfer_address
                         , transfer_fees.text.toString()
                         , object : IPayWindowListener {
