@@ -197,10 +197,10 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                                 setAlpha(0.5f)
                             }
                             R.id.pay_forget -> {
-                                var sIntent = Intent(this@TransferActivity, ChangePasswordActivity::class.java)
                                 SPUtils.getInstance().put(USER_RESETPASSWORD_TYPE, RESETPASSWORD_PAY)
-                                sIntent.putExtra("type", RESETPASSWORD_PAY)
-                                startActivity(sIntent)
+                                startActivity(Intent(this@TransferActivity, VerificationEmailActivity::class.java))
+//                                sIntent.putExtra("type", RESETPASSWORD_PAY)
+//                                startActivity(sIntent)
                             }
                         }
                     }

@@ -32,6 +32,7 @@ class MineFragment : BaseMVPFragment<IMineContract.MineView, IMineContract.MineP
     private lateinit var mMineRefresh: SwipeRefreshLayout
     private lateinit var mUserName: TextView
     private lateinit var mUserEmail: TextView
+    private var createCarryOut: Boolean = false
 
     override fun getUserSuccess(userInfoBean: UserInfoBean.DataBean) {
         mMineRefresh.post { mMineRefresh.isRefreshing = false }
@@ -54,6 +55,13 @@ class MineFragment : BaseMVPFragment<IMineContract.MineView, IMineContract.MineP
         }
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser && createCarryOut) {
+            refresh()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mMineRefresh.post { mMineRefresh.isRefreshing = false }
@@ -73,6 +81,7 @@ class MineFragment : BaseMVPFragment<IMineContract.MineView, IMineContract.MineP
         mMineRefresh.post { mMineRefresh.isRefreshing = true }
         mMineRefresh.setOnRefreshListener { this.refresh() }
         dialogHelper = DialogHelper.instance
+        createCarryOut = true
     }
 
     override fun getLayoutId(): Int {

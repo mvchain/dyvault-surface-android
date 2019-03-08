@@ -56,6 +56,8 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     private lateinit var mWalletRefresh: SwipeRefreshLayout
     private lateinit var mPopView: PopupWindow
     private lateinit var mExchange: ArrayList<ExchangeRateBean.DataBean>
+    private var createCarryOut: Boolean = false
+
 
     private var isRefresh = false
     override fun assetsSuccess(assetListBean: AssetLanguageBean) {
@@ -128,6 +130,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         }
         mWalletRefresh.post { mWalletRefresh.isRefreshing = true }
         mWalletRefresh.setOnRefreshListener(this::onRefresh)
+        createCarryOut = true
     }
 
     override fun initData() {
@@ -135,6 +138,12 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         mPresenter.getAllAssets()
         mPresenter.getBalance()
     }
+//    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+//        super.setUserVisibleHint(isVisibleToUser)
+//        if (isVisibleToUser && createCarryOut) {
+//            onRefresh()
+//        }
+//    }
 
     private fun initPop() {
         val content = java.util.ArrayList<String>()
@@ -168,7 +177,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser && isRefresh) {
+        if (isVisibleToUser && createCarryOut) {
             onRefresh()
         }
     }

@@ -1,5 +1,6 @@
 package com.mvc.topay.and.topay_android.activity
 
+import android.text.InputType
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.Gravity
@@ -15,6 +16,7 @@ import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYP
 import com.mvc.topay.and.topay_android.constract.IResetPasswordContract
 import com.mvc.topay.and.topay_android.presenter.ResetPasswordPresenter
 import kotlinx.android.synthetic.main.activity_reset_password.*
+import kotlinx.android.synthetic.main.activity_update_password.*
 
 class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswordView, IResetPasswordContract.ResetPasswordPresenter>(), IResetPasswordContract.ResetPasswordView {
     private var type = SPUtils.getInstance().getInt(USER_RESETPASSWORD_TYPE)
@@ -26,6 +28,7 @@ class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswo
         if (type === RESETPASSWORD_LOGIN) {
             startTaskActivity(this)
         } else {
+            setResult(1001)
             finish()
         }
     }
@@ -46,8 +49,10 @@ class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswo
         if (type === RESETPASSWORD_LOGIN) {
             reset_title.text = "修改登录密码"
             reset_email.hint = "新登录密码"
+            reset_email.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_NUMBER
         } else {
             reset_title.text = "修改支付密码"
+            reset_email.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD or InputType.TYPE_CLASS_NUMBER
             reset_email.hint = "新支付密码"
         }
         reset_pwd_show.setOnCheckedChangeListener { buttonView, isChecked ->

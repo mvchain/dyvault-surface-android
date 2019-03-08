@@ -36,7 +36,7 @@ class QCodeActivity : BaseActivity(), View.OnClickListener {
     /**
      * 二维码解析回调函数
      */
-    internal var analyzeCallback: CodeUtils.AnalyzeCallback = object : CodeUtils.AnalyzeCallback {
+    private val analyzeCallback: CodeUtils.AnalyzeCallback = object : CodeUtils.AnalyzeCallback {
         override fun onAnalyzeSuccess(mBitmap: Bitmap, result: String) {
             val resultIntent = Intent()
             val bundle = Bundle()

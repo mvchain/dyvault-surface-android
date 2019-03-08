@@ -59,11 +59,12 @@ class VerificationEmailActivity : BaseMVPActivity<IVerificationContract.Verifica
     }
 
     override fun resetPassword(httpDataBean: HttpDataBean) {
+        dismiss()
         var email = verification_email.text.toString()
         var resetIntent = Intent(this, ResetPasswordActivity::class.java)
         resetIntent.putExtra(TEMP_EMAIL, email)
         resetIntent.putExtra(TEMP_TOKEN, httpDataBean.data)
-        startActivity(resetIntent)
+        startActivityForResult(resetIntent,1001)
     }
 
     fun onClick(v: View) {
@@ -82,6 +83,12 @@ class VerificationEmailActivity : BaseMVPActivity<IVerificationContract.Verifica
                 showDialog("验证中...")
                 mPresenter.resetPassword(email, code)
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode === 1001){
+            finish()
         }
     }
 }
