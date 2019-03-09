@@ -19,12 +19,22 @@
     <string name="navi_mine">Mine</string>
     <string name="language_title">Language</string>
     <string name="about_title">About</string>
+    <string name="buying_title">Buying Coins</string>
     <string name="account_security">account security</string>
+    <string name="about_app">About ToPay</string>
     <string name="select_photo">Choose from album</string>
+    <string name="check_app_update_hint">A new version has been detected, is it updated？</string>
 
     <string name="increase_remove">Remove</string>
     <string name="increase_add">Add to</string>
+    <string name="login_content">Sign in</string>
+    <string name="register_content">Sign up</string>
+    <string name="sign_out">Sign out</string>
+    <string name="dialog_determine">Determine</string>
+    <string name="dialog_cancel">Cancel</string>
 
+
+    <string name="check_for_updates">Check for updates</string>
     <string name="account_update_email">Modify mailbox</string>
     <string name="account_update_password">Modify the login password</string>
     <string name="account_update_pay_password">Modify payment password</string>

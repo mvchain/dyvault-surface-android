@@ -68,7 +68,7 @@
         android:background="@drawable/shape_check_update_bg_22dp"
         android:gravity="center"
         android:onClick="onClick"
-        android:text="检查更新"
+        android:text="@string/check_for_updates"
         android:textColor="@color/white"
         android:textSize="19sp"
         android:textStyle="bold" />

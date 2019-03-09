@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.MainActivity
 import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.ACCEPT_CHINESE
+import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.CHINESE
 import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.DEFAULT_ACCEPT_LANGUAGE
 import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.DEFAULT_LANGUAGE
 import com.mvc.topay.and.topay_android.common.Constant.LANGUAGE.ENGLISH
@@ -27,7 +28,7 @@ class StartActivity : BaseActivity() {
         //Set to Chinese if there is no default internationalization language  (app)
         LogUtils.e(default_language)
         if (default_language == "") {
-            SPUtils.getInstance().put(DEFAULT_LANGUAGE, ENGLISH)
+            SPUtils.getInstance().put(DEFAULT_LANGUAGE, CHINESE)
         }
         //Set to Chinese if there is no default internationalization language (web)
         if (default_accept_language == "") {

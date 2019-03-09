@@ -45,15 +45,15 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
     override fun detailSuccess(detailBean: DetailBean.DataBean) {
         var sb = StringBuffer()
         var iconResId = R.drawable.waiting //default icon
-        detail_price_content.text = TextUtils.doubleToFour(detailBean.value)
+        detail_price_content.text ="${TextUtils.doubleToFour(detailBean.value)}  ${detailBean.feeTokenType}"
         if (detailBean.classify === 5) {
             detail_fees_title.text = "订单号"
             detail_fees_content.text = detailBean.orderNumber
             detail_coll_layout.visibility = View.GONE
             detail_hash_layout.visibility = View.GONE
-            if(detailBean.transactionType == 1){
+            if (detailBean.transactionType == 1) {
                 sb.append("收款：来自${detailBean.fromAddress}")
-            }else{
+            } else {
                 sb.append("转账：转到${detailBean.toAddress}")
             }
             iconResId = R.drawable.success
@@ -72,8 +72,9 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
                     iconResId = R.drawable.failure
                 }
             }
+            detail_colladd_title.text = if (detailBean.transactionType == 1) "来源地址" else "目标地址"
             detail_fees_title.text = "交易手续费"
-            detail_fees_content.text = "${detailBean.fee} ${detailBean.feeTokenType}"
+            detail_fees_content.text = "${TextUtils.doubleToSix(detailBean.fee)} ${detailBean.feeTokenType}"
             detail_colladd_content.text = if (detailBean.transactionType == 1) detailBean.fromAddress else detailBean.toAddress
             detail_hash_content.text = detailBean.blockHash
             detail_colladd_content.setOnClickListener {

@@ -187,7 +187,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                 var transfer_address = transfer_trans_address.text.toString()
                 var transfer_price = transfer_trans_price.text.toString()
                 if (transfer_address == "") {
-                    showToast("收款地址/用户名 不能为空")
+                    showToast("收款地址/账号 不能为空")
                     return
                 }
                 if (transfer_price == "") {

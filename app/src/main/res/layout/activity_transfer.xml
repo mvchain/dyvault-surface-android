@@ -74,7 +74,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center_vertical"
-            android:hint="输入收款地址/用户名"
+            android:hint="输入收款地址/账号"
             android:inputType=""
             android:paddingLeft="12dp"
             android:paddingRight="10dp"
@@ -119,6 +119,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/fee_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/transfer_info_group"
@@ -182,7 +183,16 @@
 
     </LinearLayout>
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_below="@id/fee_layout"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:textColor="@color/detail_sxf_bg"
+        android:padding="10dp"
+        android:text="Topay 用户之间转账/收款无需手续费"
+        android:textSize="11sp"
+        android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/transfer_submit"
         android:layout_width="match_parent"

@@ -42,7 +42,7 @@ class MainActivity : BaseActivity() {
                         val packageInfo = packageManager.getPackageInfo(packageName, 0)
                         val versionCode = packageInfo.versionCode
                         if (installApkBean.data.appVersionCode > versionCode) {
-                            dialogHelper.create(this@MainActivity, "检查到新版本，是否更新？", object : IDialogViewClickListener {
+                            dialogHelper.create(this@MainActivity, getString(R.string.check_app_update_hint), object : IDialogViewClickListener {
                                 override fun click(viewId: Int) {
                                     when (viewId) {
                                         R.id.hint_enter -> {

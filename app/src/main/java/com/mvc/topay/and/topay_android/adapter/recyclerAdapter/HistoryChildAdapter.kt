@@ -1,5 +1,6 @@
 package com.mvc.topay.and.topay_android.adapter.recyclerAdapter
 
+import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,13 +23,33 @@ class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean
         val price = helper.getView<TextView>(R.id.his_child_price)
         val status = helper.getView<TextView>(R.id.his_child_status)
         var sb = StringBuffer()
+        var statusSb = StringBuffer()
         if (item.classify === 0) {
             if (item.transactionType === 1) {
                 Glide.with(mContext).load(R.drawable.recharge).into(icon)
                 sb.append("充值：来自")
+                statusSb.append("充值")
             } else {
                 Glide.with(mContext).load(R.drawable.withdraw).into(icon)
                 sb.append("提现：提到")
+                statusSb.append("提现")
+            }
+            status.visibility = View.VISIBLE
+            when (item.status) {
+                0, 1 -> {
+                    status.text = "等待中"
+                    status.setTextColor(Color.parseColor("#AFAFAF"))
+                }
+                2 -> {
+                    statusSb.append("成功")
+                    status.text = statusSb.toString()
+                    status.setTextColor(Color.parseColor("#7FD43F"))
+                }
+                9 -> {
+                    statusSb.append("失败")
+                    status.text = statusSb.toString()
+                    status.setTextColor(Color.RED)
+                }
             }
         } else if (item.classify === 5) {
             if (item.transactionType === 1) {
@@ -38,11 +59,11 @@ class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean
                 Glide.with(mContext).load(R.drawable.transfer).into(icon)
                 sb.append("转账：转到")
             }
+            status.visibility = View.INVISIBLE
         }
         title.text = sb.append("${if (item.transactionType === 1) item.fromAddress else item.toAddress}").toString()
         time.text = TimeUtils.millis2String(item.createdAt, SimpleDateFormat("yyyy-MM-dd HH:mm:ss") as DateFormat)
         price.text = "${if (item.transactionType === 1) "+" else "-"}${TextUtils.toBigDecimal(item.value)}"
-        status.visibility = View.INVISIBLE
         helper.addOnClickListener(R.id.his_layout)
     }
 }

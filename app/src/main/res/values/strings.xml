@@ -14,21 +14,27 @@
     <!--App 双击退出-->
     <string name="app_exit">请再按一次退出App</string>
     <!--应用内文字-->
-    <!---->
     <string name="navi_assets">资产</string>
     <string name="navi_mine">我的</string>
     <string name="language_title">语言</string>
     <string name="about_title">关于</string>
     <string name="buying_title">买币</string>
     <string name="account_security">账户安全</string>
+    <string name="about_app">关于ToPay</string>
     <string name="select_photo">从相册选择</string>
+    <string name="check_app_update_hint">检测到新版本, 是否更新？</string>
 
 
     <string name="increase_remove">移除</string>
     <string name="increase_add">添加</string>
     <string name="login_content">登录</string>
     <string name="register_content">注册</string>
+    <string name="sign_out">登出</string>
+    <string name="dialog_determine">确定</string>
+    <string name="dialog_cancel">取消</string>
 
+
+    <string name="check_for_updates">检查更新</string>
     <string name="account_update_email">修改邮箱</string>
     <string name="account_update_password">修改登录密码</string>
     <string name="account_update_pay_password">修改支付密码</string>
