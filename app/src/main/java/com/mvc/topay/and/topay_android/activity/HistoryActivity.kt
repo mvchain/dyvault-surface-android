@@ -35,7 +35,7 @@ class HistoryActivity : BaseActivity() {
     private lateinit var fragments: ArrayList<Fragment>
     private lateinit var historyAdapter: HistoryPagerAdapter
     override fun initData() {
-        history_title.text = tokenName
+        history_title.text = tokenName.trim()
         //All records
         var allFragment = HistoryFragment()
         var allBundle = Bundle()

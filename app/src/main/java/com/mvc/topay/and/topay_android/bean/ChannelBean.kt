@@ -24,7 +24,7 @@ data class ChannelBean(
 
             var channelName: String,
             var contact: String,
-            var createdAt: Int,
+            var createdAt: Long,
             var id: Int,
             var info: String,
             var updatedAt: Long

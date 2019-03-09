@@ -1,6 +1,7 @@
 package com.mvc.topay.and.topay_android.utils
 
 import android.content.Intent
+import android.util.Log
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
@@ -38,7 +39,7 @@ class RetrofitUtils {
             Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-//                    http://47.110.144.216/api/app/       http://192.168.15.21:10086/
+//                    http://47.110.144.216/api/app/       http://192.168.15.21:10086/   http://54.238.152.0/api/app/
                     .baseUrl("http://47.110.144.216/api/app/")
                     .client(okhttpUtils).build()
         }
@@ -52,6 +53,11 @@ class RetrofitUtils {
                         val response = chain.proceed(request)
                         response
                     }
+                    .addInterceptor(HttpLoggingInterceptor
+                    { message ->
+                        LogUtils.e("RetrofitUtils", message)
+                    }
+                            .setLevel(HttpLoggingInterceptor.Level.BODY))
                     .authenticator { _, response ->
                         val body = RetrofitUtils.client(ApiStore::class.java).refreshToken(SPUtils.getInstance().getString(REFRESH_TOKEN)).execute().body()
                         if (body!!.code === 200) {
@@ -63,7 +69,7 @@ class RetrofitUtils {
                             builder.addHeader("versionCode", MyApplication.getAppVersionCode().toString())
                             builder.build()
                         } else {
-                            LogUtils.e("token 失效")
+//                            LogUtils.e("token 失效")
                             SPUtils.getInstance().remove(REFRESH_TOKEN)
                             SPUtils.getInstance().remove(TOKEN)
                             SPUtils.getInstance().remove(USER_ID)
@@ -78,11 +84,7 @@ class RetrofitUtils {
                             null
                         }
                     }
-                    .addInterceptor(HttpLoggingInterceptor
-                    { message ->
-                        LogUtils.e("RetrofitUtils", message)
-                    }
-                            .setLevel(HttpLoggingInterceptor.Level.BODY))
+
                     .sslSocketFactory(createSSLSocketFactory()!!)
                     .writeTimeout(15, TimeUnit.SECONDS)
                     .readTimeout(15, TimeUnit.SECONDS)

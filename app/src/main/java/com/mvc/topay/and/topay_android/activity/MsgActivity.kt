@@ -2,13 +2,15 @@ package com.mvc.topay.and.topay_android.activity
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.Gravity
 import android.view.View
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.adapter.recyclerAdapter.MsgAdapter
 import com.mvc.topay.and.topay_android.base.BaseMVPActivity
 import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.bean.MsgBean
+import com.mvc.topay.and.topay_android.common.Constant.SP.OLD_TIME
 import com.mvc.topay.and.topay_android.constract.IMsgContrast
 import com.mvc.topay.and.topay_android.presenter.MsgPresenter
 import kotlinx.android.synthetic.main.activity_msg.*
@@ -29,7 +31,9 @@ class MsgActivity : BaseMVPActivity<IMsgContrast.MsgView, IMsgContrast.MsgPresen
         super.initMVPView()
         mBean = ArrayList()
         msgAdapter = MsgAdapter(R.layout.item_msg_rv, mBean)
-        msg_back.setOnClickListener { finish() }
+        msg_back.setOnClickListener {
+            setResult(1002)
+            finish() }
         msg_rv.adapter = msgAdapter
         msg_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -61,6 +65,7 @@ class MsgActivity : BaseMVPActivity<IMsgContrast.MsgView, IMsgContrast.MsgPresen
         }
         mBean.addAll(msgBean)
         if (mBean.isNotEmpty()) {
+            SPUtils.getInstance().put(OLD_TIME,mBean[0].createdAt)
             msg_rv.visibility = View.VISIBLE
             msg_null.visibility = View.GONE
             msgAdapter.notifyDataSetChanged()
@@ -82,5 +87,15 @@ class MsgActivity : BaseMVPActivity<IMsgContrast.MsgView, IMsgContrast.MsgPresen
     private fun refresh() {
         isRefresh = true
         mPresenter.getMessage(20, 0)
+    }
+
+    override fun onBackPressed() {
+        setResult(1002)
+        finish()
+    }
+
+    override fun onDestroy() {
+        setResult(1002)
+        super.onDestroy()
     }
 }

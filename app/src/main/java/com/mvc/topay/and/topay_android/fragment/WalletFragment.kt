@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.activity.BuyingCoinsActivity
@@ -17,10 +18,13 @@ import com.mvc.topay.and.topay_android.activity.IncreaseCurrencyActivity
 import com.mvc.topay.and.topay_android.activity.MsgActivity
 import com.mvc.topay.and.topay_android.adapter.recyclerAdapter.WalletAssetsAdapter
 import com.mvc.topay.and.topay_android.base.*
+import com.mvc.topay.and.topay_android.bean.MsgBean
 import com.mvc.topay.and.topay_android.common.Constant.SP.ASSETS_LIST
 import com.mvc.topay.and.topay_android.common.Constant.SP.BALANCE
 import com.mvc.topay.and.topay_android.common.Constant.SP.DEFAULT_SYMBOL
+import com.mvc.topay.and.topay_android.common.Constant.SP.OLD_TIME
 import com.mvc.topay.and.topay_android.common.Constant.SP.RATE_LIST
+import com.mvc.topay.and.topay_android.common.Constant.SP.READ_MSG
 import com.mvc.topay.and.topay_android.common.Constant.SP.SET_RATE
 import com.mvc.topay.and.topay_android.constract.IWalletContract
 import com.mvc.topay.and.topay_android.event.WalletAssetsListEvent
@@ -35,6 +39,23 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContract.WalletPresenter>(), IWalletContract.WalletView {
+    override fun msgSuccess(msgBean: MsgBean) {
+        if (msgBean.data.isNotEmpty()) {
+            msgTime = msgBean.data[0].createdAt
+            var old_time = SPUtils.getInstance().getLong(OLD_TIME)
+            if (msgTime <= old_time && SPUtils.getInstance().getBoolean(READ_MSG)) {
+                SPUtils.getInstance().put(OLD_TIME, msgTime)
+                mWalletMsg.setImageResource(R.drawable.news_black)
+                return
+            }
+            mWalletMsg.setImageResource(R.drawable.new_news)
+        } else {
+            if (SPUtils.getInstance().getBoolean(READ_MSG, false)) {
+                mWalletMsg.setImageResource(R.drawable.news_black)
+            }
+        }
+    }
+
     override fun networkError() {
         showToast("服务器繁忙")
         mWalletRefresh.post { mWalletRefresh.isRefreshing = false }
@@ -56,6 +77,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     private lateinit var mWalletRefresh: SwipeRefreshLayout
     private lateinit var mPopView: PopupWindow
     private lateinit var mExchange: ArrayList<ExchangeRateBean.DataBean>
+    private var msgTime: Long = 0L
     private var createCarryOut: Boolean = false
 
 
@@ -107,7 +129,10 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
                 startActivity(Intent(mActivity, IncreaseCurrencyActivity::class.java))
             }
         }
-        mWalletMsg.setOnClickListener { startActivity(Intent(mActivity, MsgActivity::class.java)) }
+        mWalletMsg.setOnClickListener {
+            SPUtils.getInstance().put(READ_MSG, true)
+            startActivityForResult(Intent(mActivity, MsgActivity::class.java), 1002)
+        }
         assetsList = ArrayList()
         walletAdapter = WalletAssetsAdapter(R.layout.item_home_assets_type, assetsList)
         mWalletRecyclerView.layoutManager = object : LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false) {
@@ -137,13 +162,8 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         super.initData()
         mPresenter.getAllAssets()
         mPresenter.getBalance()
+        mPresenter.getMsg(1, 0)
     }
-//    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-//        super.setUserVisibleHint(isVisibleToUser)
-//        if (isVisibleToUser && createCarryOut) {
-//            onRefresh()
-//        }
-//    }
 
     private fun initPop() {
         val content = java.util.ArrayList<String>()
@@ -185,6 +205,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     private fun onRefresh() {
         mPresenter.getAllAssets()
         mPresenter.getBalance()
+        mPresenter.getMsg(1, 0)
     }
 
     override fun getLayoutId(): Int {
@@ -199,6 +220,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     fun eventRefresh(walletAssetsListEvent: WalletAssetsListEvent) {
         mPresenter.getAllAssets()
         mPresenter.getBalance()
+        mPresenter.getMsg(1, 0)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -209,5 +231,12 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     override fun onDestroy() {
         EventBus.getDefault().unregister(this)
         super.onDestroy()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        LogUtils.e(resultCode)
+        if (resultCode == 1002) {
+            mWalletMsg.setImageResource(R.drawable.news_black)
+        }
     }
 }

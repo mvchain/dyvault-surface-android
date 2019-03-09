@@ -5,6 +5,7 @@ import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.base.*
+import com.mvc.topay.and.topay_android.bean.MsgBean
 import com.mvc.topay.and.topay_android.common.Constant.SP.CURRENCY_LIST
 import com.mvc.topay.and.topay_android.common.Constant.SP.DEFAULT_RATE
 import com.mvc.topay.and.topay_android.common.Constant.SP.DEFAULT_SYMBOL
@@ -17,6 +18,12 @@ import com.mvc.topay.and.topay_android.utils.RxHelper
 import io.reactivex.Observable
 
 class WalletModel : BaseModel(), IWalletContract.WalletModel {
+    override fun getMsg(pagesize: Int, timestamp: Long): Observable<MsgBean> {
+        return RetrofitUtils.client(ApiStore::class.java).getMessage(MyApplication.token,pagesize,timestamp)
+                .compose(RxHelper.rxSchedulerHelper())
+                .map { msgBean -> msgBean }
+    }
+
     override fun getBalance(): Observable<BalanceBean> {
         return RetrofitUtils.client(ApiStore::class.java).getAssetBalance(MyApplication.token)
                 .compose(RxHelper.rxSchedulerHelper())

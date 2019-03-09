@@ -110,4 +110,16 @@ object HttpUrl {
      *  Get user salt
      */
     const val USER_SALT = "user/salt"
+
+    /**
+     * get application version Code
+     */
+    const val UPDATE_APP = "app"
+
+    /**
+     * Verify if the internal address
+     */
+    const val ASSETS_INNER = "asset/inner"
+
+
 }

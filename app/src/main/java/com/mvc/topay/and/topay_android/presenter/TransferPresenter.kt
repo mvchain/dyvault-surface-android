@@ -5,6 +5,15 @@ import com.mvc.topay.and.topay_android.constract.ITransferContract
 import com.mvc.topay.and.topay_android.model.TransferModel
 
 class TransferPresenter : ITransferContract.TransferPresenter() {
+    override fun getTransFee(address: String) {
+        mRxUtils.register(mIModel!!.getTransFee(address)
+                .subscribe({ idToBean ->
+                    mIView!!.transFeeStatus(idToBean.data)
+                }, {
+                    mIView!!.transFeeStatus(false)
+                }))
+    }
+
     override fun getDetail(tokenId: Int) {
         mRxUtils.register(mIModel!!.getDetail(tokenId)
                 .subscribe({ idToBean ->

@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -48,7 +49,7 @@ class MineFragment : BaseMVPFragment<IMineContract.MineView, IMineContract.MineP
 
     override fun getUserFailed(userInfoBean: UserInfoBean?) {
         if (userInfoBean != null) {
-            if (userInfoBean.code === 200) {
+            if (userInfoBean.code === 400) {
                 startTaskActivity(mActivity)
             }
             showToast(userInfoBean.message)

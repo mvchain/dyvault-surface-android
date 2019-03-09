@@ -1,5 +1,6 @@
 package com.mvc.topay.and.topay_android.activity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageInfo
@@ -8,10 +9,20 @@ import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.blankj.utilcode.util.LogUtils
 
 import com.gyf.barlibrary.ImmersionBar
+import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.R
+import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.base.BaseActivity
+import com.mvc.topay.and.topay_android.listener.IDialogViewClickListener
+import com.mvc.topay.and.topay_android.utils.AppInnerDownLoder
+import com.mvc.topay.and.topay_android.utils.DialogHelper
+import com.mvc.topay.and.topay_android.utils.RetrofitUtils
+import com.mvc.topay.and.topay_android.utils.RxHelper
+import com.per.rslibrary.IPermissionRequest
+import com.per.rslibrary.RsPermission
 
 
 class AboutActivity : BaseActivity() {
@@ -21,6 +32,7 @@ class AboutActivity : BaseActivity() {
 
     private var mVersionAbout: TextView? = null
     private var mBackAbout: ImageView? = null
+    private lateinit var dialogHelper: DialogHelper
 
     override fun initData() {
         mVersionAbout!!.text = getVersionName(this)
@@ -32,6 +44,7 @@ class AboutActivity : BaseActivity() {
         mVersionAbout = findViewById(R.id.about_version)
         mBackAbout = findViewById(R.id.about_back)
         mBackAbout!!.setOnClickListener { v -> finish() }
+        dialogHelper = DialogHelper.instance
     }
 
     /**
@@ -56,41 +69,41 @@ class AboutActivity : BaseActivity() {
 
     @SuppressLint("CheckResult")
     fun onClick(view: View) {
-        showToast("当前版本已是最新")
-//        RetrofitUtils.client(ApiStore::class.java).updateApk(MyApplication.getTOKEN(), "apk")
-//                .compose(RxHelper.rxSchedulerHelper())
-//                .subscribe({ installApkBean ->
-//                    if (installApkBean.getCode() === 200) {
-//                        val packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0)
-//                        val versionCode = packageInfo.versionCode
-//                        if (installApkBean.getData().getAppVersionCode() > versionCode) {
-//                            dialogHelper.create(this@AboutActivity, "检查到新版本，是否更新？", { viewId ->
-//                                when (viewId) {
-//                                    R.id.hint_enter -> {
-//                                        dialogHelper.dismiss()
-//                                        RsPermission.getInstance().setiPermissionRequest(object : IPermissionRequest {
-//                                            override fun toSetting() {
-//
-//                                            }
-//
-//                                            override fun cancle(i: Int) {
-//
-//                                            }
-//
-//                                            override fun success(i: Int) {
-//                                                AppInnerDownLoder.downLoadApk(this@AboutActivity, installApkBean.getData().getHttpUrl(), "BZT")
-//                                            }
-//                                        }).requestPermission(this@AboutActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                                    }
-//                                    R.id.hint_cancle -> dialogHelper.dismiss()
-//                                }
-//                            }).show()
-//                        } else {
-//                            ToastUtils.showShort("当前版本已是最新")
-//                        }
-//                    } else {
-//                        LogUtils.e(installApkBean.getMessage())
-//                    }
-//                }, { throwable -> LogUtils.e(throwable.getMessage()) })
+        //check update
+        RetrofitUtils.client(ApiStore::class.java).updateApk(MyApplication.token, "apk")
+                .compose(RxHelper.rxSchedulerHelper())
+                .subscribe({ installApkBean ->
+                    if (installApkBean.code === 200) {
+                        val packageInfo = packageManager.getPackageInfo(packageName, 0)
+                        val versionCode = packageInfo.versionCode
+                        if (installApkBean.data.appVersionCode > versionCode) {
+                            dialogHelper.create(this@AboutActivity, "检查到新版本，是否更新？", object : IDialogViewClickListener {
+                                override fun click(viewId: Int) {
+                                    when (viewId) {
+                                        R.id.hint_enter -> {
+                                            dialogHelper.dismiss()
+                                            RsPermission.getInstance().setiPermissionRequest(object : IPermissionRequest {
+                                                override fun toSetting() {
+
+                                                }
+
+                                                override fun cancle(i: Int) {
+
+                                                }
+
+                                                override fun success(i: Int) {
+                                                    AppInnerDownLoder.downLoadApk(this@AboutActivity, installApkBean.data.httpUrl, "ToPay")
+                                                }
+                                            }).requestPermission(this@AboutActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                        }
+                                        R.id.hint_cancle -> dialogHelper.dismiss()
+                                    }
+                                }
+                            }).show()
+                        }
+                    } else {
+                        LogUtils.e(installApkBean.message)
+                    }
+                }, { throwable -> LogUtils.e(throwable.message) })
     }
 }

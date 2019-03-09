@@ -44,7 +44,6 @@ class PopViewHelper {
         mPopView.setBackgroundDrawable(BitmapDrawable())
         mPopView.isOutsideTouchable = false
         mPopView.softInputMode = PopupWindow.INPUT_METHOD_NEEDED or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
-        LogUtils.e(mPopView)
         return mPopView
     }
 

@@ -186,5 +186,17 @@ interface ApiStore {
     @POST(HttpUrl.USER_SALT)
     fun getUserSalt(@Header("Authorization") token: String, @Query("email") email: String): Observable<HttpDataBean>
 
+    /**
+     * get channel list
+     */
+    @GET(HttpUrl.UPDATE_APP)
+    fun updateApk(@Header("Authorization") token: String, @Query("appType") appType: String): Observable<InstallApkBean>
+
+    /**
+     * get channel list
+     */
+    @GET(HttpUrl.ASSETS_INNER)
+    fun getTransFee(@Header("Authorization") token: String, @Query("address") address : String): Observable<HttpUpdateBean>
+
 }
 

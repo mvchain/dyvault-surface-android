@@ -15,6 +15,12 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class TransferModel : BaseModel(), ITransferContract.TransferModel {
+    override fun getTransFee(address: String): Observable<HttpUpdateBean> {
+        return RetrofitUtils.client(ApiStore::class.java).getTransFee(MyApplication.token, address)
+                .compose(RxHelper.rxSchedulerHelper())
+                .map { updateBean -> updateBean }
+    }
+
     override fun getDetail(tokenId: Int): Observable<IDToTransferBean> {
         return RetrofitUtils.client(ApiStore::class.java).getTransaction(MyApplication.token, tokenId)
                 .compose(RxHelper.rxSchedulerHelper())

@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
+import com.blankj.utilcode.util.LogUtils
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.activity.DetailActivity
 import com.mvc.topay.and.topay_android.adapter.recyclerAdapter.HistoryChildAdapter
@@ -14,6 +15,7 @@ import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.bean.TransactionsBean
 import com.mvc.topay.and.topay_android.constract.IHistoryChindContract
 import com.mvc.topay.and.topay_android.event.HistoryEvent
+import com.mvc.topay.and.topay_android.event.HistoryFragmentEvent
 import com.mvc.topay.and.topay_android.presenter.HistoryChildPresenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -67,11 +69,11 @@ class HistoryFragment : BaseMVPFragment<IHistoryChindContract.HistoryChindView, 
         })
         mRefreshView.post { mRefreshView.isRefreshing = true }
         mRefreshView.setOnRefreshListener { historyRefresh() }
-        isRefresh = true
     }
 
     override fun initData() {
         super.initData()
+        isRefresh = true
         mPresenter.getTransferList(0, 10, tokenId, type)
     }
 
@@ -85,6 +87,7 @@ class HistoryFragment : BaseMVPFragment<IHistoryChindContract.HistoryChindView, 
 
     override fun getHistorySuccess(transactionsBean: ArrayList<TransactionsBean.DataBean>) {
         mRefreshView.post { mRefreshView.isRefreshing = false }
+        LogUtils.e(isRefresh)
         if (isRefresh) {
             isRefresh = false
             dateBean.clear()
@@ -107,7 +110,7 @@ class HistoryFragment : BaseMVPFragment<IHistoryChindContract.HistoryChindView, 
         recyclerView.visibility = View.GONE
     }
 
-    fun historyRefresh() {
+    private fun historyRefresh() {
         isRefresh = true
         dateBean.clear()
         mPresenter.getTransferList(0, 10, tokenId, type)
@@ -116,7 +119,7 @@ class HistoryFragment : BaseMVPFragment<IHistoryChindContract.HistoryChindView, 
 
 
     @Subscribe
-    fun refresh(event: HistoryEvent?) {
+    fun refresh(event: HistoryFragmentEvent?) {
         isRefresh = true
         dateBean.clear()
         mPresenter.getTransferList(0, 10, tokenId, type)

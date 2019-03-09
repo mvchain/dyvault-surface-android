@@ -28,27 +28,28 @@ class IncreaseModel : BaseModel(), IIncreaseContract.IIncreaseModel {
         return RetrofitUtils.client(ApiStore::class.java).getCurrencyList(MyApplication.token)
                 .compose(RxHelper.rxSchedulerHelper())
                 .flatMap { currencyBean ->
-                    LogUtils.e(assetListBean)
                     SPUtils.getInstance().put(CURRENCY_LIST, JsonHelper.jsonToString(currencyBean))
                     val currdata = currencyBean.data
                     val assetBean = assetListBean.data
                     for (i in currdata.indices) {
-                        val increaseBean = IncreaseBean(currdata[i].tokenId
-                                , false
-                                , currdata[i].tokenImage
-                                , currdata[i].tokenName
-                                , currdata[i].tokenCnName
-                                , currdata[i].tokenEnName
-                                , i >= 1)
-                        for (j in assetBean.indices) {
-                            if (currdata[i].tokenId === assetBean[j].tokenId) {
-                                increaseBean.isAdd = false
-                                break
-                            } else {
-                                increaseBean.isAdd = true
+                        if(currdata[i].visible !== 0){
+                            val increaseBean = IncreaseBean(currdata[i].tokenId
+                                    , false
+                                    , currdata[i].tokenImage
+                                    , currdata[i].tokenName
+                                    , currdata[i].tokenCnName
+                                    , currdata[i].tokenEnName
+                                    , i >= 1)
+                            for (j in assetBean.indices) {
+                                if (currdata[i].tokenId === assetBean[j].tokenId) {
+                                    increaseBean.isAdd = false
+                                    break
+                                } else {
+                                    increaseBean.isAdd = true
+                                }
                             }
+                            mList.add(increaseBean)
                         }
-                        mList.add(increaseBean)
                     }
                     Observable.just(mList)
                 }
@@ -61,7 +62,7 @@ class IncreaseModel : BaseModel(), IIncreaseContract.IIncreaseModel {
                 val increaseBean = mList[i]
                 if (increaseBean.zhContent.toLowerCase().contains(search.toLowerCase())
                         || increaseBean.title.contains(search)
-                        || increaseBean.zhContent.toLowerCase().contains(search.toLowerCase())) {
+                        || increaseBean.enContent.toLowerCase().contains(search.toLowerCase())) {
                     mSearchList.add(increaseBean)
                 }
             }

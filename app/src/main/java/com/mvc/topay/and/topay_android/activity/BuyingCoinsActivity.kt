@@ -18,6 +18,7 @@ class BuyingCoinsActivity : BaseMVPActivity<IBuyingContract.BuyingView, IBuyingC
     private lateinit var channelAdapter: ChannelAdapter
     private var isRefresh = false
     override fun initMVPData() {
+        isRefresh = true
         mPresenter.getChannelList(0, 10)
     }
 
@@ -38,6 +39,8 @@ class BuyingCoinsActivity : BaseMVPActivity<IBuyingContract.BuyingView, IBuyingC
             }
         })
         buying_back.setOnClickListener { finish() }
+        coins_swipe.post { coins_swipe.isRefreshing = true }
+        coins_swipe.setOnRefreshListener { onRefresh() }
     }
 
     override fun getLayoutId(): Int {
@@ -47,8 +50,12 @@ class BuyingCoinsActivity : BaseMVPActivity<IBuyingContract.BuyingView, IBuyingC
     override fun initPresenter(): BasePresenter<*, *> {
         return BuyingPresenter.newInstance()
     }
-
+    fun onRefresh(){
+        isRefresh = true
+        mPresenter.getChannelList(0, 10)
+    }
     override fun channelSuccess(channelBean: ArrayList<ChannelBean.DataBean>) {
+        coins_swipe.post { coins_swipe.isRefreshing = false }
         if (isRefresh) {
             isRefresh = false
             this.channelBean.clear()
@@ -65,6 +72,7 @@ class BuyingCoinsActivity : BaseMVPActivity<IBuyingContract.BuyingView, IBuyingC
     }
 
     override fun channelFailed(msg: String) {
+        coins_swipe.post { coins_swipe.isRefreshing = false }
         isRefresh = false
         coins_null.visibility = View.VISIBLE
         coins_rv.visibility = View.GONE

@@ -24,6 +24,7 @@ import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYP
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_SALT
 import com.mvc.topay.and.topay_android.constract.ITransferContract
 import com.mvc.topay.and.topay_android.event.HistoryEvent
+import com.mvc.topay.and.topay_android.event.HistoryFragmentEvent
 import com.mvc.topay.and.topay_android.event.WalletAssetsListEvent
 import com.mvc.topay.and.topay_android.listener.IPayWindowListener
 import com.mvc.topay.and.topay_android.listener.PswMaxListener
@@ -47,7 +48,6 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
     private lateinit var mTransBean: IDToTransferBean.DataBean
     private lateinit var mPopView: PopupWindow
     private lateinit var tranDialog: Dialog
-
     override fun initMVPData() {
         btc_price.text = tokenName
         transfer_title.text = "${tokenName}转账"
@@ -78,6 +78,11 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                 }
             }
         })
+        transfer_trans_address.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                mPresenter.getTransFee(transfer_trans_address.text.toString().trim())
+            }
+        }
     }
 
     override fun getLayoutId(): Int {
@@ -92,7 +97,16 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
     override fun detailSuccess(data: IDToTransferBean.DataBean) {
         this.mTransBean = data
         transfer_balance.text = "${TextUtils.doubleToFour(data.balance)} $tokenName"
-        transfer_fees.text = "${TextUtils.doubleToSix(data.fee)}  ${data.feeTokenName}"
+        transfer_fees.text = "${TextUtils.doubleToSix(data.fee)} ${data.feeTokenName}"
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun transFeeStatus(isStation: Boolean) {
+        if (isStation) {
+            transfer_fees.text = "${0.000000} ${mTransBean.feeTokenName}"
+        } else {
+            transfer_fees.text = "${TextUtils.doubleToSix(mTransBean.fee)} ${mTransBean.feeTokenName}"
+        }
     }
 
     override fun detailFailed(msg: String) {
@@ -105,6 +119,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
         }
         EventBus.getDefault().post(WalletAssetsListEvent())
         EventBus.getDefault().post(HistoryEvent())
+        EventBus.getDefault().post(HistoryFragmentEvent())
         finish()
         tranDialog.dismiss()
 
@@ -172,7 +187,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                 var transfer_address = transfer_trans_address.text.toString()
                 var transfer_price = transfer_trans_price.text.toString()
                 if (transfer_address == "") {
-                    showToast("收款地址不能为空")
+                    showToast("收款地址/用户名 不能为空")
                     return
                 }
                 if (transfer_price == "") {

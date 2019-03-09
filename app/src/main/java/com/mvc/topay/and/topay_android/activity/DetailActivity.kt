@@ -51,7 +51,11 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
             detail_fees_content.text = detailBean.orderNumber
             detail_coll_layout.visibility = View.GONE
             detail_hash_layout.visibility = View.GONE
-            sb.append("转账：转到${detailBean.toAddress}")
+            if(detailBean.transactionType == 1){
+                sb.append("收款：来自${detailBean.fromAddress}")
+            }else{
+                sb.append("转账：转到${detailBean.toAddress}")
+            }
             iconResId = R.drawable.success
         } else if (detailBean.classify === 0) {
             when (detailBean.status) {

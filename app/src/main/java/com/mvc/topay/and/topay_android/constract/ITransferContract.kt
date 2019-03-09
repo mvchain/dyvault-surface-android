@@ -10,12 +10,14 @@ import io.reactivex.Observable
 interface ITransferContract {
     abstract class TransferPresenter : BasePresenter<TransferModel, TransferView>() {
         abstract fun getDetail(id: Int)
+        abstract fun getTransFee(address: String)
         abstract fun sendTransferMsg(address: String, password: String, tokenId: Int, value: String)
     }
 
     interface TransferModel : IBaseModel {
         fun getDetail(id: Int): Observable<IDToTransferBean>
         fun sendTransferMsg(address: String, password: String, tokenId: Int, value: String): Observable<HttpUpdateBean>
+        fun getTransFee(address: String): Observable<HttpUpdateBean>
 
     }
 
@@ -24,5 +26,6 @@ interface ITransferContract {
         fun detailFailed(msg: String)
         fun transferSuccess(bean: HttpUpdateBean)
         fun transferFailed(msg:String)
+        fun transFeeStatus(isStation:Boolean)
     }
 }
