@@ -72,6 +72,8 @@ class MineFragment : BaseMVPFragment<IMineContract.MineView, IMineContract.MineP
 
 
     override fun initView() {
+        mRootView!!.findViewById<TextView>(R.id.mine_authentication).setOnClickListener(this)
+        mRootView!!.findViewById<TextView>(R.id.mine_payment).setOnClickListener(this)
         mRootView!!.findViewById<TextView>(R.id.mine_account).setOnClickListener(this)
         mRootView!!.findViewById<TextView>(R.id.mine_language).setOnClickListener(this)
         mRootView!!.findViewById<TextView>(R.id.mine_about).setOnClickListener(this)
@@ -99,6 +101,12 @@ class MineFragment : BaseMVPFragment<IMineContract.MineView, IMineContract.MineP
 
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.mine_authentication -> {
+//                startActivity(Intent(mActivity, SelectResetPasswordActivity::class.java))
+            }
+            R.id.mine_payment -> {
+//                startActivity(Intent(mActivity, SelectResetPasswordActivity::class.java))
+            }
             R.id.mine_account -> {
                 startActivity(Intent(mActivity, SelectResetPasswordActivity::class.java))
             }

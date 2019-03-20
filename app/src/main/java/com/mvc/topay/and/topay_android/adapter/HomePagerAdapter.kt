@@ -6,8 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter
 
 import java.util.ArrayList
 
-class HistoryPagerAdapter(fm: FragmentManager, private val fragments: ArrayList<Fragment>) : FragmentPagerAdapter(fm) {
-    private val titles = arrayOf("全部", "支出", "收入")
+class HomePagerAdapter(fm: FragmentManager, private val fragments: ArrayList<Fragment>) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return fragments[position]
@@ -15,9 +14,5 @@ class HistoryPagerAdapter(fm: FragmentManager, private val fragments: ArrayList<
 
     override fun getCount(): Int {
         return fragments.size
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return titles[position]
     }
 }

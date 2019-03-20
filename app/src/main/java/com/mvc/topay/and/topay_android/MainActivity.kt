@@ -11,6 +11,7 @@ import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.base.BaseActivity
 import com.mvc.topay.and.topay_android.event.LanguageEvent
 import com.mvc.topay.and.topay_android.fragment.MineFragment
+import com.mvc.topay.and.topay_android.fragment.OtcFragment
 import com.mvc.topay.and.topay_android.fragment.WalletFragment
 import com.mvc.topay.and.topay_android.listener.IDialogViewClickListener
 import com.mvc.topay.and.topay_android.utils.AppInnerDownLoder
@@ -82,6 +83,8 @@ class MainActivity : BaseActivity() {
         EventBus.getDefault().register(this)
         var walletFragment = WalletFragment()
         mFragment.add(walletFragment)
+        var otcFragment = OtcFragment()
+        mFragment.add(otcFragment)
         var mineFragment = MineFragment()
         mFragment.add(mineFragment)
         pagerAdapter = HomePagerAdapter(supportFragmentManager, mFragment)

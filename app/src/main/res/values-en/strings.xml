@@ -17,7 +17,10 @@
     <!---->
     <string name="navi_assets">Assets</string>
     <string name="navi_mine">Mine</string>
+    <string name="navi_otc">OTC</string>
     <string name="language_title">Language</string>
+    <string name="authentication_title">Authentication</string>
+    <string name="payment_title">Payment Method</string>
     <string name="about_title">About</string>
     <string name="buying_title">Buying Coins</string>
     <string name="account_security">account security</string>
