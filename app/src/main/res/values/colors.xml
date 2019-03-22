@@ -31,6 +31,7 @@
     <color name="increase_search_edit_tv">#D5D7E6</color>
     <color name="detail_sxf_bg">#B9B9B9</color>
     <color name="coins_top">#F4F4F6</color>
-    <color name="coins_bottom">#E8E8EC</color>
+    <color name="coins_bottom">#F1F1F1</color>
+    <color name="coins_buying_name">#ACACAC</color>
 
 </resources>

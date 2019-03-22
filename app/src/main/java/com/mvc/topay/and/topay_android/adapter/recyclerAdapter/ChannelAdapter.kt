@@ -7,8 +7,10 @@ import com.mvc.topay.and.topay_android.bean.ChannelBean
 
 class ChannelAdapter(layoutResId: Int, data: List<ChannelBean.DataBean>) : BaseQuickAdapter<ChannelBean.DataBean, BaseViewHolder>(layoutResId, data) {
     override fun convert(helper: BaseViewHolder, item: ChannelBean.DataBean) {
-        helper.setText(R.id.coins_name, "${item.channelName}")
-        helper.setText(R.id.coins_contact, "${item.contact}")
-        helper.setText(R.id.coins_info, "${item.info}")
+        helper.setText(R.id.coins_buying_name, "购买${item.channelName}")
+        helper.setText(R.id.coins_price, "${item.contact}")
+        helper.setText(R.id.coins_status, "${item.info}")
+        helper.setText(R.id.coins_order, "${item.info}")
+        helper.setText(R.id.coins_time, "${item.info}")
     }
 }

@@ -39,6 +39,20 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContract.WalletPresenter>(), IWalletContract.WalletView {
+    private lateinit var walletAdapter: WalletAssetsAdapter
+    private lateinit var assetsList: ArrayList<AssetLanguageBean.DataBean>
+    private lateinit var mWalletRecyclerView: FadingRecyclerView
+    private lateinit var mWalletAddCurrency: ImageView
+    private lateinit var mWalletMsg: ImageView
+    private lateinit var mWalletBalance: TextView
+    private lateinit var mWalletRate: TextView
+    private lateinit var mWalletBuyingCoins: TextView
+    private lateinit var mWalletRefresh: SwipeRefreshLayout
+    private lateinit var mPopView: PopupWindow
+    private lateinit var mExchange: ArrayList<ExchangeRateBean.DataBean>
+    private var msgTime: Long = 0L
+    private var createCarryOut: Boolean = false
+
     override fun msgSuccess(msgBean: MsgBean) {
         if (msgBean.data.isNotEmpty()) {
             msgTime = msgBean.data[0].createdAt
@@ -65,21 +79,6 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         SPUtils.getInstance().put(BALANCE, JsonHelper.jsonToString(balanceBean))
         mWalletBalance.text = TextUtils.rateToPrice(balanceBean.data)
     }
-
-    private lateinit var walletAdapter: WalletAssetsAdapter
-    private lateinit var assetsList: ArrayList<AssetLanguageBean.DataBean>
-    private lateinit var mWalletRecyclerView: FadingRecyclerView
-    private lateinit var mWalletAddCurrency: ImageView
-    private lateinit var mWalletMsg: ImageView
-    private lateinit var mWalletBalance: TextView
-    private lateinit var mWalletRate: TextView
-    private lateinit var mWalletBuyingCoins: TextView
-    private lateinit var mWalletRefresh: SwipeRefreshLayout
-    private lateinit var mPopView: PopupWindow
-    private lateinit var mExchange: ArrayList<ExchangeRateBean.DataBean>
-    private var msgTime: Long = 0L
-    private var createCarryOut: Boolean = false
-
 
     private var isRefresh = false
     override fun assetsSuccess(assetListBean: AssetLanguageBean) {

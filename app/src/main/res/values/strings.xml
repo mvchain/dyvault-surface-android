@@ -21,7 +21,8 @@
     <string name="authentication_title">身份认证</string>
     <string name="payment_title">收款方式</string>
     <string name="about_title">关于</string>
-    <string name="buying_title">买币</string>
+    <string name="buying_title">一键买币</string>
+    <string name="buying_detail_title">订单信息</string>
     <string name="account_security">账户安全</string>
     <string name="about_app">关于ToPay</string>
     <string name="select_photo">从相册选择</string>

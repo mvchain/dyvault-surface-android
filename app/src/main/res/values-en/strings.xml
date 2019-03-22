@@ -22,7 +22,8 @@
     <string name="authentication_title">Authentication</string>
     <string name="payment_title">Payment Method</string>
     <string name="about_title">About</string>
-    <string name="buying_title">Buying Coins</string>
+    <string name="buying_title">One button to buy coins</string>
+    <string name="buying_detail_title">Order Information</string>
     <string name="account_security">account security</string>
     <string name="about_app">About ToPay</string>
     <string name="select_photo">Choose from album</string>
