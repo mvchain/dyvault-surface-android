@@ -4,9 +4,7 @@ import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.view.Gravity
 import android.view.View
-import com.blankj.utilcode.util.EncryptUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SpanUtils
 import com.mvc.topay.and.topay_android.MainActivity
@@ -85,7 +83,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
             }
             login_password.setSelection(login_password.text.length)
         }
-        login_register.text = SpanUtils().append("没有账户？").append("注册").setForegroundColor(ContextCompat.getColor(this, R.color.register_button_bg)).create()
+        login_register.text = SpanUtils().append(getString(R.string.no_account)).append(getString(R.string.register_content)).setForegroundColor(ContextCompat.getColor(this, R.color.register_button_bg)).create()
     }
 
     override fun getLayoutId(): Int {

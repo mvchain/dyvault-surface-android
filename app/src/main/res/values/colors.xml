@@ -11,6 +11,8 @@
     <color name="trand_gray">#8E8E9E</color>
     <color name="qcode_blue">#007AFF</color>
     <color name="login_button_bg">#5A5CC7</color>
+    <color name="login_button_left">#5687F9</color>
+    <color name="login_button_right">#5A5DDF</color>
     <color name="register_button_bg">#2263AC</color>
     <color name="app_bg_status_bar">#E6E8F0</color>
     <color name="login_title_tv_bg">#8B8B8B</color>

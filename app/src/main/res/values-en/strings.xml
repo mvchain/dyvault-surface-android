@@ -36,10 +36,29 @@
     <string name="sign_out">Sign out</string>
     <string name="dialog_determine">Determine</string>
     <string name="dialog_cancel">Cancel</string>
+    <string name="confirm">confirm</string>
+    <string name="forget_password">Forget password?</string>
 
 
     <string name="check_for_updates">Check for updates</string>
     <string name="account_update_email">Modify mailbox</string>
     <string name="account_update_password">Modify the login password</string>
     <string name="account_update_pay_password">Modify payment password</string>
+    <string name="account_new_update_password">New login password</string>
+    <string name="account_new_update_pay_password">New payment password</string>
+
+
+    <string name="email_address">Email Adress</string>
+    <string name="login_password">Login password</string>
+    <string name="verification_code">Verification code</string>
+    <string name="get_code">Get Code</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="already_account">Existing account?</string>
+    <string name="verify_email">Verify email</string>
+
+    <string name="next">Next</string>
+    <string name="user_name">User Name</string>
+    <string name="del_currency">Determine the deletion currency</string>
+    <string name="sign_out_app">Confirmed to log out of ToPay?</string>
+
 </resources>

@@ -63,8 +63,8 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/shape_login_edit_14dp"
-                android:hint="邮箱地址"
-                android:inputType=""
+                android:hint="@string/email_address"
+                android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
@@ -88,7 +88,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/shape_login_edit_14dp"
-                    android:hint="登录密码"
+                    android:hint="@string/login_password"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:paddingLeft="20dp"
@@ -122,7 +122,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="验证码"
+                    android:hint="@string/verification_code"
                     android:inputType="number"
                     android:maxLength="6"
                     android:maxLines="1"
@@ -140,7 +140,7 @@
                     android:layout_marginRight="12dp"
                     android:gravity="center"
                     android:onClick="onClick"
-                    android:text="获取验证码"
+                    android:text="@string/get_code"
                     android:textColor="@color/register_button_bg"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -152,10 +152,10 @@
                 android:layout_marginLeft="110dp"
                 android:layout_marginTop="99dp"
                 android:layout_marginRight="110dp"
-                android:background="@drawable/shape_register_bg_22dp"
+                android:background="@drawable/shape_login_bg_22dp"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:text="@string/login_content"
+                android:text="@string/confirm"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
 
@@ -166,8 +166,8 @@
                 android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:text="忘记密码?"
-                android:textColor="@color/register_button_bg"
+                android:text="@string/forget_password"
+                android:textColor="@color/login_button_bg"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -184,7 +184,7 @@
                 android:layout_marginBottom="25dp"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:text="没有账户？注册"
+                android:text="@string/no_account"
                 android:textColor="@color/forget_password_bg"
                 android:textSize="15sp"
                 android:textStyle="bold" />

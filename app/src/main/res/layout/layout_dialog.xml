@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="270dp"
-        android:layout_height="130dp"
-        android:background="@drawable/shape_round_white_20dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+            android:layout_width="270dp"
+            android:layout_height="130dp"
+            android:background="@drawable/shape_round_white_20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
         <TextView
-            android:id="@+id/hint_title"
-            android:layout_width="match_parent"
-            android:padding="10dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:text="确认删除币种"
-            android:textColor="@color/dialog_hint_tv"
-            android:textSize="15sp" />
+                android:id="@+id/hint_title"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="-"
+                android:textColor="@color/dialog_hint_tv"
+                android:textSize="15sp"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/hint_cancle"
-                android:layout_width="110dp"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:text="取消"
-                android:textColor="@color/dialog_hint_tv"
-                android:textSize="15sp" />
+                    android:id="@+id/hint_cancle"
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="@string/dialog_cancel"
+                    android:textColor="@color/dialog_hint_tv"
+                    android:textSize="15sp"/>
 
             <TextView
-                android:id="@+id/hint_enter"
-                android:layout_width="110dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="12dp"
-                android:gravity="center"
-                android:text="确认"
-                android:textColor="@color/register_button_bg"
-                android:textSize="15sp" />
+                    android:id="@+id/hint_enter"
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center"
+                    android:text="@string/dialog_determine"
+                    android:textColor="@color/register_button_bg"
+                    android:textSize="15sp"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners android:radius="22dp" />
-    <solid android:color="@color/login_button_bg" />
+    <gradient android:startColor="@color/login_button_left" android:endColor="@color/login_button_right"/>
 </shape>

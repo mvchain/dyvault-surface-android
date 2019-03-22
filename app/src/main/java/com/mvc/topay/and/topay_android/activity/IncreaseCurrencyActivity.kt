@@ -140,7 +140,7 @@ class IncreaseCurrencyActivity : BaseMVPActivity<IIncreaseContract.IIncreaseView
                 if (increase_search_rv.visibility == View.VISIBLE) {
                     // 搜索的结果
                     if (!mSearch[position].isAdd) {
-                        dialogHelper.create(this, "确定删除币种" + mSearch[position].title + "?", object : IDialogViewClickListener {
+                        dialogHelper.create(this, getString(R.string.del_currency) + mSearch[position].title + "?", object : IDialogViewClickListener {
                             override fun click(viewId: Int) {
                                 when (viewId) {
                                     R.id.hint_cancle -> {
@@ -159,7 +159,7 @@ class IncreaseCurrencyActivity : BaseMVPActivity<IIncreaseContract.IIncreaseView
                     //全部列表结果
                     LogUtils.e(mBean.size)
                     if (!mBean[position].isAdd) {
-                        dialogHelper.create(this, "确定删除币种" + mBean[position].title + "?", object :IDialogViewClickListener {
+                        dialogHelper.create(this, getString(R.string.del_currency) + mBean[position].title + "?", object :IDialogViewClickListener {
                             override fun click(viewId: Int) {
                                 when (viewId) {
                                     R.id.hint_cancle -> {

@@ -60,6 +60,7 @@
         <activity android:name=".activity.MineQCodeActivity" />
         <activity android:name=".activity.DetailActivity" />
         <activity android:name=".activity.BuyingCoinsActivity" />
+        <activity android:name=".activity.BuyingDetailActivity" />
 
         <!--适配华为（hw）刘海屏-->
         <meta-data

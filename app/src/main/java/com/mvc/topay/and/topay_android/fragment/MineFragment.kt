@@ -117,7 +117,7 @@ class MineFragment : BaseMVPFragment<IMineContract.MineView, IMineContract.MineP
                 startActivity(Intent(mActivity, AboutActivity::class.java))
             }
             R.id.login_up -> {
-                dialogHelper.create(mActivity, "确认登出Topay?", object : IDialogViewClickListener {
+                dialogHelper.create(mActivity, getString(R.string.sign_out_app), object : IDialogViewClickListener {
                     override fun click(viewId: Int) {
                         when (viewId) {
                             R.id.hint_cancle -> {

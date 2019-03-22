@@ -61,7 +61,7 @@ class RegisterActivity : BaseMVPActivity<IRegisterContract.RegisterView, IRegist
 
     override fun initMVPView() {
         super.initMVPView()
-        register_login.text = SpanUtils().append("已有账户？").append(getString(R.string.login_content)).setForegroundColor(ContextCompat.getColor(this, R.color.register_button_bg)).create()
+        register_login.text = SpanUtils().append(getString(R.string.already_account)).append(getString(R.string.login_content)).setForegroundColor(ContextCompat.getColor(this, R.color.register_button_bg)).create()
     }
 
     override fun getLayoutId(): Int {

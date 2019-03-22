@@ -47,13 +47,13 @@ class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswo
         this.mToken = intent.getStringExtra(TEMP_TOKEN)
         this.mEmail = intent.getStringExtra(TEMP_EMAIL)
         if (type === RESETPASSWORD_LOGIN) {
-            reset_title.text = "修改登录密码"
-            reset_email.hint = "新登录密码"
+            reset_title.text = getString(R.string.account_update_password)
+            reset_email.hint = getString(R.string.account_new_update_password)
             reset_email.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_NUMBER
         } else {
-            reset_title.text = "修改支付密码"
+            reset_title.text = getString(R.string.account_update_pay_password)
             reset_email.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD or InputType.TYPE_CLASS_NUMBER
-            reset_email.hint = "新支付密码"
+            reset_email.hint = getString(R.string.account_new_update_pay_password)
         }
         reset_pwd_show.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
