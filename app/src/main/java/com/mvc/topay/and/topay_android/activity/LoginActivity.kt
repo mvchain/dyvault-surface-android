@@ -100,7 +100,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
                 finish()
             }
             R.id.login_send -> {
-                showDialog("发送验证码中...")
+                showDialog(getString(R.string.send_code_load))
                 mPresenter.sendCode(login_email.text.toString())
             }
             R.id.login_submit -> {

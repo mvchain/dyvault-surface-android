@@ -8,11 +8,13 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.util.Log
 
 import com.blankj.utilcode.util.LogUtils
 import com.mvc.topay.and.topay_android.MyApplication
+import com.mvc.topay.and.topay_android.R
 
 import java.io.BufferedInputStream
 import java.io.File
@@ -41,8 +43,8 @@ object AppInnerDownLoder {
         // 必须一直下载完，不可取消
         pd.setCancelable(false)
         pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
-        pd.setMessage("正在下载安装包，请稍后")
-        pd.setTitle("版本升级")
+        pd.setMessage(mContext.getString(R.string.download_loading))
+        pd.setTitle(mContext.getString(R.string.version_update))
         pd.show()
         object : Thread() {
             override fun run() {

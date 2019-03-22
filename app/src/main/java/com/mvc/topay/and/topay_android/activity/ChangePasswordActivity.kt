@@ -2,13 +2,11 @@ package com.mvc.topay.and.topay_android.activity
 
 import android.content.Intent
 import android.text.InputType
-import android.view.Gravity
 import android.view.View
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BaseMVPActivity
 import com.mvc.topay.and.topay_android.base.BasePresenter
-import com.mvc.topay.and.topay_android.common.Constant
 import com.mvc.topay.and.topay_android.common.Constant.SP.RESETPASSWORD_LOGIN
 import com.mvc.topay.and.topay_android.common.Constant.SP.RESETPASSWORD_PAY
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYPE
@@ -42,17 +40,17 @@ class ChangePasswordActivity : BaseMVPActivity<IChangePasswordContract.ChangePas
         super.initMVPView()
         TYPE = intent.getIntExtra("type", -1)
         if (TYPE === RESETPASSWORD_PAY) {
-            update_title.text = "修改支付密码"
-            update_old_password.hint = "原支付密码"
-            update_new_password.hint = "新支付密码"
+            update_title.text = getString(R.string.account_update_pay_password)
+            update_old_password.hint = getString(R.string.account_old_pay_password)
+            update_new_password.hint = getString(R.string.account_new_pay_password)
             update_old_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(6)) //最大输入长度
             update_new_password.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(6)) //最大输入长度
             update_old_password.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD or InputType.TYPE_CLASS_NUMBER
             update_new_password.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD or InputType.TYPE_CLASS_NUMBER
         } else {
-            update_title.text = "修改登录密码"
-            update_old_password.hint = "原登录密码"
-            update_new_password.hint = "新登录密码"
+            update_title.text = getString(R.string.account_update_password)
+            update_old_password.hint = getString(R.string.account_old_password)
+            update_new_password.hint = getString(R.string.account_new_password)
             update_old_password.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
             update_new_password.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
         }

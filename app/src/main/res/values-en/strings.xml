@@ -44,9 +44,11 @@
     <string name="account_update_email">Modify mailbox</string>
     <string name="account_update_password">Modify the login password</string>
     <string name="account_update_pay_password">Modify payment password</string>
-    <string name="account_new_update_password">New login password</string>
-    <string name="account_new_update_pay_password">New payment password</string>
-
+    <string name="account_old_password">Original login password</string>
+    <string name="account_old_pay_password">Original payment password</string>
+    <string name="account_new_password">New login password</string>
+    <string name="account_new_pay_password">New payment password</string>
+    <string name="forget_old_pwd">Forgot the original password？</string>
 
     <string name="email_address">Email Adress</string>
     <string name="login_password">Login password</string>
@@ -61,4 +63,16 @@
     <string name="del_currency">Determine the deletion currency</string>
     <string name="sign_out_app">Confirmed to log out of ToPay?</string>
 
+
+    <string name="version_update">Version Upgrade</string>
+    <string name="download_loading">Downloading installation package, Please wait</string>
+    <string name="send_code_load">Send verification code...</string>
+    <string name="please_wait">Please wait</string>
+    <string name="verify_current_email">Please verify the current email first</string>
+    <string name="login_invalid">Login is invalid, please log in again</string>
+    <string name="confirm_pay_pwd">Confirm payment password</string>
+
+
+
+    <string name="null_sdk">No SD card found</string>
 </resources>

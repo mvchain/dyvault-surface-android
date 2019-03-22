@@ -34,7 +34,7 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.Cha
             override fun exit() {
                 change_send.isEnabled = true
                 change_send.setTextColor(ContextCompat.getColor(baseContext, R.color.register_button_bg))
-                change_send.text = "获取验证码"
+                change_send.text = getString(R.string.get_code)
             }
         }).updataTime()
     }
@@ -64,7 +64,7 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.Cha
             change_user_email.text = infoBean.username
             isEmail = true
         }else{
-            showToast("登录失效，请重新登录")
+            showToast(getString(R.string.login_invalid))
             startTaskActivity(this)
         }
     }
@@ -90,7 +90,7 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.Cha
                 if (!isEmail) {
                     return
                 }
-                showDialog("发送验证码中...")
+                showDialog(getString(R.string.send_code_load))
                 mPresenter.sendEmail()
             }
             R.id.change_next -> {
@@ -99,7 +99,7 @@ class ChangeEmailVerificationActivity : BaseMVPActivity<IChangeEmailContract.Cha
                     showToast(MyApplication.application!!.getString(R.string.login_null_code))
                     return
                 }
-                showDialog("请稍后...")
+                showDialog(getString(R.string.please_wait))
                 mPresenter.verifyEmail(code)
             }
         }

@@ -94,7 +94,7 @@ class SetEmailActivity : BaseMVPActivity<ISetEmailContract.SetEmailView, ISetEma
                     showToast(MyApplication.application!!.getString(R.string.login_null_email))
                     return
                 }
-                showDialog("发送验证码中...")
+                showDialog(getString(R.string.send_code_load))
                 mPresenter.sendEmail(emailAddress)
             }
             R.id.email_submit -> {

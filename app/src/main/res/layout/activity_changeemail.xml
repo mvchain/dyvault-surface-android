@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="修改邮箱"
+            android:text="@string/account_update_email"
             android:textColor="@color/login_title_tv_bg"
             android:textSize="15sp" />
 
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="40dp"
-                android:text="请先验证原来邮箱"
+                android:text="@string/verify_current_email"
                 android:textColor="@color/forget_password_bg"
                 android:textSize="13sp" />
 
@@ -80,7 +80,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="验证码"
+                    android:hint="@string/verification_code"
                     android:inputType="number"
                     android:maxLength="6"
                     android:maxLines="1"
@@ -98,7 +98,7 @@
                     android:layout_marginRight="12dp"
                     android:gravity="center"
                     android:onClick="onClick"
-                    android:text="获取验证码"
+                    android:text="@string/get_code"
                     android:textColor="@color/register_button_bg"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -113,7 +113,7 @@
                 android:background="@drawable/shape_register_bg_22dp"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:text="下一步"
+                android:text="@string/next"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
         </LinearLayout>

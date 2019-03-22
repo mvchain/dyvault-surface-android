@@ -78,14 +78,14 @@ class RegisterActivity : BaseMVPActivity<IRegisterContract.RegisterView, IRegist
                 finish()
             }
             R.id.register_send -> {
-                showDialog("发送验证码中...")
+                showDialog(getString(R.string.send_code_load))
                 mPresenter.sendCode(register_email.text.toString())
             }
             R.id.register_submit -> {
                 var email = register_email.text.toString()
                 var name = register_name.text.toString()
                 var code = register_code.text.toString()
-                showDialog("请稍后...")
+                showDialog(getString(R.string.please_wait))
                 mPresenter.verifyUser(name, email, "", code)
             }
             R.id.register_login -> {

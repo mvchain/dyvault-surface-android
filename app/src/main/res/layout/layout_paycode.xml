@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:gravity="center"
-                android:text="确认支付密码"
+                android:text="@string/confirm_pay_pwd"
                 android:textColor="@color/login_content"
                 android:textSize="15sp" />
 

@@ -99,7 +99,7 @@ class SetPasswordActivity : BaseMVPActivity<ISetPasswordContract.SetPasswordView
             }
 
             R.id.set_pwd_submit -> {
-                showDialog("请稍后...")
+                showDialog(getString(R.string.please_wait))
                 var login_password = set_pwd_login_password.text.toString()
                 var pay_password = set_pwd_pay_password.text.toString()
                 mPresenter.setPassword(email, inviteCode, nickname, login_password, mToken, pay_password)
