@@ -35,5 +35,10 @@
     <color name="coins_top">#F4F4F6</color>
     <color name="coins_bottom">#F1F1F1</color>
     <color name="coins_buying_name">#ACACAC</color>
+    <color name="coins_status_payed">#24B24A</color>
+    <color name="coins_status_complete">#555555</color>
+    <color name="coins_status_cancel">#C7C7C7</color>
+    <color name="coins_status_wait">#FF4600</color>
+    <color name="coins_status_failed">#FF3030</color>
 
 </resources>

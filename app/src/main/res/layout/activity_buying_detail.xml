@@ -61,9 +61,10 @@
                             android:textColor="@color/trand_gray"
                             android:layout_height="wrap_content"/>
                     <TextView
+                            android:id="@+id/buy_detail_status"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:text="已取消"
+                            android:text="-"
                             android:gravity="right"
                             android:textSize="17sp"
                             android:textStyle="bold"
@@ -73,21 +74,24 @@
                 <LinearLayout
                         android:id="@+id/remaining_time"
                         android:layout_width="match_parent"
+                        android:visibility="gone"
                         android:orientation="horizontal"
                         android:layout_marginTop="23dp"
                         android:layout_height="wrap_content">
                     <TextView
+                            android:id="@+id/buy_detail_time_hint"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:textSize="13sp"
-                            android:text="剩余收款时间"
+                            android:text="@string/buy_detail_time_hint"
                             android:textColor="@color/trand_gray"
                             android:layout_height="wrap_content"/>
                     <TextView
+                            android:id="@+id/buy_detail_time"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:textSize="17sp"
-                            android:text="15分30秒"
+                            android:text="-分-秒"
                             android:gravity="right"
                             android:textStyle="bold"
                             android:textColor="@color/content_tv_bg"
@@ -108,14 +112,14 @@
                         android:id="@+id/order_amount_hint"
                         android:textSize="13sp"
                         android:textColor="@color/detail_sxf_bg"
-                        android:text="订单金额"
+                        android:text="@string/order_amount_hint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 <TextView
                         android:id="@+id/order_amount"
                         android:textSize="15sp"
                         android:textColor="@color/content_tv_bg"
-                        android:text="12345.00 USDT"
+                        android:text="-"
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -124,7 +128,7 @@
                         android:textSize="13sp"
                         android:layout_below="@id/order_amount_hint"
                         android:textColor="@color/detail_sxf_bg"
-                        android:text="订单号"
+                        android:text="@string/order_number_hint"
                         android:layout_marginTop="12dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -133,7 +137,7 @@
                         android:textSize="15sp"
                         android:textColor="@color/detail_sxf_bg"
                         android:layout_alignBaseline="@id/order_number_hint"
-                        android:text="1234567890"
+                        android:text="-"
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -143,14 +147,14 @@
                         android:layout_marginTop="12dp"
                         android:textColor="@color/detail_sxf_bg"
                         android:layout_below="@id/order_number_hint"
-                        android:text="买家"
+                        android:text="@string/order_buyer_hint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 <TextView
                         android:id="@+id/order_buyer"
                         android:textSize="15sp"
                         android:textColor="@color/detail_sxf_bg"
-                        android:text="CANWENNY"
+                        android:text="-"
                         android:layout_alignBaseline="@id/order_buyer_hint"
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
@@ -161,7 +165,7 @@
                         android:textColor="@color/detail_sxf_bg"
                         android:layout_marginTop="12dp"
                         android:layout_below="@id/order_buyer_hint"
-                        android:text="单价"
+                        android:text="@string/order_price_hint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 <TextView
@@ -169,7 +173,7 @@
                         android:textSize="15sp"
                         android:layout_alignBaseline="@id/order_price_hint"
                         android:textColor="@color/detail_sxf_bg"
-                        android:text="12345.00 CNY"
+                        android:text="-"
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -179,7 +183,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/detail_sxf_bg"
                         android:layout_below="@id/order_price_hint"
-                        android:text="数量"
+                        android:text="@string/order_quantity_hint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 <TextView
@@ -187,7 +191,7 @@
                         android:layout_alignBaseline="@id/order_quantity_hint"
                         android:textSize="15sp"
                         android:textColor="@color/detail_sxf_bg"
-                        android:text="27025.00"
+                        android:text="-"
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -197,7 +201,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/detail_sxf_bg"
                         android:layout_below="@id/order_quantity_hint"
-                        android:text="订单金额"
+                        android:text="@string/order_time_hint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 <TextView
@@ -205,12 +209,13 @@
                         android:textSize="15sp"
                         android:textColor="@color/detail_sxf_bg"
                         android:layout_alignBaseline="@id/order_time_hint"
-                        android:text="12345.00 USDT"
+                        android:text="-"
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 <View
                         android:id="@+id/order_line"
+                        android:visibility="gone"
                         android:background="@color/line_gray"
                         android:layout_below="@id/order_time_hint"
                         android:layout_marginTop="19dp"
@@ -219,6 +224,7 @@
                 <RelativeLayout
                         android:id="@+id/payment_layout"
                         android:layout_width="wrap_content"
+                        android:visibility="gone"
                         android:layout_marginTop="19dp"
                         android:layout_below="@id/order_line"
                         android:layout_height="wrap_content">
@@ -226,7 +232,7 @@
                             android:id="@+id/buyer_payment_method_hint"
                             android:textSize="13sp"
                             android:textColor="@color/detail_sxf_bg"
-                            android:text="买家付款方式"
+                            android:text="@string/buyer_payment_method_hint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     <TextView
@@ -234,7 +240,7 @@
                             android:textSize="15sp"
                             android:textColor="@color/detail_sxf_bg"
                             android:layout_alignBaseline="@id/buyer_payment_method_hint"
-                            android:text="银行卡"
+                            android:text="-"
                             android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -244,7 +250,7 @@
                             android:textSize="13sp"
                             android:textColor="@color/detail_sxf_bg"
                             android:layout_below="@id/buyer_payment_method_hint"
-                            android:text="订单金额"
+                            android:text="@string/payment_account_hint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     <TextView
@@ -252,21 +258,22 @@
                             android:textSize="15sp"
                             android:textColor="@color/detail_sxf_bg"
                             android:layout_alignBaseline="@id/payment_account_hint"
-                            android:text="12345.00 USDT"
+                            android:text="-"
                             android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                 </RelativeLayout>
             </RelativeLayout>
             <TextView
+                    android:id="@+id/order_submit"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="110dp"
                     android:textColor="@color/colorWhite"
                     android:gravity="center"
                     android:layout_marginTop="70dp"
                     android:layout_marginBottom="80dp"
-                    android:background="@drawable/shape_receipt_submit_22dp"
-                    android:text="交易已完成"
+                    android:background="@drawable/shape_login_bg_22dp"
+                    android:text="@string/but_detail_submit"
                     android:layout_marginRight="110dp"
                     android:layout_height="44dp"/>
         </LinearLayout>

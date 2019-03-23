@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="通知"
+            android:text="@string/msg_title"
             android:textColor="@color/login_title_tv_bg"
             android:textSize="15sp" />
 

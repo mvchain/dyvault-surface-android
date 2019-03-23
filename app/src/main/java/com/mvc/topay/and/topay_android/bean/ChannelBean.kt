@@ -22,11 +22,16 @@ data class ChannelBean(
              * updatedAt : 0
              */
 
-            var channelName: String,
-            var contact: String,
+            var amount: Double,
             var createdAt: Long,
             var id: Int,
-            var info: String,
-            var updatedAt: Long
+            var orderNumber: String,
+            var orderStatus: Int,
+            var orderType: Int,
+            var stopAt: Long,
+            var tokenId: String,
+            var tokenName: String,
+            var tokenValue: Double,
+            var userId: Int
     )
 }

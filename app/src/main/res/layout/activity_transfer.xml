@@ -74,7 +74,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center_vertical"
-            android:hint="输入收款地址/账号"
+            android:hint="@string/transfer_trans_address"
             android:inputType=""
             android:paddingLeft="12dp"
             android:paddingRight="10dp"
@@ -95,7 +95,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_login_edit_14dp"
                 android:digits="1234567890."
-                android:hint="输入转账金额"
+                android:hint="@string/input_transfer_price"
                 android:inputType="numberDecimal"
                 android:paddingLeft="12dp"
                 android:singleLine="true"
@@ -139,7 +139,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="可用余额"
+                android:text="@string/transfer_available_balance"
                 android:textColor="@color/text_gray"
                 android:textSize="13sp" />
 
@@ -167,7 +167,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="交易手续费"
+                android:text="@string/transfer_sxf"
                 android:textColor="@color/text_gray"
                 android:textSize="13sp" />
 
@@ -190,7 +190,7 @@
         android:gravity="center"
         android:textColor="@color/detail_sxf_bg"
         android:padding="10dp"
-        android:text="Topay 用户之间转账/收款无需手续费"
+        android:text="@string/transfer_sxf_hint"
         android:textSize="11sp"
         android:layout_height="wrap_content" />
     <TextView
@@ -204,7 +204,7 @@
         android:background="@drawable/shape_login_bg_22dp"
         android:gravity="center"
         android:onClick="onClick"
-        android:text="确认"
+        android:text="@string/confirm"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold" />

@@ -103,7 +103,7 @@ object HttpUrl {
     /**
      *  Get transfer details based on transfer transaction ID
      */
-    const val CHANNEL = "channel"
+    const val BUSINESS = "business"
 
 
     /**

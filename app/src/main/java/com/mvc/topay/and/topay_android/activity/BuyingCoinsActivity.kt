@@ -2,19 +2,10 @@ package com.mvc.topay.and.topay_android.activity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.View
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.adapter.BuyingPagerAdapter
-import com.mvc.topay.and.topay_android.adapter.recyclerAdapter.ChannelAdapter
 import com.mvc.topay.and.topay_android.base.BaseActivity
-import com.mvc.topay.and.topay_android.base.BaseMVPActivity
-import com.mvc.topay.and.topay_android.base.BasePresenter
-import com.mvc.topay.and.topay_android.bean.ChannelBean
-import com.mvc.topay.and.topay_android.constract.IBuyingContract
 import com.mvc.topay.and.topay_android.fragment.BuyingCoinsFragment
-import com.mvc.topay.and.topay_android.presenter.BuyingPresenter
 import kotlinx.android.synthetic.main.activity_buying_coins.*
 import java.util.ArrayList
 
@@ -44,11 +35,11 @@ class BuyingCoinsActivity : BaseActivity() {
         completedBundle.putInt("type", 2)
         completedFragment.arguments = completedBundle
         mFragments.add(completedFragment)
-        var cancleFragment = BuyingCoinsFragment()
-        var cancleBundle = Bundle()
-        cancleBundle.putInt("type", 3)
-        cancleFragment.arguments = cancleBundle
-        mFragments.add(cancleFragment)
+        var cancelFragment = BuyingCoinsFragment()
+        var cancelBundle = Bundle()
+        cancelBundle.putInt("type", 4)
+        cancelFragment.arguments = cancelBundle
+        mFragments.add(cancelFragment)
         mBuyingAdapter = BuyingPagerAdapter(supportFragmentManager, mFragments)
         coins_tab.setupWithViewPager(coins_vp)
         coins_vp.adapter = mBuyingAdapter

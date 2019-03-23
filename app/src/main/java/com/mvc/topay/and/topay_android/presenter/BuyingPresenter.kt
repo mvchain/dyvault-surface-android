@@ -5,8 +5,8 @@ import com.mvc.topay.and.topay_android.constract.IBuyingContract
 import com.mvc.topay.and.topay_android.model.BuyingModel
 
 class BuyingPresenter : IBuyingContract.BuyingPresenter() {
-    override fun getChannelList(id: Int, pageSize: Int) {
-        mRxUtils.register(mIModel!!.getChannelList(id, pageSize)
+    override fun getChannelList(id: Int, pageSize: Int, status: Int) {
+        mRxUtils.register(mIModel!!.getChannelList(id, pageSize,status)
                 .subscribe({
                     channel->
                     mIView!!.channelSuccess(channel.data)
@@ -14,6 +14,7 @@ class BuyingPresenter : IBuyingContract.BuyingPresenter() {
                     mIView!!.channelFailed(it.message!!)
                 }))
     }
+
 
     companion object {
         fun newInstance(): BasePresenter<*, *> {

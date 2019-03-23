@@ -1,5 +1,6 @@
 package com.mvc.topay.and.topay_android.adapter.recyclerAdapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
 class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean>?) : BaseQuickAdapter<TransactionsBean.DataBean, BaseViewHolder>(layoutResId, data) {
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun convert(helper: BaseViewHolder, item: TransactionsBean.DataBean) {
         val icon = helper.getView<ImageView>(R.id.his_child_icon)
         val title = helper.getView<TextView>(R.id.his_child_title)
@@ -27,26 +29,26 @@ class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean
         if (item.classify === 0) {
             if (item.transactionType === 1) {
                 Glide.with(mContext).load(R.drawable.recharge).into(icon)
-                sb.append("充值：来自")
-                statusSb.append("充值")
+                sb.append(mContext.getString(R.string.top_up_from))
+                statusSb.append(mContext.getString(R.string.recharge))
             } else {
                 Glide.with(mContext).load(R.drawable.withdraw).into(icon)
-                sb.append("提现：提到")
-                statusSb.append("提现")
+                sb.append(mContext.getString(R.string.withdraw_mention))
+                statusSb.append(mContext.getString(R.string.withdraw))
             }
             status.visibility = View.VISIBLE
             when (item.status) {
                 0, 1 -> {
-                    status.text = "等待中"
+                    status.text = mContext.getString(R.string.waiting)
                     status.setTextColor(Color.parseColor("#AFAFAF"))
                 }
                 2 -> {
-                    statusSb.append("成功")
+                    statusSb.append(mContext.getString(R.string.success))
                     status.text = statusSb.toString()
                     status.setTextColor(Color.parseColor("#7FD43F"))
                 }
                 9 -> {
-                    statusSb.append("失败")
+                    statusSb.append(mContext.getString(R.string.failed))
                     status.text = statusSb.toString()
                     status.setTextColor(Color.RED)
                 }
@@ -54,14 +56,14 @@ class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean
         } else if (item.classify === 5) {
             if (item.transactionType === 1) {
                 Glide.with(mContext).load(R.drawable.receive).into(icon)
-                sb.append("收款：来自")
+                sb.append(mContext.getString(R.string.collection_from))
             } else {
                 Glide.with(mContext).load(R.drawable.transfer).into(icon)
-                sb.append("转账：转到")
+                sb.append(mContext.getString(R.string.transfer_go))
             }
             status.visibility = View.INVISIBLE
         }
-        title.text = sb.append("${if (item.transactionType === 1) item.fromAddress else item.toAddress}").toString()
+        title.text = sb.append(if (item.transactionType === 1) item.fromAddress else item.toAddress).toString()
         time.text = TimeUtils.millis2String(item.createdAt, SimpleDateFormat("yyyy-MM-dd HH:mm:ss") as DateFormat)
         price.text = "${if (item.transactionType === 1) "+" else "-"}${TextUtils.toBigDecimal(item.value)}"
         helper.addOnClickListener(R.id.his_layout)

@@ -10,11 +10,11 @@ import java.util.ArrayList
 
 interface IBuyingContract {
     abstract class BuyingPresenter : BasePresenter<BuyingModel, BuyingView>() {
-        abstract fun getChannelList(id: Int, pageSize: Int)
+        abstract fun getChannelList(id: Int, pageSize: Int, status: Int)
     }
 
     interface BuyingModel : IBaseModel {
-        fun getChannelList(id: Int, pageSize: Int): Observable<ChannelBean>
+        fun getChannelList(id: Int, pageSize: Int, status: Int): Observable<ChannelBean>
     }
 
     interface BuyingView : IBaseFragment {

@@ -41,7 +41,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
             override fun exit() {
                 login_send.isEnabled = true
                 login_send.setTextColor(ContextCompat.getColor(baseContext, R.color.register_button_bg))
-                login_send.text = "获取验证码"
+                login_send.text = getString(R.string.get_code)
             }
         }).updataTime()
     }
@@ -104,7 +104,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
                 mPresenter.sendCode(login_email.text.toString())
             }
             R.id.login_submit -> {
-                showDialog("登录中...")
+                showDialog(getString(R.string.logging_in))
                 var userName = login_email.text.toString()
                 var login_password = login_password.text.toString()
                 var login_code = login_code.text.toString()

@@ -111,7 +111,7 @@ class QCodeActivity : BaseActivity(), View.OnClickListener {
                         }
 
                         override fun cancle(i: Int) {
-                            ToastUtils.showLong("未给予读取权限无法读取相册图片")
+                            showToast(getString(R.string.no_permission_to_view_photos))
                         }
 
                         override fun success(i: Int) {
@@ -154,7 +154,7 @@ class QCodeActivity : BaseActivity(), View.OnClickListener {
                     setResult(200, intent)
                     finish()
                 } else {
-                    ToastUtils.showLong("图片不正确，请重新选择")
+                    showToast(getString(R.string.photos_error))
                 }
             }
         }

@@ -40,7 +40,7 @@ class RetrofitUtils {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
 //                    http://47.110.144.216/api/app/       http://192.168.15.21:10086/   http://54.238.152.0/api/app/
-                    .baseUrl("http://54.238.152.0/api/app/")
+                    .baseUrl("http://47.110.144.216/api/app/")
                     .client(okhttpUtils).build()
         }
         private val okhttpUtils: OkHttpClient

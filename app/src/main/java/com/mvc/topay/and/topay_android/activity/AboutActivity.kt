@@ -100,6 +100,8 @@ class AboutActivity : BaseActivity() {
                                     }
                                 }
                             }).show()
+                        }else{
+                            showDialog(getString(R.string.currency_version_news))
                         }
                     } else {
                         LogUtils.e(installApkBean.message)

@@ -53,7 +53,7 @@ class SetEmailActivity : BaseMVPActivity<ISetEmailContract.SetEmailView, ISetEma
             override fun exit() {
                 email_send.isEnabled = true
                 email_send.setTextColor(ContextCompat.getColor(baseContext, R.color.register_button_bg))
-                email_send.text = "获取验证码"
+                email_send.text = getString(R.string.get_code)
             }
         }).updataTime()
     }
@@ -66,7 +66,7 @@ class SetEmailActivity : BaseMVPActivity<ISetEmailContract.SetEmailView, ISetEma
 
     override fun verifyEmailSuccess(token: String) {
         dismiss()
-        showToast("邮箱修改成功")
+        showToast(getString(R.string.mailbox_was_successfully))
         SPUtils.getInstance().put(TOKEN, token)
         SPUtils.getInstance().put(USER_EMAIL, email_address.text.toString())
         MyApplication.token = token
@@ -105,10 +105,10 @@ class SetEmailActivity : BaseMVPActivity<ISetEmailContract.SetEmailView, ISetEma
                     return
                 }
                 if (emailCode === "") {
-                    showToast(MyApplication.application!!.getString(R.string.login_null_code))
+                    showToast(getString(R.string.login_null_code))
                     return
                 }
-                showDialog("修改中...")
+                showDialog(getString(R.string.modifying_password))
                 mPresenter.verifyEmail(emailAddress, sToken, emailCode)
             }
         }

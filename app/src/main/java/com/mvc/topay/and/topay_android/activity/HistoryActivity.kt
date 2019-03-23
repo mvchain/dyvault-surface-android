@@ -105,7 +105,7 @@ class HistoryActivity : BaseActivity() {
                         }
 
                         override fun cancle(i: Int) {
-                            ToastUtils.showLong("未给予相机权限将无法扫描二维码")
+                            showToast(getString(R.string.camera_not_permission))
                         }
 
                         override fun success(i: Int) {
@@ -150,7 +150,7 @@ class HistoryActivity : BaseActivity() {
                     }
                 }, {
                     LogUtils.e(it!!.message)
-                    showToast("服务器繁忙")
+                    showToast(getString(R.string.service_error))
                 })
     }
 
@@ -161,7 +161,7 @@ class HistoryActivity : BaseActivity() {
                 200 -> {
                     val qode = data.getBooleanExtra("QODE", false)
                     if (!qode) {
-                        showToast("无效地址")
+                        showToast(getString(R.string.invalid_address))
                         return
                     }
                     val stringExtra = data.getStringExtra(CodeUtils.RESULT_STRING)

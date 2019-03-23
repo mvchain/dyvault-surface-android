@@ -30,7 +30,8 @@ class RegisterActivity : BaseMVPActivity<IRegisterContract.RegisterView, IRegist
             override fun exit() {
                 register_send.isEnabled = true
                 register_send.setTextColor(ContextCompat.getColor(baseContext, R.color.register_button_bg))
-                register_send.text = "获取验证码"
+                register_send.text = getString(R.string.get_code)
+
             }
         }).updataTime()
     }

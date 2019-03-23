@@ -71,7 +71,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
     }
 
     override fun networkError() {
-        showToast("服务器繁忙")
+        showToast(getString(R.string.service_error))
         mWalletRefresh.post { mWalletRefresh.isRefreshing = false }
     }
 
@@ -123,7 +123,7 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         }
         mWalletAddCurrency.setOnClickListener {
             if (SPUtils.getInstance().getString(ASSETS_LIST) === "") {
-                showToast("服务器繁忙")
+                showToast(getString(R.string.service_error))
             } else {
                 startActivity(Intent(mActivity, IncreaseCurrencyActivity::class.java))
             }

@@ -97,14 +97,15 @@ class IncreaseCurrencyActivity : BaseMVPActivity<IIncreaseContract.IIncreaseView
         increase_serach_null.visibility = View.VISIBLE
         increase_search_rv.visibility = View.GONE
         increase_rv.visibility = View.GONE
-        increase_serach_null.text = "未获取到币种"
+        increase_serach_null.text = getString(R.string.unacquired_currency)
+
     }
 
     override fun showSearchNull() {
         increase_serach_null.visibility = View.VISIBLE
         increase_search_rv.visibility = View.GONE
         increase_rv.visibility = View.GONE
-        increase_serach_null.text = "没有搜索到相关结果"
+        increase_serach_null.text = getString(R.string.null_search_data)
     }
 
     fun onClick(v: View) {
@@ -157,9 +158,8 @@ class IncreaseCurrencyActivity : BaseMVPActivity<IIncreaseContract.IIncreaseView
                     }
                 } else {
                     //全部列表结果
-                    LogUtils.e(mBean.size)
                     if (!mBean[position].isAdd) {
-                        dialogHelper.create(this, getString(R.string.del_currency) + mBean[position].title + "?", object :IDialogViewClickListener {
+                        dialogHelper.create(this, getString(R.string.del_currency) + mBean[position].title + "?", object : IDialogViewClickListener {
                             override fun click(viewId: Int) {
                                 when (viewId) {
                                     R.id.hint_cancle -> {
@@ -236,7 +236,7 @@ class IncreaseCurrencyActivity : BaseMVPActivity<IIncreaseContract.IIncreaseView
             if (updateBean.code === 200 && updateBean.data) {
                 EventBus.getDefault().post(WalletAssetsListEvent())
             }
-        }, { throwable -> LogUtils.e("IncreaseCurrencyActivit", throwable.message) })
+        }, { throwable -> LogUtils.e("IncreaseCurrencyActivity", throwable.message) })
         if (increase_search_rv.visibility == View.VISIBLE) {
             val add = mSearch[position].isAdd
             mSearch[position].isAdd = !add

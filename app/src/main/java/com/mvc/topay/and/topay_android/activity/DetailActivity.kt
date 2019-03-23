@@ -1,6 +1,7 @@
 package com.mvc.topay.and.topay_android.activity
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -42,38 +43,39 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
         return DetailPresenter.newInstance()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun detailSuccess(detailBean: DetailBean.DataBean) {
         var sb = StringBuffer()
         var iconResId = R.drawable.waiting //default icon
-        detail_price_content.text ="${TextUtils.doubleToFour(detailBean.value)}  ${detailBean.feeTokenType}"
-        if (detailBean.classify === 5) {
-            detail_fees_title.text = "订单号"
+        detail_price_content.text = "${TextUtils.doubleToFour(detailBean.value)}  ${detailBean.feeTokenType}"
+        if (detailBean.classify == 5) {
+            detail_fees_title.text = getString(R.string.order_number_hint)
             detail_fees_content.text = detailBean.orderNumber
             detail_coll_layout.visibility = View.GONE
             detail_hash_layout.visibility = View.GONE
             if (detailBean.transactionType == 1) {
-                sb.append("收款：来自${detailBean.fromAddress}")
+                sb.append("${getString(R.string.collection_from)}${detailBean.fromAddress}")
             } else {
-                sb.append("转账：转到${detailBean.toAddress}")
+                sb.append("${getString(R.string.transfer_go)}${detailBean.toAddress}")
             }
             iconResId = R.drawable.success
-        } else if (detailBean.classify === 0) {
+        } else if (detailBean.classify == 0) {
             when (detailBean.status) {
                 0, 1 -> {
-                    sb.append("等待中")
+                    sb.append(getString(R.string.waiting))
                     iconResId = R.drawable.waiting
                 }
                 2 -> {
-                    sb.append("提现成功")
+                    sb.append(getString(R.string.successful_withdrawal))
                     iconResId = R.drawable.success
                 }
                 3 -> {
-                    sb.append("提现失败")
+                    sb.append(getString(R.string.cash_withdrawal_failure))
                     iconResId = R.drawable.failure
                 }
             }
-            detail_colladd_title.text = if (detailBean.transactionType == 1) "来源地址" else "目标地址"
-            detail_fees_title.text = "交易手续费"
+            detail_colladd_title.text = if (detailBean.transactionType == 1) getString(R.string.source_address) else getString(R.string.target_address)
+            detail_fees_title.text = getString(R.string.transaction_fees)
             detail_fees_content.text = "${TextUtils.doubleToSix(detailBean.fee)} ${detailBean.feeTokenType}"
             detail_colladd_content.text = if (detailBean.transactionType == 1) detailBean.fromAddress else detailBean.toAddress
             detail_hash_content.text = detailBean.blockHash
@@ -81,7 +83,7 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
                 var cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 var mClipData = ClipData.newPlainText("hash", detail_colladd_content.text.toString())
                 cm.primaryClip = mClipData
-                showToast("hash地址已复制到剪贴板")
+                showToast(getString(R.string.hash_copy_hint))
             }
             detail_hash_content.setOnClickListener {
                 val uri = Uri.parse(detailBean.hashLink)
@@ -92,7 +94,7 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
                 var cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 var mClipData = ClipData.newPlainText("hash", detail_hash_content.text.toString())
                 cm.primaryClip = mClipData
-                showToast("交易hash已复制到剪贴板")
+                showToast(getString(R.string.tran_hash_copy_hint))
                 true
             }
         }
@@ -118,7 +120,7 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
                     }
 
                     override fun cancle(i: Int) {
-                        showToast("权限不足")
+                        showToast(getString(R.string.insufficient_permissions))
                     }
 
                     override fun success(i: Int) {
@@ -130,7 +132,7 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
                         parintent.type = "image/*"  //设置分享内容的类型
                         parintent.putExtra(Intent.EXTRA_STREAM, parseUri)
                         //创建分享的Dialog
-                        val share_intent = Intent.createChooser(parintent, "分享到:")
+                        val share_intent = Intent.createChooser(parintent, getString(R.string.share_hint))
                         startActivity(share_intent)
                         drawingCache.recycle()
                         share_layout.isDrawingCacheEnabled = false

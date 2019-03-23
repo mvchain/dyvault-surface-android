@@ -26,8 +26,8 @@ class MineQCodeActivity : BaseMVPActivity<IReceiptQRContract.ReceiptQRView, IRec
     private var tokenId: Int = 0
     private lateinit var tokenName: String
     override fun initMVPData() {
-        m_title.text = "$tokenName 收款"
-        m_qcode_content.text = "$tokenName 收款地址"
+        m_title.text = "$tokenName ${getString(R.string.transfer_receipt)}"
+        m_qcode_content.text = "$tokenName ${getString(R.string.transfer_collection_address)}"
         mPresenter.getMineQcode(tokenId)
     }
 
@@ -70,7 +70,7 @@ class MineQCodeActivity : BaseMVPActivity<IReceiptQRContract.ReceiptQRView, IRec
                     }
 
                     override fun cancle(i: Int) {
-                        showToast("权限不足")
+                        showToast(getString(R.string.insufficient_permissions))
                     }
 
                     override fun success(i: Int) {
@@ -82,7 +82,7 @@ class MineQCodeActivity : BaseMVPActivity<IReceiptQRContract.ReceiptQRView, IRec
                         parintent.type = "image/*"  //设置分享内容的类型
                         parintent.putExtra(Intent.EXTRA_STREAM, parseUri)
                         //创建分享的Dialog
-                        val share_intent = Intent.createChooser(parintent, "分享到:")
+                        val share_intent = Intent.createChooser(parintent, getString(R.string.share_hint))
                         startActivity(share_intent)
                         drawingCache.recycle()
                         share_layout.setDrawingCacheEnabled(false)
@@ -97,7 +97,7 @@ class MineQCodeActivity : BaseMVPActivity<IReceiptQRContract.ReceiptQRView, IRec
                 val mClipData = ClipData.newPlainText("hash", m_qcode_hash.text.toString())
                 // 将ClipData内容放到系统剪贴板里。
                 cm.primaryClip = mClipData
-                ToastUtils.showLong("内容已复制至剪贴板")
+                showToast(getString(R.string.copy_hint))
             }
         }
     }

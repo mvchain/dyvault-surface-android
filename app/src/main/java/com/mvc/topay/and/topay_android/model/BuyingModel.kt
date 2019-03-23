@@ -10,12 +10,13 @@ import com.mvc.topay.and.topay_android.utils.RxHelper
 import io.reactivex.Observable
 
 class BuyingModel : BaseModel(), IBuyingContract.BuyingModel {
-    override fun getChannelList(id: Int, pageSize: Int): Observable<ChannelBean> {
+    override fun getChannelList(id: Int, pageSize: Int, status: Int): Observable<ChannelBean> {
         return RetrofitUtils.client(ApiStore::class.java)
-                .getChannelList(MyApplication.token, id, pageSize)
+                .getBusinessList(MyApplication.token, id, pageSize, status)
                 .compose(RxHelper.rxSchedulerHelper())
                 .map { channel -> channel }
     }
+
 
     companion object {
         val instance: BuyingModel

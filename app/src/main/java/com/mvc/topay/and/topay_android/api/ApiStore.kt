@@ -174,10 +174,16 @@ interface ApiStore {
 
 
     /**
-     * get channel list
+     * get business list
      */
-    @GET(HttpUrl.CHANNEL)
-    fun getChannelList(@Header("Authorization") token: String, @Query("id") id: Int, @Query("pageSize") pageSize: Int): Observable<ChannelBean>
+    @GET(HttpUrl.BUSINESS)
+    fun getBusinessList(@Header("Authorization") token: String, @Query("id") id: Int, @Query("pageSize") pageSize: Int, @Query("status") status:Int): Observable<ChannelBean>
+
+    /**
+     * get business detail
+     */
+    @GET(HttpUrl.BUSINESS+"/{id}")
+    fun getBusinessDetail(@Header("Authorization") token: String, @Path("id") id: Int): Observable<BuyDetailBean>
 
 
     /**

@@ -50,7 +50,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
     private lateinit var tranDialog: Dialog
     override fun initMVPData() {
         btc_price.text = tokenName
-        transfer_title.text = "${tokenName}转账"
+        transfer_title.text = "$tokenName${getString(R.string.btn_transfer)}"
         transfer_trans_address.setText(mHash)
         mPresenter.getDetail(tokenId)
         transfer_trans_price.filters = arrayOf<InputFilter>(PointLengthFilter())
@@ -61,13 +61,13 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
         tokenName = intent.getStringExtra("tokenName")
         tokenId = intent.getIntExtra("tokenId", 0)
         mHash = intent.getStringExtra("hash")
-        tranDialog = WeiboDialogUtils.createLoadingDialog(this@TransferActivity, "转帐中")
+        tranDialog = WeiboDialogUtils.createLoadingDialog(this@TransferActivity, getString(R.string.transfer))
         transfer_trans_price.addTextChangedListener(object : EditTextWatcher() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 var changePrice = s.toString()
                 if (changePrice != "" && mTransBean != null) {
                     if (TextUtils.stringToDouble(changePrice) > mTransBean.balance) {
-                        transfer_balance.text = "余额不足"
+                        transfer_balance.text = getString(R.string.insufficient_balance)
                         transfer_balance.setTextColor(ContextCompat.getColor(baseContext, R.color.colorRed))
                         transfer_submit.isEnabled = false
                     } else {
@@ -110,12 +110,12 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
     }
 
     override fun detailFailed(msg: String) {
-        showToast("服务器繁忙")
+        showToast(getString(R.string.service_error))
     }
 
     override fun transferSuccess(bean: HttpUpdateBean) {
         if (bean.code === 200) {
-            showToast("操作成功")
+            showToast(getString(R.string.successful_operation))
         }
         EventBus.getDefault().post(WalletAssetsListEvent())
         EventBus.getDefault().post(HistoryEvent())
@@ -138,7 +138,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                 200 -> {
                     val qode = data.getBooleanExtra("QODE", false)
                     if (!qode) {
-                        showToast("无效地址")
+                        showToast(getString(R.string.invalid_address))
                         return
                     }
                     val hash = data.getStringExtra(CodeUtils.RESULT_STRING)
@@ -167,7 +167,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                         }
 
                         override fun cancle(i: Int) {
-                            showToast("未给予相机权限将无法扫描二维码")
+                            showToast(getString(R.string.camera_not_permission))
                         }
 
                         override fun success(i: Int) {
@@ -187,15 +187,15 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                 var transfer_address = transfer_trans_address.text.toString()
                 var transfer_price = transfer_trans_price.text.toString()
                 if (transfer_address == "") {
-                    showToast("收款地址/账号 不能为空")
+                    showToast("${getString(R.string.collection_address)}${getString(R.string.not_null)}")
                     return
                 }
                 if (transfer_price == "") {
-                    showToast("转账金额不能为空")
+                    showToast("${getString(R.string.transfer_amount)}${getString(R.string.not_null)}")
                     return
                 }
                 if (java.lang.Double.parseDouble(transfer_price) <= 0) {
-                    showToast("转账金额不正确")
+                    showToast("${getString(R.string.transfer_amount)}${getString(R.string.incorrect)}")
                     return
                 }
                 mPopView = PopViewHelper.instance.create(this
@@ -208,7 +208,7 @@ class TransferActivity : BaseMVPActivity<ITransferContract.TransferView, ITransf
                         when (view.id) {
                             R.id.pay_close -> {
                                 mPopView.dismiss()
-                                showToast("取消交易")
+                                showToast(getString(R.string.cancel_the_deal))
                             }
                             R.id.pay_text -> {
                                 KeyboardUtils.showSoftInput(mPopView.contentView.findViewById<View>(R.id.pay_text))

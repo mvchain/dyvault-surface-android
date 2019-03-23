@@ -77,11 +77,11 @@ class ChangePasswordActivity : BaseMVPActivity<IChangePasswordContract.ChangePas
                 var oldPsw = update_old_password.text.toString()
                 var newPsw = update_new_password.text.toString()
                 if (oldPsw === "") {
-                    showToast("原密码不可为空")
+                    showToast(getString(R.string.old_pwd_not_null))
                     return
                 }
                 if (newPsw === "") {
-                    showToast("新密码不可为空")
+                    showToast(getString(R.string.new_pwd_not_null))
                     return
                 }
                 if (TYPE === RESETPASSWORD_LOGIN) {

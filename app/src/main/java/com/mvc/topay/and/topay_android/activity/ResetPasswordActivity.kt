@@ -77,7 +77,7 @@ class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswo
                 finish()
             }
             R.id.reset_next -> {
-                showDialog("修改中...")
+                showDialog(getString(R.string.modifying_password))
                 mPresenter.resetPassword(mEmail, reset_email.text.toString(), mToken, type)
             }
         }

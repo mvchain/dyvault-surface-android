@@ -53,7 +53,7 @@ class VerificationEmailActivity : BaseMVPActivity<IVerificationContract.Verifica
             override fun exit() {
                 verification_send.isEnabled = true
                 verification_send.setTextColor(ContextCompat.getColor(baseContext, R.color.register_button_bg))
-                verification_send.text = "获取验证码"
+                verification_send.text = getString(R.string.get_code)
             }
         }).updataTime()
     }
@@ -74,13 +74,13 @@ class VerificationEmailActivity : BaseMVPActivity<IVerificationContract.Verifica
             }
             R.id.verification_send -> {
                 var email = verification_email.text.toString()
-                showDialog("发送验证码中")
+                showDialog(getString(R.string.send_code_load))
                 mPresenter.sendCode(email)
             }
             R.id.verification_next -> {
                 var email = verification_email.text.toString()
                 var code = verification_code.text.toString()
-                showDialog("验证中...")
+                showDialog(getString(R.string.in_verification))
                 mPresenter.resetPassword(email, code)
             }
         }
