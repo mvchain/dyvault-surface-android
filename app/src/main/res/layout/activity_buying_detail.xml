@@ -54,9 +54,10 @@
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
                     <TextView
+                            android:id="@+id/buy_detail_status_hint"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:text="出售"
+                            android:text="-"
                             android:textSize="13sp"
                             android:textColor="@color/trand_gray"
                             android:layout_height="wrap_content"/>

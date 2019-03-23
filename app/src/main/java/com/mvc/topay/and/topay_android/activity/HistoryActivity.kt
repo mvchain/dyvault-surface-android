@@ -67,7 +67,11 @@ class HistoryActivity : BaseActivity() {
         rateType = intent.getStringExtra("rateType")
         tokenName = intent.getStringExtra("tokenName")
         fragments = ArrayList()
-        historyAdapter = HistoryPagerAdapter(supportFragmentManager, fragments)
+        var titles = ArrayList<String>()
+        titles.add(getString(R.string.page_all))
+        titles.add(getString(R.string.page_expenditure))
+        titles.add(getString(R.string.page_income))
+        historyAdapter = HistoryPagerAdapter(supportFragmentManager, fragments,titles)
         history_vp.adapter = historyAdapter
         history_table.setupWithViewPager(history_vp)
     }

@@ -54,9 +54,9 @@ class BuyingCoinsFragment : BaseMVPFragment<IBuyingContract.BuyingView, IBuyingC
         buyAdapter.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
                 R.id.coins_layout -> {
-//                    var buyIntent = Intent(mActivity, BuyingDetailActivity::class.java)
-//                    buyIntent.putExtra("buyingId", buyBean[position].id)
-//                    startActivity(buyIntent)
+                    var buyIntent = Intent(mActivity, BuyingDetailActivity::class.java)
+                    buyIntent.putExtra("buyingId", buyBean[position].id)
+                    startActivity(buyIntent)
                 }
             }
         }

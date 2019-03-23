@@ -8,10 +8,7 @@ import com.mvc.topay.and.topay_android.R
 
 import java.util.ArrayList
 
-class HistoryPagerAdapter(fm: FragmentManager, private val fragments: ArrayList<Fragment>) : FragmentPagerAdapter(fm) {
-    private val titles = arrayOf(MyApplication.appContext.getString(R.string.page_all)
-            , MyApplication.application!!.getString(R.string.page_expenditure)
-            , MyApplication.appContext.getString(R.string.page_income))
+class HistoryPagerAdapter(fm: FragmentManager, private val fragments: ArrayList<Fragment>,private val titles :ArrayList<String>) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return fragments[position]

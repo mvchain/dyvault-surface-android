@@ -88,6 +88,7 @@ class BuyingDetailActivity : BaseMVPActivity<IBuyingDetailContract.BuyingDetailV
                 buy_detail_status.setTextColor(ContextCompat.getColor(baseContext, R.color.coins_status_failed))
             }
         }
+        buy_detail_status_hint.text = "${if(buydetailBean.orderType == 1) getString(R.string.page_buy) else getString(R.string.page_sell)} ${buydetailBean.tokenName}"
         order_amount.text = "${TextUtils.doubleToFour(buydetailBean.amount)}${buydetailBean.tokenName}"
         order_number.text = buydetailBean.orderNumber
         order_buyer.text = buydetailBean.buyUsername

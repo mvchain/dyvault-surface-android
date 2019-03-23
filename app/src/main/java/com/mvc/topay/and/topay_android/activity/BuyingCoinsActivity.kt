@@ -2,6 +2,7 @@ package com.mvc.topay.and.topay_android.activity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.adapter.BuyingPagerAdapter
 import com.mvc.topay.and.topay_android.base.BaseActivity
@@ -40,7 +41,12 @@ class BuyingCoinsActivity : BaseActivity() {
         cancelBundle.putInt("type", 4)
         cancelFragment.arguments = cancelBundle
         mFragments.add(cancelFragment)
-        mBuyingAdapter = BuyingPagerAdapter(supportFragmentManager, mFragments)
+        var titles = ArrayList<String>()
+        titles.add(getString(R.string.page_all))
+        titles.add(getString(R.string.page_processing))
+        titles.add(getString(R.string.page_completed))
+        titles.add(getString(R.string.page_cancel))
+        mBuyingAdapter = BuyingPagerAdapter(supportFragmentManager, mFragments,titles)
         coins_tab.setupWithViewPager(coins_vp)
         coins_vp.adapter = mBuyingAdapter
         buying_back.setOnClickListener { finish() }
