@@ -1,12 +1,13 @@
 package com.mvc.topay.and.topay_android.utils
 
 import android.content.Intent
-import android.util.Log
+import cn.jpush.android.api.JPushInterface
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.Utils
 import com.mvc.topay.and.topay_android.MyApplication
+import com.mvc.topay.and.topay_android.activity.SelectLoginActivity
 import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.common.Constant
 import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
@@ -77,14 +78,16 @@ class RetrofitUtils {
                             SPUtils.getInstance().remove(USER_EMAIL)
                             SPUtils.getInstance().remove(USER_SALT)
                             SPUtils.getInstance().remove(USER_INFO)
-                            val intent = Intent()
-                            intent.action = "${MyApplication.application!!.packageName}.android.login"
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            Utils.getApp().startActivity(intent)
+                            if(ActivityUtils.getTopActivity() !is SelectLoginActivity){
+                                val intent = Intent()
+                                JPushInterface.deleteAlias(MyApplication.application, SPUtils.getInstance().getInt(USER_ID))
+                                intent.action = "${MyApplication.application!!.packageName}.android.login"
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                Utils.getApp().startActivity(intent)
+                            }
                             null
                         }
                     }
-
                     .sslSocketFactory(createSSLSocketFactory()!!)
                     .writeTimeout(15, TimeUnit.SECONDS)
                     .readTimeout(15, TimeUnit.SECONDS)

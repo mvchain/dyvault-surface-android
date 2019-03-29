@@ -3,6 +3,7 @@ package com.mvc.topay.and.topay_android
 import android.app.Application
 import android.content.Context
 import android.view.Gravity
+import cn.jpush.android.api.JPushInterface
 
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
@@ -16,8 +17,7 @@ class MyApplication : Application() {
         myApplication = this
         appContext = applicationContext
         Utils.init(this)
-        //        JPushInterface.setDebugMode(true);
-        //        JPushInterface.init(this);
+        JPushInterface.init(this)
         //        MultiDex.install(this);
         //        if (SPUtils.getInstance().getString(DEFAULT_ENGLUSH).equals("")) {
         //            Locale locale = new Locale(ENGLISH);

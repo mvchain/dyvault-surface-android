@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
+import cn.jpush.android.api.JPushInterface
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.barlibrary.ImmersionBar
@@ -99,6 +100,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
         SPUtils.getInstance().remove(USER_EMAIL)
         SPUtils.getInstance().remove(USER_SALT)
         SPUtils.getInstance().remove(USER_INFO)
+        JPushInterface.deleteAlias(applicationContext, SPUtils.getInstance().getInt(USER_ID))
         val intent = Intent(activity, SelectLoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)

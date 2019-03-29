@@ -4,6 +4,7 @@ import android.content.Intent
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
+import cn.jpush.android.api.JPushInterface
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.MainActivity
@@ -33,6 +34,7 @@ class SetPasswordActivity : BaseMVPActivity<ISetPasswordContract.SetPasswordView
         SPUtils.getInstance().put(USER_EMAIL, dataBean.email)
         SPUtils.getInstance().put(USER_SALT, dataBean.salt)
         var mainIntent = Intent(this, MainActivity::class.java)
+        JPushInterface.setAlias(applicationContext, dataBean.userId, "${dataBean.userId}")
         mainIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(mainIntent)
     }

@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
+import cn.jpush.android.api.JPushInterface
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SpanUtils
 import com.mvc.topay.and.topay_android.MainActivity
@@ -60,6 +61,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
         SPUtils.getInstance().put(USER_ID, dataBean.userId)
         SPUtils.getInstance().put(USER_EMAIL, dataBean.email)
         SPUtils.getInstance().put(USER_SALT, dataBean.salt)
+        JPushInterface.setAlias(applicationContext, dataBean.userId, "${dataBean.userId}")
         var mainIntent = Intent(this, MainActivity::class.java)
         mainIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(mainIntent)
@@ -75,7 +77,7 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
 
     override fun initMVPView() {
         super.initMVPView()
-        login_pwd_show.setOnCheckedChangeListener { buttonView, isChecked ->
+        login_pwd_show.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 login_password.transformationMethod = HideReturnsTransformationMethod.getInstance()
             } else {

@@ -1,9 +1,14 @@
 package com.mvc.topay.and.topay_android.activity
 
+import android.annotation.SuppressLint
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BaseActivity
 import android.content.Intent
 import android.os.Handler
+import android.webkit.JavascriptInterface
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.blankj.utilcode.util.EncryptUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
@@ -22,12 +27,12 @@ class StartActivity : BaseActivity() {
         return R.layout.activity_start
     }
 
+    @SuppressLint("JavascriptInterface")
     override fun initView() {
         super.initView()
         val default_language = SPUtils.getInstance().getString(DEFAULT_LANGUAGE)
         val default_accept_language = SPUtils.getInstance().getString(DEFAULT_ACCEPT_LANGUAGE)
         //Set to Chinese if there is no default internationalization language  (app)
-        LogUtils.e(default_language)
         if (default_language == "") {
             SPUtils.getInstance().put(DEFAULT_LANGUAGE, CHINESE)
         }
@@ -46,6 +51,7 @@ class StartActivity : BaseActivity() {
             }
         }, 300)
     }
+
 
     override fun initData() {
 
