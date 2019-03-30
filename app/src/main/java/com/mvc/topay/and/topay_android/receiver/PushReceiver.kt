@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.os.Bundle
 import android.support.v4.app.NotificationCompat
 import android.util.Log
 import cn.jpush.android.api.JPushInterface
@@ -20,6 +19,8 @@ import org.json.JSONObject
 
 class PushReceiver : BroadcastReceiver() {
     private var nm: NotificationManager? = null
+    private val ORDER_STATUS = "ORDER_STATUS"
+
 
     override fun onReceive(context: Context, intent: Intent) {
         if (null == nm) {
@@ -57,13 +58,13 @@ class PushReceiver : BroadcastReceiver() {
         val title = bundle!!.getString(JPushInterface.EXTRA_TITLE)
         val message = bundle.getString(JPushInterface.EXTRA_MESSAGE)
         val extra = bundle.getString(JPushInterface.EXTRA_EXTRA)
+        LogUtils.e(TAG, bundle)
         val extraJson = JSONObject(extra)
-        LogUtils.e(TAG, extraJson.toString() + "========" + message)
-        val orderId = extraJson.getInt("orderId")
+        val id = extraJson.getInt("id")
         val builder: NotificationCompat.Builder
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder = NotificationCompat.Builder(context, "price_update")
-            nm!!.createNotificationChannel(NotificationChannel("price_update", "新消息通知", NotificationManager.IMPORTANCE_HIGH))
+            builder = NotificationCompat.Builder(context, "to_pay")
+            nm!!.createNotificationChannel(NotificationChannel("to_pay", "新消息通知", NotificationManager.IMPORTANCE_HIGH))
         } else {
             builder = NotificationCompat.Builder(context)
         }
@@ -87,7 +88,7 @@ class PushReceiver : BroadcastReceiver() {
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 //设置通知小ICON(应用默认图标)
                 .setSmallIcon(R.mipmap.icon)
-        nm!!.notify(orderId, builder.build())
+        nm!!.notify(id, builder.build())
     }
 
     companion object {

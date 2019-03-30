@@ -185,6 +185,12 @@ interface ApiStore {
     @GET(HttpUrl.BUSINESS+"/{id}")
     fun getBusinessDetail(@Header("Authorization") token: String, @Path("id") id: Int): Observable<BuyDetailBean>
 
+    /**
+     * get business detail
+     */
+    @PUT(HttpUrl.BUSINESS+"/{id}")
+    fun putBusinessDetail(@Header("Authorization") token: String, @Path("id") id: Int): Observable<HttpUpdateBean>
+
 
     /**
      * get channel list

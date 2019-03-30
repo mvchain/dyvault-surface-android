@@ -15,7 +15,6 @@ import com.mvc.topay.and.topay_android.utils.TextUtils
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
-@Suppress("DEPRECATED_IDENTITY_EQUALS")
 class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean>?) : BaseQuickAdapter<TransactionsBean.DataBean, BaseViewHolder>(layoutResId, data) {
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun convert(helper: BaseViewHolder, item: TransactionsBean.DataBean) {
@@ -26,8 +25,8 @@ class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean
         val status = helper.getView<TextView>(R.id.his_child_status)
         var sb = StringBuffer()
         var statusSb = StringBuffer()
-        if (item.classify === 0) {
-            if (item.transactionType === 1) {
+        if (item.classify == 0) {
+            if (item.transactionType == 1) {
                 Glide.with(mContext).load(R.drawable.recharge).into(icon)
                 sb.append(mContext.getString(R.string.top_up_from))
                 statusSb.append(mContext.getString(R.string.recharge))
@@ -53,8 +52,8 @@ class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean
                     status.setTextColor(Color.RED)
                 }
             }
-        } else if (item.classify === 5) {
-            if (item.transactionType === 1) {
+        } else if (item.classify == 5) {
+            if (item.transactionType == 1) {
                 Glide.with(mContext).load(R.drawable.receive).into(icon)
                 sb.append(mContext.getString(R.string.collection_from))
             } else {
@@ -62,10 +61,19 @@ class HistoryChildAdapter(layoutResId: Int, data: List<TransactionsBean.DataBean
                 sb.append(mContext.getString(R.string.transfer_go))
             }
             status.visibility = View.INVISIBLE
+        }else if(item.classify == 6){
+            if (item.transactionType == 1) {
+                Glide.with(mContext).load(R.drawable.receive).into(icon)
+                sb.append(mContext.getString(R.string.collection_from))
+            } else {
+                Glide.with(mContext).load(R.drawable.pay_icon).into(icon)
+                sb.append(mContext.getString(R.string.pay_go))
+            }
+            status.visibility = View.INVISIBLE
         }
-        title.text = sb.append(if (item.transactionType === 1) item.fromAddress else item.toAddress).toString()
+        title.text = sb.append(if (item.transactionType == 1) item.fromAddress else item.toAddress).toString()
         time.text = TimeUtils.millis2String(item.createdAt, SimpleDateFormat("yyyy-MM-dd HH:mm:ss") as DateFormat)
-        price.text = "${if (item.transactionType === 1) "+" else "-"}${TextUtils.toBigDecimal(item.value)}"
+        price.text = "${if (item.transactionType == 1) "+" else "-"}${TextUtils.toBigDecimal(item.value)}"
         helper.addOnClickListener(R.id.his_layout)
     }
 }

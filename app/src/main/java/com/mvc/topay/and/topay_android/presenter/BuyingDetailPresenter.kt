@@ -5,6 +5,16 @@ import com.mvc.topay.and.topay_android.constract.IBuyingDetailContract
 import com.mvc.topay.and.topay_android.model.BuyingDetailModel
 
 class BuyingDetailPresenter : IBuyingDetailContract.BuyingDetailPresenter() {
+    override fun putBuyingDetail(id: Int) {
+        mRxUtils.register(mIModel!!.putBuyingDetail(id)
+                .subscribe({
+                    buyBean->
+                    mIView!!.confirmDetailSuccess(buyBean)
+                },{
+                    mIView!!.confirmDetailFailed(it.message!!)
+                }))
+    }
+
     override fun getBuyingDetail(id: Int) {
         mRxUtils.register(mIModel!!.getBuyingDetail(id)
                 .subscribe({

@@ -59,7 +59,19 @@ class DetailActivity : BaseMVPActivity<IDetailContract.DetailView, IDetailContra
                 sb.append("${getString(R.string.transfer_go)}${detailBean.toAddress}")
             }
             iconResId = R.drawable.success
-        } else if (detailBean.classify == 0) {
+        }else if(detailBean.classify == 6){
+            detail_fees_title.text = getString(R.string.order_number_hint)
+            detail_fees_content.text = detailBean.orderNumber
+            detail_coll_layout.visibility = View.GONE
+            detail_hash_layout.visibility = View.GONE
+            if (detailBean.transactionType == 1) {
+                sb.append("${getString(R.string.collection_from)}${detailBean.fromAddress}")
+            } else {
+                sb.append("${getString(R.string.pay_go)}${detailBean.toAddress}")
+            }
+            iconResId = R.drawable.success
+        }
+        else if (detailBean.classify == 0) {
             when (detailBean.status) {
                 0, 1 -> {
                     sb.append(getString(R.string.waiting))

@@ -24,7 +24,7 @@
                 android:background="@color/colorWhite"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="暂无数据"
+                android:text="@string/data_null"
                 android:gravity="center"
                 android:visibility="invisible"/>
     </FrameLayout>
