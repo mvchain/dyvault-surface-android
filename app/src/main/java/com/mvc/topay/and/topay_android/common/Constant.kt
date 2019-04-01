@@ -17,6 +17,8 @@ class Constant {
         const  val CURRENCY_LIST = "currency_list" //save all currency
         const val USER_EMAIL = "email"
         const val USER_SALT = "salt"
+        const val USER_BUSINESSES = "businesses"
+        const val USER_PROXY = "proxy"
         const val USER_INFO = "user_info"
         const val OLD_TIME = "old_time"
         const val READ_MSG = "read_msg"

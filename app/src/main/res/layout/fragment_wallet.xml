@@ -102,6 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
+                        android:visibility="invisible"
                         android:layout_centerInParent="true"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"

@@ -16,8 +16,10 @@ import com.mvc.topay.and.topay_android.bean.RegisterBean
 import com.mvc.topay.and.topay_android.common.Constant
 import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_BUSINESSES
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_ID
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_PROXY
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_SALT
 import com.mvc.topay.and.topay_android.constract.ISetPasswordContract
 import com.mvc.topay.and.topay_android.presenter.SetPasswordPresenter
@@ -33,6 +35,8 @@ class SetPasswordActivity : BaseMVPActivity<ISetPasswordContract.SetPasswordView
         SPUtils.getInstance().put(USER_ID, dataBean.userId)
         SPUtils.getInstance().put(USER_EMAIL, dataBean.email)
         SPUtils.getInstance().put(USER_SALT, dataBean.salt)
+        SPUtils.getInstance().put(USER_BUSINESSES, dataBean.isBusinesses)
+        SPUtils.getInstance().put(USER_PROXY, dataBean.isBusinesses)
         var mainIntent = Intent(this, MainActivity::class.java)
         JPushInterface.setAlias(applicationContext, dataBean.userId, "${dataBean.userId}")
         mainIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

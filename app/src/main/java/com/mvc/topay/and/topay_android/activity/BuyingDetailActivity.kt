@@ -12,6 +12,7 @@ import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.bean.BuyDetailBean
 import com.mvc.topay.and.topay_android.bean.HttpUpdateBean
 import com.mvc.topay.and.topay_android.constract.IBuyingDetailContract
+import com.mvc.topay.and.topay_android.event.BuyingEvent
 import com.mvc.topay.and.topay_android.listener.IDialogViewClickListener
 import com.mvc.topay.and.topay_android.presenter.BuyingDetailPresenter
 import com.mvc.topay.and.topay_android.utils.DialogHelper
@@ -19,6 +20,7 @@ import com.mvc.topay.and.topay_android.utils.TextUtils
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_buying_detail.*
+import org.greenrobot.eventbus.EventBus
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -44,6 +46,7 @@ class BuyingDetailActivity : BaseMVPActivity<IBuyingDetailContract.BuyingDetailV
 
     override fun confirmDetailSuccess(httpBean: HttpUpdateBean) {
         if (httpBean.data) {
+            EventBus.getDefault().post(BuyingEvent())
             mPresenter.getBuyingDetail(buyingId)
         }
     }
@@ -68,6 +71,7 @@ class BuyingDetailActivity : BaseMVPActivity<IBuyingDetailContract.BuyingDetailV
                             Observable.just(remainingCollectionTime)
                         }.takeUntil {
                             if (remainingCollectionTime <= 0) {
+                                EventBus.getDefault().post(BuyingEvent())
                                 mPresenter.getBuyingDetail(buyingId)
                                 true
                             } else {
@@ -83,7 +87,7 @@ class BuyingDetailActivity : BaseMVPActivity<IBuyingDetailContract.BuyingDetailV
                 buy_detail_status.setTextColor(ContextCompat.getColor(baseContext, R.color.coins_status_payed))
                 payment_layout.visibility = View.VISIBLE
                 order_line.visibility = View.VISIBLE
-                buyer_payment_method.text = payTypeArray[buydetailBean.payType - 1]
+                buyer_payment_method.text = payTypeArray[buydetailBean.payType]
                 payment_account.text = buydetailBean.payAccount
                 order_submit.setBackgroundResource(R.drawable.shape_login_bg_22dp)
                 order_submit.text = getString(R.string.but_detail_submit)
@@ -91,6 +95,10 @@ class BuyingDetailActivity : BaseMVPActivity<IBuyingDetailContract.BuyingDetailV
             }
             COMPLETE -> {
                 buy_detail_status.text = getString(R.string.coins_status_complete)
+                payment_layout.visibility = View.VISIBLE
+                order_line.visibility = View.VISIBLE
+                buyer_payment_method.text = payTypeArray[buydetailBean.payType - 1]
+                payment_account.text = buydetailBean.payAccount
                 buy_detail_status.setTextColor(ContextCompat.getColor(baseContext, R.color.coins_status_complete))
                 order_submit.setBackgroundResource(R.drawable.shape_null_click_bg_22dp)
                 order_submit.text = getString(R.string.but_detail_submit_carryout)
@@ -98,6 +106,7 @@ class BuyingDetailActivity : BaseMVPActivity<IBuyingDetailContract.BuyingDetailV
             }
             CANCEL -> {
                 buy_detail_status.text = getString(R.string.coins_status_cancel)
+                remaining_time.visibility = View.GONE
                 buy_detail_status.setTextColor(ContextCompat.getColor(baseContext, R.color.coins_status_cancel))
                 order_submit.setBackgroundResource(R.drawable.shape_null_click_bg_22dp)
                 order_submit.text = getString(R.string.but_detail_submit_cancel)
@@ -112,12 +121,12 @@ class BuyingDetailActivity : BaseMVPActivity<IBuyingDetailContract.BuyingDetailV
             }
         }
         buy_detail_status_hint.text = "${if (buydetailBean.orderType == 1) getString(R.string.page_buy) else getString(R.string.page_sell)} ${buydetailBean.tokenName}"
-        order_amount.text = "${TextUtils.doubleToFour(buydetailBean.amount)}${buydetailBean.tokenName}"
+        order_amount.text = "${TextUtils.doubleToFour(buydetailBean.amount)} CNY"
         order_number.text = buydetailBean.orderNumber
         order_buyer.text = buydetailBean.buyUsername
         order_price.text = TextUtils.doubleToFour(buydetailBean.price)
-        order_quantity.text = TextUtils.doubleToFour(buydetailBean.tokenValue)
-        order_time.text = TimeUtils.millis2String(buydetailBean.createdAt, SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
+        order_quantity.text = "${TextUtils.doubleToFour(buydetailBean.tokenValue)} ${buydetailBean.tokenName}"
+        order_time.text = TimeUtils.millis2String(buydetailBean.payAt, SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
         order_submit.setOnClickListener {
             DialogHelper.instance.create(this@BuyingDetailActivity, getString(R.string.whether_confirm), object : IDialogViewClickListener {
                 override fun click(viewId: Int) {

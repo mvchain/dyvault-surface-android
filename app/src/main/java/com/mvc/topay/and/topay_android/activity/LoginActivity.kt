@@ -17,8 +17,10 @@ import com.mvc.topay.and.topay_android.bean.RegisterBean
 import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.RESETPASSWORD_LOGIN
 import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_BUSINESSES
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_ID
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_PROXY
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYPE
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_SALT
 import com.mvc.topay.and.topay_android.constract.ILoginContract
@@ -61,6 +63,8 @@ class LoginActivity : BaseMVPActivity<ILoginContract.LoginView, ILoginContract.L
         SPUtils.getInstance().put(USER_ID, dataBean.userId)
         SPUtils.getInstance().put(USER_EMAIL, dataBean.email)
         SPUtils.getInstance().put(USER_SALT, dataBean.salt)
+        SPUtils.getInstance().put(USER_BUSINESSES, dataBean.isBusinesses)
+        SPUtils.getInstance().put(USER_PROXY, dataBean.isProxy)
         JPushInterface.setAlias(applicationContext, dataBean.userId, "${dataBean.userId}")
         var mainIntent = Intent(this, MainActivity::class.java)
         mainIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

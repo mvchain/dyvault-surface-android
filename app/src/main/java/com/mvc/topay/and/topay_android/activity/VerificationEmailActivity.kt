@@ -4,12 +4,14 @@ import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.view.View
+import com.blankj.utilcode.util.SPUtils
 import com.mvc.topay.and.topay_android.R
 import com.mvc.topay.and.topay_android.base.BaseMVPActivity
 import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.bean.HttpDataBean
 import com.mvc.topay.and.topay_android.common.Constant.SP.TEMP_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.TEMP_TOKEN
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.constract.IVerificationContract
 import com.mvc.topay.and.topay_android.listener.OnTimeEndCallBack
 import com.mvc.topay.and.topay_android.presenter.VerificationPresenter

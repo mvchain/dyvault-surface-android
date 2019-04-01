@@ -135,8 +135,11 @@
                         android:layout_height="wrap_content"/>
                 <TextView
                         android:id="@+id/order_number"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:textColor="@color/detail_sxf_bg"
+                        android:layout_toRightOf="@id/order_number_hint"
+                        android:gravity="right"
+                        android:layout_marginLeft="5dp"
                         android:layout_alignBaseline="@id/order_number_hint"
                         android:text="-"
                         android:layout_alignParentRight="true"
@@ -153,7 +156,7 @@
                         android:layout_height="wrap_content"/>
                 <TextView
                         android:id="@+id/order_buyer"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:textColor="@color/detail_sxf_bg"
                         android:text="-"
                         android:layout_alignBaseline="@id/order_buyer_hint"
@@ -171,7 +174,7 @@
                         android:layout_height="wrap_content"/>
                 <TextView
                         android:id="@+id/order_price"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:layout_alignBaseline="@id/order_price_hint"
                         android:textColor="@color/detail_sxf_bg"
                         android:text="-"
@@ -190,7 +193,7 @@
                 <TextView
                         android:id="@+id/order_quantity"
                         android:layout_alignBaseline="@id/order_quantity_hint"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:textColor="@color/detail_sxf_bg"
                         android:text="-"
                         android:layout_alignParentRight="true"
@@ -207,7 +210,7 @@
                         android:layout_height="wrap_content"/>
                 <TextView
                         android:id="@+id/order_time"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:textColor="@color/detail_sxf_bg"
                         android:layout_alignBaseline="@id/order_time_hint"
                         android:text="-"
@@ -238,7 +241,7 @@
                             android:layout_height="wrap_content"/>
                     <TextView
                             android:id="@+id/buyer_payment_method"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             android:textColor="@color/detail_sxf_bg"
                             android:layout_alignBaseline="@id/buyer_payment_method_hint"
                             android:text="-"
@@ -256,7 +259,7 @@
                             android:layout_height="wrap_content"/>
                     <TextView
                             android:id="@+id/payment_account"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             android:textColor="@color/detail_sxf_bg"
                             android:layout_alignBaseline="@id/payment_account_hint"
                             android:text="-"
@@ -273,7 +276,7 @@
                     android:gravity="center"
                     android:layout_marginTop="70dp"
                     android:layout_marginBottom="80dp"
-                    android:background="@drawable/shape_login_bg_22dp"
+                    android:background="@drawable/shape_null_click_bg_22dp"
                     android:text="@string/but_detail_submit"
                     android:layout_marginRight="110dp"
                     android:layout_height="44dp"/>

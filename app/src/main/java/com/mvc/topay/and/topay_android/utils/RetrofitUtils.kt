@@ -12,9 +12,11 @@ import com.mvc.topay.and.topay_android.api.ApiStore
 import com.mvc.topay.and.topay_android.common.Constant
 import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_BUSINESSES
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_ID
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_INFO
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_PROXY
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYPE
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_SALT
 import okhttp3.*
@@ -61,7 +63,7 @@ class RetrofitUtils {
                             .setLevel(HttpLoggingInterceptor.Level.BODY))
                     .authenticator { _, response ->
                         val body = RetrofitUtils.client(ApiStore::class.java).refreshToken(SPUtils.getInstance().getString(REFRESH_TOKEN)).execute().body()
-                        if (body!!.code === 200) {
+                        if (body!!.code == 200) {
                             SPUtils.getInstance().put(TOKEN, body!!.data)
                             MyApplication.token = body!!.data
                             val builder = response.request().newBuilder()
@@ -78,6 +80,8 @@ class RetrofitUtils {
                             SPUtils.getInstance().remove(USER_EMAIL)
                             SPUtils.getInstance().remove(USER_SALT)
                             SPUtils.getInstance().remove(USER_INFO)
+                            SPUtils.getInstance().remove(USER_BUSINESSES)
+                            SPUtils.getInstance().remove(USER_PROXY)
                             if(ActivityUtils.getTopActivity() !is SelectLoginActivity){
                                 val intent = Intent()
                                 JPushInterface.deleteAlias(MyApplication.application, SPUtils.getInstance().getInt(USER_ID))

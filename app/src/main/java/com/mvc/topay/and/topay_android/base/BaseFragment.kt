@@ -15,11 +15,14 @@ import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.mvc.topay.and.topay_android.MyApplication
 import com.mvc.topay.and.topay_android.activity.SelectLoginActivity
+import com.mvc.topay.and.topay_android.common.Constant
 import com.mvc.topay.and.topay_android.common.Constant.SP.REFRESH_TOKEN
 import com.mvc.topay.and.topay_android.common.Constant.SP.TOKEN
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_BUSINESSES
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_EMAIL
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_ID
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_INFO
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_PROXY
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_RESETPASSWORD_TYPE
 import com.mvc.topay.and.topay_android.common.Constant.SP.USER_SALT
 import com.trello.rxlifecycle2.components.support.RxFragment
@@ -87,6 +90,8 @@ abstract class BaseFragment : RxFragment() {
         SPUtils.getInstance().remove(USER_EMAIL)
         SPUtils.getInstance().remove(USER_SALT)
         SPUtils.getInstance().remove(USER_INFO)
+        SPUtils.getInstance().remove(USER_BUSINESSES)
+        SPUtils.getInstance().remove(USER_PROXY)
         JPushInterface.deleteAlias(MyApplication.application, SPUtils.getInstance().getInt(USER_ID))
         val intent = Intent(activity, SelectLoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)

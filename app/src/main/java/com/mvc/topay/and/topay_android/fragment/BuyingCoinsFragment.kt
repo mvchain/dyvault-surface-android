@@ -1,6 +1,7 @@
 package com.mvc.topay.and.topay_android.fragment
 
 import android.content.Intent
+import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -13,8 +14,11 @@ import com.mvc.topay.and.topay_android.base.BaseMVPFragment
 import com.mvc.topay.and.topay_android.base.BasePresenter
 import com.mvc.topay.and.topay_android.bean.ChannelBean
 import com.mvc.topay.and.topay_android.constract.IBuyingContract
+import com.mvc.topay.and.topay_android.event.BuyingEvent
 import com.mvc.topay.and.topay_android.presenter.BuyingPresenter
 import kotlinx.android.synthetic.main.fragment_buyingcoins.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.util.ArrayList
 
 class BuyingCoinsFragment : BaseMVPFragment<IBuyingContract.BuyingView, IBuyingContract.BuyingPresenter>(), IBuyingContract.BuyingView {
@@ -30,6 +34,16 @@ class BuyingCoinsFragment : BaseMVPFragment<IBuyingContract.BuyingView, IBuyingC
         super.initData()
         isRefresh = true
         mPresenter.getChannelList(0, 20, type)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        EventBus.getDefault().register(this)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        EventBus.getDefault().unregister(this)
+        super.onDestroy()
     }
 
     override fun initView() {
@@ -97,6 +111,12 @@ class BuyingCoinsFragment : BaseMVPFragment<IBuyingContract.BuyingView, IBuyingC
     }
 
     fun onRefresh() {
+        isRefresh = true
+        mPresenter.getChannelList(0, 20, type)
+    }
+
+    @Subscribe
+    fun onRefresh(buyingEvent: BuyingEvent) {
         isRefresh = true
         mPresenter.getChannelList(0, 20, type)
     }

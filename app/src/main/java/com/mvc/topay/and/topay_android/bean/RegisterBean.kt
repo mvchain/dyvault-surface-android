@@ -8,6 +8,8 @@ data class RegisterBean(
     data class DataBean(
             var email: String,
             var refreshToken: String,
+            var isBusinesses: Int,
+            var isProxy: Int,
             var salt: String,
             var token: String,
             var userId: Int

@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
+import android.view.View
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
@@ -26,6 +27,7 @@ import com.mvc.topay.and.topay_android.common.Constant.SP.OLD_TIME
 import com.mvc.topay.and.topay_android.common.Constant.SP.RATE_LIST
 import com.mvc.topay.and.topay_android.common.Constant.SP.READ_MSG
 import com.mvc.topay.and.topay_android.common.Constant.SP.SET_RATE
+import com.mvc.topay.and.topay_android.common.Constant.SP.USER_PROXY
 import com.mvc.topay.and.topay_android.constract.IWalletContract
 import com.mvc.topay.and.topay_android.event.WalletAssetsListEvent
 import com.mvc.topay.and.topay_android.listener.IPopViewListener
@@ -107,6 +109,9 @@ class WalletFragment : BaseMVPFragment<IWalletContract.WalletView, IWalletContra
         this.mWalletBuyingCoins = mRootView!!.findViewById(R.id.wallet_buying_coins)
         this.mWalletRefresh = mRootView!!.findViewById(R.id.wallet_swipe)
         this.isRefresh = true
+        if (SPUtils.getInstance().getInt(USER_PROXY) == 1) {
+            mWalletBuyingCoins.visibility = View.VISIBLE
+        }
         mExchange = ArrayList()
         mWalletBuyingCoins.setOnClickListener {
             startActivity(Intent(mActivity, BuyingCoinsActivity::class.java))

@@ -23,7 +23,7 @@ class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswo
     override fun resetSuccess(msg: String) {
         dismiss()
         showToast(msg)
-        if (type === RESETPASSWORD_LOGIN) {
+        if (type == RESETPASSWORD_LOGIN) {
             startTaskActivity(this)
         } else {
             setResult(1001)
@@ -47,7 +47,7 @@ class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswo
         if (type === RESETPASSWORD_LOGIN) {
             reset_title.text = getString(R.string.account_update_password)
             reset_email.hint = getString(R.string.account_new_password)
-            reset_email.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_NUMBER
+            reset_email.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
         } else {
             reset_title.text = getString(R.string.account_update_pay_password)
             reset_email.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD or InputType.TYPE_CLASS_NUMBER
@@ -68,7 +68,7 @@ class ResetPasswordActivity : BaseMVPActivity<IResetPasswordContract.ResetPasswo
     }
 
     override fun initPresenter(): BasePresenter<*, *> {
-        return ResetPasswordPresenter.newIntance()
+        return ResetPasswordPresenter.newInstance()
     }
 
     fun onClick(v: View) {

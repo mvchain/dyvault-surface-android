@@ -13,7 +13,7 @@ interface IResetPasswordContract {
     }
 
     interface ResetPasswordModel : IBaseModel {
-        fun resetPassword(password: String, token: String, type: Int): Observable<HttpUpdateBean>
+        fun resetPassword(email:String,salt:String,password: String, token: String, type: Int): Observable<HttpUpdateBean>
     }
 
     interface ResetPasswordView : IBaseActivity {
