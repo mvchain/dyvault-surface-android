@@ -87,7 +87,7 @@ class BuyingDetailActivity : BaseMVPActivity<IBuyingDetailContract.BuyingDetailV
                 buy_detail_status.setTextColor(ContextCompat.getColor(baseContext, R.color.coins_status_payed))
                 payment_layout.visibility = View.VISIBLE
                 order_line.visibility = View.VISIBLE
-                buyer_payment_method.text = payTypeArray[buydetailBean.payType]
+                buyer_payment_method.text = payTypeArray[buydetailBean.payType - 1]
                 payment_account.text = buydetailBean.payAccount
                 order_submit.setBackgroundResource(R.drawable.shape_login_bg_22dp)
                 order_submit.text = getString(R.string.but_detail_submit)
