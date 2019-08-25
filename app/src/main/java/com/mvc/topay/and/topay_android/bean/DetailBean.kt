@@ -1,5 +1,9 @@
 package com.mvc.topay.and.topay_android.bean
 
+/**--
+The Dyvault project client added the maximum number of display entries in the transaction directory.
+*/
+
 data class DetailBean(
         /**
          * code : 0
